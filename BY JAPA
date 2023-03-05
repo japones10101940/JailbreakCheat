@@ -9,7 +9,7 @@ function SairDoCarro()
 loadstring("\\103\\97\\109\\101\\58\\71\\101\\116\\83\\101\\114\\118\\105\\99\\101\\40\\34\\86\\105\\114\\116\\117\\97\\108\\73\\110\\112\\117\\116\\77\\97\\110\\97\\103\\101\\114\\34\\41\\58\\83\\101\\110\\100\\75\\101\\121\\69\\118\\101\\110\\116\\40\\116\\114\\117\\101\\44\\32\\69\\110\\117\\109\\46\\75\\101\\121\\67\\111\\100\\101\\46\\83\\112\\97\\99\\101\\44\\32\\102\\97\\108\\115\\101\\44\\32\\103\\97\\109\\101\\41\\10\\32\\32\\32\\32\\32\\32\\32\\32\\115\\112\\97\\119\\110\\40\\102\\117\\110\\99\\116\\105\\111\\110\\40\\41\\10\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\112\\99\\97\\108\\108\\40\\102\\117\\110\\99\\116\\105\\111\\110\\40\\41\\10\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\114\\101\\112\\101\\97\\116\\32\\119\\97\\105\\116\\40\\41\\32\\117\\110\\116\\105\\108\\32\\103\\97\\109\\101\\46\\80\\108\\97\\121\\101\\114\\115\\46\\76\\111\\99\\97\\108\\80\\108\\97\\121\\101\\114\\46\\67\\104\\97\\114\\97\\99\\116\\101\\114\\46\\72\\117\\109\\97\\110\\111\\105\\100\\46\\74\\117\\109\\112\\32\\61\\61\\32\\116\\114\\117\\101\\10\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\103\\97\\109\\101\\58\\71\\101\\116\\83\\101\\114\\118\\105\\99\\101\\40\\34\\86\\105\\114\\116\\117\\97\\108\\73\\110\\112\\117\\116\\77\\97\\110\\97\\103\\101\\114\\34\\41\\58\\83\\101\\110\\100\\75\\101\\121\\69\\118\\101\\110\\116\\40\\102\\97\\108\\115\\101\\44\\32\\69\\110\\117\\109\\46\\75\\101\\121\\67\\111\\100\\101\\46\\83\\112\\97\\99\\101\\44\\32\\102\\97\\108\\115\\101\\44\\32\\103\\97\\109\\101\\41\\10\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\32\\101\\110\\100\\41\\10\\32\\32\\32\\32\\32\\32\\32\\32\\101\\110\\100\\41\\10")()
 end
 
-local Tp1,Tp2 = loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/tp'))()
+local Tp1,Tp2 = loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/TP'))()
 repeat 
 	wait()
 until Tp1 ~= nil and Tp2 ~= nil
@@ -67,6 +67,7 @@ Farm:CriarBotao("Auto Casino[Entrar]", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-73.93269348144531, 155.28050231933594, -4714.79833984375))
@@ -218,6 +219,7 @@ Farm:CriarBotao("Auto Rosquinha", function()
         local carro, a, b = getCamaro()
 
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
 
     end
@@ -251,6 +253,7 @@ Farm:CriarBotao("Auto Posto de Gasolina", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     wait(0.6)
@@ -285,6 +288,7 @@ Farm:CriarBotao("Auto Vender (Vulcao)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
@@ -300,6 +304,7 @@ Farm:CriarBotao("Auto Vender (Base Cidade)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
@@ -310,6 +315,7 @@ Farm:CriarBotao("Auto Vender (Cargo Plane)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-330.4154052734375, 21.541906356811523, 2061.408935546875))
@@ -464,6 +470,7 @@ Teleportes:CriarBotao("TP Museu(Com Carro)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(1113.5445556640625, 139.10427856445312, 1297.2264404296875))
@@ -480,6 +487,7 @@ Teleportes:CriarBotao("TP Joaleria", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(143.66824340820312, 17.883831024169922, 1379.358154296875))
@@ -489,6 +497,7 @@ Teleportes:CriarBotao("TP Bank", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(43.04151153564453, 17.872217178344727, 764.78759765625))
@@ -498,6 +507,7 @@ Teleportes:CriarBotao("TP Power Plant", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(46.77196502685547, 20.40790367126465, 2358.94482421875))
@@ -507,6 +517,7 @@ Teleportes:CriarBotao("TP Casino", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-194.64422607421875, 19.190465927124023, -4584.3720703125))
@@ -516,6 +527,7 @@ Teleportes:CriarBotao("TP Aeroporto", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-1303.5528564453125, 41.84423828125, 2859.515869140625))
@@ -525,6 +537,7 @@ Teleportes:CriarBotao("TP Tomb", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(610.7174072265625, 21.32147979736328, -485.48687744140625))
@@ -543,6 +556,7 @@ Teleportes:CriarBotao("TP Loja de Rosquinha", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(62.23844528198242, 18.963422775268555, -1517.5889892578125))
@@ -552,6 +566,7 @@ Teleportes:CriarBotao("TP Area 51", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(612.4613647460938, 19.61579132080078, -3616.880126953125))
@@ -561,6 +576,7 @@ Teleportes:CriarBotao("TP Trade", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
 
@@ -571,6 +587,7 @@ Teleportes:CriarBotao("TP Loja de Armas", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
 
@@ -581,6 +598,7 @@ Teleportes:CriarBotao("TP Loja de 1M", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(479.4014587402344, 19.485206604003906, -1593.4052734375))
@@ -590,6 +608,7 @@ Teleportes:CriarBotao("TP Vulcao(Dentro)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
@@ -604,6 +623,7 @@ Teleportes:CriarBotao("TP Vulcao(Fora)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
@@ -613,6 +633,7 @@ Teleportes:CriarBotao("TP Base Cidade", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
@@ -622,6 +643,7 @@ Teleportes:CriarBotao("TP Prisao(Dentro)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-1219.6141357421875, 18.449987411499023, -1759.02490234375))
@@ -631,6 +653,7 @@ Teleportes:CriarBotao("TP Prisao(Fora)", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(-1138.365234375, 18.39781951904297, -1389.2274169921875))
@@ -640,6 +663,7 @@ Teleportes:CriarBotao("TP Mansion", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
+        wait(2)
         EntrarNoCarroMaisProximo()
     end
     Tp2(Vector3.new(2920.753662109375, 57.75913619995117, -4601.60009765625))
@@ -1133,4 +1157,3 @@ setclipboard("by ヘンリケ#0002")
     end)
 
 end
-
