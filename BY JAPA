@@ -281,6 +281,52 @@ Farm:CriarBotao("Auto Posto de Gasolina", function()
 
 end)
 
+Farm:CriarBotao("Auto TOMB", function()
+    wait(1)
+    Tp1(Vector3.new(549.031982421875, 35.28807067871094, -549.385986328125))
+    wait()
+    Tp1(Vector3.new(549.031982421875, 35.28807067871094, -549.385986328125))
+    wait()
+    Tp1(Vector3.new(544.4019775390625, -59.67583084106445, -534.8048706054688))
+    wait(10)
+    Tp1(Vector3.new(529.7024536132812, -46.07521057128906, -414.81341552734375))
+    wait()
+    Tp1(Vector3.new(522.7109985351562, -59.67583465576172, -370.5540771484375))
+    wait()
+    Tp1(Vector3.new(525.0407104492188, -59.94953155517578, -328.6084899902344))
+    wait()
+    Tp1(Vector3.new(525.0407104492188, -59.94953155517578, -328.6084899902344))
+    wait()
+    Tp1(Vector3.new(612.4694213867188, -72.97843933105469, -229.28823852539062))
+    wait()
+    Tp1(Vector3.new(640.2015380859375, -72.68500518798828, -227.0514373779297))
+    wait()
+    Tp1(Vector3.new(833.90625, -81.56377410888672, -204.59385681152344))
+    wait()
+    Tp1(Vector3.new(761.46875, -99.97856903076172, -198.047119140625))
+    wait()
+    Tp1(Vector3.new(675.3905029296875, -79.62577056884766, -246.17239379882812))
+    wait()
+    Tp1(Vector3.new(795.8203735351562, -89.76021575927734, -204.9577178955078))
+    wait()
+    Tp1(Vector3.new(894.1664428710938, -94.05460357666016, -195.2938995361328))
+    wait()
+    Tp1(Vector3.new(942.763916015625, -85.13917541503906, -190.04388427734375))
+    wait(1)
+    local pos = Vector3.new(942.763916015625, -85.13917541503906, -190.04388427734375)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+  
+    Tp1(Vector3.new(968.03466796875, -85.32301330566406, -189.6398162841797))
+    wait(3)
+    Tp1(Vector3.new(978.0042114257812, -85.32301330566406, -187.48912048339844))
+    wait(2)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "AVISO!!!";
+        Text = "Feito!";
+    })	
+
+end)
+
 Farm:CriarLabel('AUTO VENDER:', true) --Auto vender
 
 
@@ -324,6 +370,27 @@ end)
 
 
 Farm:CriarLabel('AUTO SAIDAS:', true) --auto exit
+
+Farm:CriarBotao("Auto Sair Joaleria", function()
+for i = 1, 50 do
+    game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+    task.wait(0.01)
+end
+end)
+
+Farm:CriarBotao("Auto Sair Casino", function()
+    for i = 1, 50 do
+        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+        task.wait(0.01)
+    end
+    end)
+    
+    Farm:CriarBotao("Auto Sair Cargo Plane", function()
+        for i = 1, 50 do
+            game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            task.wait(0.01)
+        end
+        end)
 
 Farm:CriarBotao("Auto Sair Vulcao", function()
     Tp1(Vector3.new(2211.435791015625, 19.643844604492188, -2461.634765625))
@@ -466,7 +533,7 @@ end)
 Teleportes:CriarLabel('TELEPORTES:', true)
 
 
-Teleportes:CriarBotao("TP Museu(Com Carro)", function()
+Teleportes:CriarBotao("TP Museu", function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
         Tp2(carro.Seat.Position)
@@ -476,7 +543,7 @@ Teleportes:CriarBotao("TP Museu(Com Carro)", function()
     Tp2(Vector3.new(1113.5445556640625, 139.10427856445312, 1297.2264404296875))
 end)
 
-Teleportes:CriarBotao("TP Museu(Sem Carro)[SEM DELAY]", function()
+Teleportes:CriarBotao("TP Museu(SEM DELAY)", function()
     for i = 1, 50 do
         game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
         task.wait(0.01)
@@ -840,18 +907,6 @@ Outros:CriarBotao('Deletar lasers', function()
 
 end) 
 
-Outros:CriarBotao('Deletar Todas as Portas (BANK)', function()
-  
-    for i,v in pairs(workspace:GetDescendants()) do
-        if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name == 'LasersMoving' or v.Name == 'Shadow' or v.Name == 'Light' or (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or v.Name == 'Door' or (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')  then
-            local oldParent = v.Parent
-            v.Parent = game:GetService('ReplicatedStorage')
-        end
-    end
-
-end)
-
-
 Outros:CriarBotao('FLY(X)', function()
     pcall(function()
     FLYSPEED = 20
@@ -1132,22 +1187,13 @@ Outros:CriarBotao('FPS+', function()
 
 Credits:CriarLabel('DISCORD', true)
 
-Credits:CriarBotao('MACRO X', function()
-
-    setclipboard("https://discord.gg/ud3FT2pwRk")
-    wait(0.6)
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "MACRO X";
-        Text = "Link de convite no clipboard!";
-    })
-end)
 Credits:CriarBotao('DISCORD', function() 
 
-setclipboard("by ヘンリケ#0002")
+setclipboard("by ヘンリケ#1111")
         
         game:GetService("StarterGui"):SetCore("SendNotification", {
             Title = "DISCORD";
-            Text = "by ヘンリケ#0002";
+            Text = "by ヘンリケ#1111";
         })
         wait(0.5)
         game:GetService("StarterGui"):SetCore("SendNotification", {
