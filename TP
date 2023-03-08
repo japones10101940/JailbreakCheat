@@ -129,7 +129,6 @@ function tp2(pos)
     else
         getCar().CFrame = CFrame.new(pos)
         getCar().BodyGyro.MaxTorque = Vector3.new(0,0,0)
-        wait(1)
     end
 end
  
