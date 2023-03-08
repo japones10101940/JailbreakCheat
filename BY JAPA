@@ -70,9 +70,10 @@ Tp2(carro.Seat.Position)
 wait(2)
 EntrarNoCarroMaisProximo()
     end
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
+    
 wait()
 Tp2(Vector3.new(57.718910217285156, 20.911163330078125, 2353.02685546875))
+loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
 wait()    
 Tp1(Vector3.new(68.75518798828125, 21.001739501953125, 2339.879150390625))
 wait()
