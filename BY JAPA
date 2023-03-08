@@ -731,6 +731,23 @@ while wait(0.5) do
     end
 end
 end)
+
+Combat:CriarLabel('DIVERSOS:', true)
+
+
+Combat:CriarSlider("Velocidade", 0 --[[valor minimo]], 1000 --[[valor maximo]], function(value)
+
+getgenv().WalkSpeedValue = value; --set your desired walkspeed here
+local Player = game:service'Players'.LocalPlayer;
+Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+
+
+end)
+end)
+
+
 Teleportes:CriarLabel('TELEPORTES:', true)
 
 
@@ -1311,14 +1328,6 @@ Outros:CriarBotao('Iniciar Queda Livre', function(value)
 
 end)
 
-Outros:CriarBotao('Buff Velocidade', function()
-    getgenv().WalkSpeedValue = 100; --set your desired walkspeed here
-local Player = game:service'Players'.LocalPlayer;
-Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
-Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
-Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
-end)
-end)
 
 Outros:CriarBotao('No Clip(Q)', function()
     local NC = false
