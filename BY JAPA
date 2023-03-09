@@ -164,7 +164,7 @@ end)
 
 
 
-Farm:CriarBotao("Auto Casino[Entrar]", function()
+Farm:CriarBotao("Auto Casino", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "SCRIPT instável"; -- Texto da sua notificacao
@@ -236,7 +236,16 @@ wait()
 Tp1(Vector3.new(-111.75055694580078, 73.08425903320312, -4612.2138671875))
 loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
 wait()
-
+loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Casino'))()
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "AVISO!"; -- Titulo da sua notificacao
+    Text = "Aguarde..."; -- Texto da sua notificacao
+    Duration = 100; -- Tempo que sua notificacao vai ficar na tela;
+  })
+wait(4.1)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Casino'))()
+wait(4.1)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Casino'))()
 wait()
 Tp1(Vector3.new(-82.11653137207031, 81.34656524658203, -4649.365234375))
 wait()
@@ -254,7 +263,7 @@ wait(3)
 Tp1(Vector3.new(-7.5441484451293945, -77.02445983886719, -4715.873046875))
 wait()       
 Tp1(Vector3.new(16.682323455810547, -77.02445983886719, -4722.1015625))
-wait(1.5)
+wait(2)
 for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
 if v.Name == "Break" then
     pcall(function()
@@ -284,6 +293,7 @@ Tp1(Vector3.new(26.1173038482666, -77.26969909667969, -4662.6728515625))
 wait(1)
 Tp1(Vector3.new(7.94412088394165, -77.26969909667969, -4654.79931640625))
 wait()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Casino'))()
 Tp1(Vector3.new(33.69564437866211, -77.02262878417969, -4583.1396484375))
 wait()
 Tp1(Vector3.new(63.65641403198242, -77.07304382324219, -4549.95556640625))
@@ -292,32 +302,7 @@ Tp1(Vector3.new(95.20052337646484, -77.02481842041016, -4534.49462890625))
 wait()
 Tp1(Vector3.new(124.50833892822266, -77.07303619384766, -4528.50732421875))
 wait()
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "AVISO!!!";
-    Text = "Caso não de certo, use a opção (Auto Quest Casino)!";
-})	
-game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.RequestHack:FireServer()
 
-
-for i = 1,3 do
-
-local time = 1
-
-repeat task.wait() time+=0.01 until time > 3 or Led.BrickColor == BrickColor.new("Lime green")
-if time > 3 then return end
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "MACRO X";
-    Text = "SUCESSO!!!"
-})
-game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer()
-repeat task.wait() until  Led.BrickColor == BrickColor.new("Really red")
-
-end
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-Title = "MACRO X";
-Text = "Feito!";
-})	
 end)	
 
 Farm:CriarBotao("Auto Rosquinha", function()
@@ -420,70 +405,6 @@ Farm:CriarBotao("Auto Posto de Gasolina", function()
 
 end)
 
-Farm:CriarBotao("Auto TOMB", function()
-    local c = false
-local callback = function(text)
-if text == "Continuar" then
-c=true
-end
-end
-
-local BindableFunction = Instance.new('BindableFunction')
-BindableFunction.OnInvoke = callback 
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-  Title = "AVISO!"; -- Titulo da sua notificacao
-  Text = "Script com mal funcionamento, ainda deseja continuar?"; -- Texto da sua notificacao
-  Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-  Button1 = "Continuar";
-  Button2 = "Parar";
-  Callback = BindableFunction
-})
-repeat wait()until c
-    Tp1(Vector3.new(549.031982421875, 35.28807067871094, -549.385986328125))
-    wait()
-    Tp1(Vector3.new(549.031982421875, 35.28807067871094, -549.385986328125))
-    wait()
-    Tp1(Vector3.new(544.4019775390625, -59.67583084106445, -534.8048706054688))
-    wait(10)
-    Tp1(Vector3.new(529.7024536132812, -46.07521057128906, -414.81341552734375))
-    wait()
-    Tp1(Vector3.new(522.7109985351562, -59.67583465576172, -370.5540771484375))
-    wait()
-    Tp1(Vector3.new(525.0407104492188, -59.94953155517578, -328.6084899902344))
-    wait()
-    Tp1(Vector3.new(525.0407104492188, -59.94953155517578, -328.6084899902344))
-    wait()
-    Tp1(Vector3.new(612.4694213867188, -72.97843933105469, -229.28823852539062))
-    wait()
-    Tp1(Vector3.new(640.2015380859375, -72.68500518798828, -227.0514373779297))
-    wait()
-    Tp1(Vector3.new(833.90625, -81.56377410888672, -204.59385681152344))
-    wait()
-    Tp1(Vector3.new(761.46875, -99.97856903076172, -198.047119140625))
-    wait()
-    Tp1(Vector3.new(675.3905029296875, -79.62577056884766, -246.17239379882812))
-    wait()
-    Tp1(Vector3.new(795.8203735351562, -89.76021575927734, -204.9577178955078))
-    wait()
-    Tp1(Vector3.new(894.1664428710938, -94.05460357666016, -195.2938995361328))
-    wait()
-    Tp1(Vector3.new(942.763916015625, -85.13917541503906, -190.04388427734375))
-    wait(1)
-    local pos = Vector3.new(942.763916015625, -85.13917541503906, -190.04388427734375)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-  
-    Tp1(Vector3.new(968.03466796875, -85.32301330566406, -189.6398162841797))
-    wait(3)
-    Tp1(Vector3.new(978.0042114257812, -85.32301330566406, -187.48912048339844))
-    wait(2)
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!!!";
-        Text = "Feito!";
-    })	
-
-end)
-
 Farm:CriarLabel('AUTO VENDER:', true) --Auto vender
 
 
@@ -528,7 +449,7 @@ end)
 
 Farm:CriarLabel('AUTO SAIDAS:', true) --auto exit
 
-Farm:CriarBotao("Auto Sair Joaleria", function()
+Farm:CriarBotao("Auto Sair Joalheria", function()
     local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
     local oldfunction = item.Ragdoll
     item.Ragdoll = function()
@@ -642,7 +563,7 @@ Farm:CriarBotao("Auto Sair Power Plant", function()
     Tp1(Vector3.new(110.30799102783203, 23.12737464904785, 2275.71435546875))
     wait()
     Tp1(Vector3.new(65.38693237304688, 21.72730255126953, 2284.3955078125))
-    wait()
+    wait(1)
     Tp1(Vector3.new(45.90081787109375, 21.001739501953125, 2297.48193359375))
 end)
 
@@ -745,11 +666,7 @@ end)
 
 Combat:CriarLabel('DIVERSOS:', true)
 
-Combat:CriarSlider("Altura Do Pulo", 0 , 1000 , function(value)
-plr.Character.Humanoid.JumpPower = value
-end)
-
-Combat:CriarSlider("Velocidade", 0 , 1000 , function(value)
+Combat:CriarSlider("Velocidade", 1 , 125 , function(value)
 
 getgenv().WalkSpeedValue = value; 
 local Player = game:service'Players'.LocalPlayer;
@@ -773,7 +690,7 @@ Teleportes:CriarBotao("TP Museu", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -809,11 +726,11 @@ Teleportes:CriarBotao("TP Museu(SEM DELAY)", function()
     wait()
 end)
 
-Teleportes:CriarBotao("TP Joaleria", function()
+Teleportes:CriarBotao("TP Joalheria", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -828,7 +745,7 @@ Teleportes:CriarBotao("TP Bank", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -843,7 +760,7 @@ Teleportes:CriarBotao("TP Power Plant", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -858,7 +775,7 @@ Teleportes:CriarBotao("TP Casino", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -873,7 +790,7 @@ Teleportes:CriarBotao("TP Aeroporto", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -888,7 +805,7 @@ Teleportes:CriarBotao("TP Tomb", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -903,7 +820,7 @@ Teleportes:CriarBotao("TP Posto de Gasolina", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -917,7 +834,7 @@ Teleportes:CriarBotao("TP Loja de Rosquinha", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -932,7 +849,7 @@ Teleportes:CriarBotao("TP Area 51", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -947,7 +864,7 @@ Teleportes:CriarBotao("TP Trade", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -963,7 +880,7 @@ Teleportes:CriarBotao("TP Loja de Armas", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -979,7 +896,7 @@ Teleportes:CriarBotao("TP Loja de 1M", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -994,7 +911,7 @@ Teleportes:CriarBotao("TP Vulcao(Dentro)", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -1014,7 +931,7 @@ Teleportes:CriarBotao("TP Vulcao(Fora)", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -1029,7 +946,7 @@ Teleportes:CriarBotao("TP Base Cidade", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -1044,7 +961,7 @@ Teleportes:CriarBotao("TP Prisao(Dentro)", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -1059,7 +976,7 @@ Teleportes:CriarBotao("TP Prisao(Fora)", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
@@ -1074,7 +991,7 @@ Teleportes:CriarBotao("TP Mansion", function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "AVISO!"; -- Titulo da sua notificacao
         Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
+        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
       })
     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
         local carro, a, b = getCamaro()
