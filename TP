@@ -80,7 +80,7 @@ function tp1(pos)
     Body:Destroy()
     step:Disconnect()
 end
-local altura = 850
+local altura = 725
 function tp2(pos)
     if not getCar() then
         if getgenv().usecar == true then
