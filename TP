@@ -15,6 +15,18 @@ function getCar()
     end
     return nil
 end
+function getCamaro()
+    local vehicle, spec, nearest = nil,nil, 10000
+ 
+    for i, v in next, require(game.ReplicatedStorage.Module.UI).CircleAction.Specs do
+        if v.Name == "Enter Driver" and v.ValidRoot.Name == "Camaro" --[[or Jeep]] then
+            local dist = (v.ValidRoot.PrimaryPart.Position - Root.Position).Magnitude
+ 
+            if dist < nearest then
+                vehicle, spec, nearest = v.ValidRoot, v, dist
+            end
+        end
+    end
  
     if vehicle ~= nil then
         return vehicle,spec,nearest
