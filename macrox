@@ -1,971 +1,175 @@
-local start = tick()
-
-loadstring(game:HttpGet"https://github.com/webhooking2022/functions-library/raw/main/.functions")()
-repeat wait() until functions
-
-_G.ScriptLoaded = nil
-local speaker = game.Players.LocalPlayer
-
-for i,v in pairs(game.CoreGui:GetChildren()) do
-    if v.Name == "SCRIPT" then
-        v:Destroy()
-    end
-end
-function FindTool(name, plr)
-    plr = plr or speaker
-    local tool 
-    pcall(function()
-        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-            if v.Name == name then
-                tool = v 
-            end
-        end
-        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-            if v:IsA("Tool") and v.Name == name then
-                tool = v 
-            end
-        end
-    end)
-    return tool
-end
-local SCRIPT = Instance.new("ScreenGui")
-local MENU = Instance.new("ImageLabel")
-local Tab = Instance.new("Frame")
-local UIListLayout = Instance.new("UIListLayout")
-local Analisando = Instance.new("TextLabel")
-local gasg = Instance.new("Frame")
-local TextButton = Instance.new("TextButton")
-local DropShadow = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local DropShadow_2 = Instance.new("Frame")
-local UICorner_2 = Instance.new("UICorner")
-local UICorner_3 = Instance.new("UICorner")
-local DropShadow_3 = Instance.new("Frame")
-local UICorner_4 = Instance.new("UICorner")
-local DropShadow_4 = Instance.new("Frame")
-local UICorner_5 = Instance.new("UICorner")
-local SliderButton = Instance.new("TextButton")
-local SliderFrame = Instance.new("Frame")
-local UICorner_6 = Instance.new("UICorner")
-local UICorner_7 = Instance.new("UICorner")
-local Value = Instance.new("TextLabel")
-local MACROX = Instance.new("TextLabel")
-local INICIOMACROX = Instance.new("TextLabel")
-
-
-SCRIPT.Name = "SCRIPT"
-SCRIPT.Parent = game.CoreGui
-
-MENU.Name = "MENU"
-MENU.Parent = SCRIPT
-MENU.AnchorPoint = Vector2.new(0.7, 0.)
-MENU.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-MENU.BackgroundTransparency = 1.000
-MENU.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MENU.ClipsDescendants = true
-MENU.Position = UDim2.new(0.566212893, 0, 0.5, 0)
-MENU.Visible = false
-MENU.Image = "rbxassetid://3570695787"
-MENU.ImageColor3 = Color3.fromRGB(0, 0, 0)
-MENU.ImageTransparency = 0.150
-MENU.ScaleType = Enum.ScaleType.Slice
-MENU.SliceCenter = Rect.new(100, 100, 100, 100)
-MENU.SliceScale = 0.250
-
-local mover = MENU
-Tab.Name = "Tab"
-Tab.Parent = MENU
-Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Tab.BackgroundTransparency = 1.000
-Tab.Position = UDim2.new(0.019510068, 0, 0.115384683, 0)
-Tab.Size = UDim2.new(0, 68, 0, 179)
-
-UIListLayout.Parent = Tab
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-
-Analisando.Name = "Analisando.."
-Analisando.Parent = MENU
-Analisando.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Analisando.BackgroundTransparency = 1.000
-Analisando.Position = UDim2.new(0.0334190056, 0, 0, 0)
-Analisando.Size = UDim2.new(0, 74, 0, 22)
-Analisando.Font = Enum.Font.PermanentMarker
-Analisando.Text = "Aguardando..."
-Analisando.TextColor3 = Color3.fromRGB(255, 255, 255)
-Analisando.TextSize = 14.000
-
-gasg.Name = "gasg"
-gasg.Parent = MENU
-gasg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-gasg.BackgroundTransparency = 1.000
-gasg.Position = UDim2.new(0.272233227, 0, 0, 0)
-gasg.Size = UDim2.new(0, 256, 0, 224)
-
-TextButton.Parent = gasg
-TextButton.BackgroundColor3 = Color3.fromRGB(16, 15, 16)
-TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0, 0, 0, 50)
-TextButton.Size = UDim2.new(0, 260, 0, 44)
-TextButton.Visible = false
-TextButton.ZIndex = 3
-TextButton.Font = Enum.Font.FredokaOne
-TextButton.Text = "Slider"
-TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.TextSize = 14.000
-TextButton.TextXAlignment = Enum.TextXAlignment.Left
-TextButton.TextYAlignment = Enum.TextYAlignment.Top
-
-DropShadow.Name = "DropShadow"
-DropShadow.Parent = TextButton
-DropShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DropShadow.BorderSizePixel = 0
-DropShadow.Position = UDim2.new(0, -1, 0, -1)
-DropShadow.Size = UDim2.new(1, 0, 1, 0)
-
-UICorner.Parent = DropShadow
-
-DropShadow_2.Name = "DropShadow"
-DropShadow_2.Parent = TextButton
-DropShadow_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DropShadow_2.BorderSizePixel = 0
-DropShadow_2.Position = UDim2.new(0, 1, 0, 1)
-DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
-
-UICorner_2.Parent = DropShadow_2
-
-UICorner_3.Parent = TextButton
-
-DropShadow_3.Name = "DropShadow"
-DropShadow_3.Parent = TextButton
-DropShadow_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DropShadow_3.BorderSizePixel = 0
-DropShadow_3.Position = UDim2.new(0, 1, 0, -1)
-DropShadow_3.Size = UDim2.new(1, 0, 1, 0)
-
-UICorner_4.Parent = DropShadow_3
-
-DropShadow_4.Name = "DropShadow"
-DropShadow_4.Parent = TextButton
-DropShadow_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DropShadow_4.BorderSizePixel = 0
-DropShadow_4.Position = UDim2.new(0, -1, 0, 1)
-DropShadow_4.Size = UDim2.new(1, 0, 1, 0)
-
-UICorner_5.Parent = DropShadow_4
-
-SliderButton.Name = "SliderButton"
-SliderButton.Parent = TextButton
-SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SliderButton.BorderSizePixel = 0
-SliderButton.Position = UDim2.new(0.0538461544, 0, 0.568181813, 0)
-SliderButton.Size = UDim2.new(0, 235, 0, 4)
-SliderButton.ZIndex = 6
-SliderButton.Font = Enum.Font.SourceSans
-SliderButton.Text = ""
-SliderButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-SliderButton.TextSize = 14.000
-
-SliderFrame.Name = "SliderFrame"
-SliderFrame.Parent = SliderButton
-SliderFrame.Active = true
-SliderFrame.BackgroundColor3 = Color3.fromRGB(238, 0, 0)
-SliderFrame.BorderSizePixel = 0
-SliderFrame.Selectable = true
-SliderFrame.Size = UDim2.new(0, 120, 0, 4)
-SliderFrame.ZIndex = 6
-
-UICorner_6.Parent = SliderFrame
-
-UICorner_7.Parent = SliderButton
-
-Value.Name = "Value"
-Value.Parent = TextButton
-Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Value.BackgroundTransparency = 1.000
-Value.Position = UDim2.new(0.719230771, 0, 0.0227273107, 0)
-Value.Size = UDim2.new(0, 72, 0, 18)
-Value.ZIndex = 3
-Value.Font = Enum.Font.FredokaOne
-Value.Text = "150"
-Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-Value.TextSize = 14.000
-
-MACROX.Name = "MACRO X "
-MACROX.Parent = MENU
-MACROX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-MACROX.BackgroundTransparency = 1.000
-MACROX.Position = UDim2.new(0.786632359, 0, 0, 0)
-MACROX.Size = UDim2.new(0, 74, 0, 22)
-MACROX.Font = Enum.Font.PermanentMarker
-MACROX.Text = "MACRO X"
-MACROX.TextColor3 = Color3.fromRGB(255, 255, 255)
-MACROX.TextSize = 14.000
-
-
-INICIOMACROX.AnchorPoint = Vector2.new(0.5,0.5)
-
-INICIOMACROX.Name = "INICIO MACRO X "
-INICIOMACROX.Parent = SCRIPT
-INICIOMACROX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-INICIOMACROX.BackgroundTransparency = 1.000
-INICIOMACROX.Position = UDim2.new(0.5, 0, 0.5, 0)
-INICIOMACROX.Size = UDim2.new(0, 200, 0, 50)
-INICIOMACROX.Font = Enum.Font.FredokaOne
-INICIOMACROX.Text = "MACRO X "
-INICIOMACROX.TextColor3 = Color3.fromRGB(255, 255, 255)
-INICIOMACROX.TextSize = 14.000
-
-local function SFWDG_fake_script()  
-	local script = Instance.new('LocalScript', MENU)
-
-	local Menu = script.Parent;
-	
-	Menu.Active = true
-	Menu.Draggable = true
-end
-coroutine.wrap(SFWDG_fake_script)()
-local function PKVKS_fake_script() 
-	local script = Instance.new('LocalScript', MENU)
-
-	Tab = function(text)
-		
-	
-		local TextButton = Instance.new("TextButton")
-	
-		TextButton.Parent = script.Parent.Tab
-		TextButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        TextButton.BackgroundTransparency = 0.7
-		TextButton.Position = UDim2.new(-0.0060736537, 0, -0.00299146771, 0)
-		TextButton.Size = UDim2.new(0, 85, 0, 24)
-		TextButton.Font = Enum.Font.FredokaOne
-		TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextButton.TextSize = 14.000
-		TextButton.Text = "   "..text
-		TextButton.BorderSizePixel = 0
-		TextButton.TextXAlignment = Enum.TextXAlignment.Left
-		Instance.new("UICorner", TextButton)
-	
-		local MENU2 = Instance.new("ScrollingFrame")
-
-
-		MENU2.Name = "MENU2"
-		MENU2.Parent = script.Parent.gasg
-		MENU2.Active = true
-		MENU2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		MENU2.BackgroundTransparency = 1.000
-		MENU2.Position = UDim2.new(0.0174826235, 0, 0.0940170959, 0)
-		MENU2.Size = UDim2.new(0, 281, 0, 212)
-		MENU2.ScrollBarThickness = 4
-		MENU2.AutomaticCanvasSize = Enum.AutomaticSize.Y
-		MENU2.Visible = false
-		MENU2.ClipsDescendants = false
-		MENU2.ScrollBarImageTransparency = 1
-
-		
-		local uili = Instance.new("UIListLayout", MENU2)
-		uili.Padding=UDim.new(0, 5)
-		local botao = TextButton 
-		local frame = MENU2 
-		local lugar = script.Parent.gasg 
-	
-	
-		botao.MouseButton1Click:Connect(function()
-			local Texto = text
-			local TextLabel = script.Parent["Analisando.."]
-	
-			spawn(function()
-				for i = 1,#Texto do
-					TextLabel.Text = string.sub(Texto, 1, i)
-					wait(0.01)
-				end
-			end)
-			
-	
-			for i,v in pairs(lugar:GetChildren()) do
-				v.Visible = false
-			end
-			frame.Visible = true
-		end)
-		
-		local Tab = {}
-		function Tab:CriarSlider(text, minvalue, maxvalue, callback)
-			local TextButton = Instance.new("TextButton")
-			local DropShadow = Instance.new("Frame")
-			local UICorner = Instance.new("UICorner")
-			local DropShadow_2 = Instance.new("Frame")
-			local UICorner_2 = Instance.new("UICorner")
-			local UICorner_3 = Instance.new("UICorner")
-			local DropShadow_3 = Instance.new("Frame")
-			local UICorner_4 = Instance.new("UICorner")
-			local DropShadow_4 = Instance.new("Frame")
-			local UICorner_5 = Instance.new("UICorner")
-			local SliderButton = Instance.new("TextButton")
-			local SliderFrame = Instance.new("Frame")
-			local UICorner_6 = Instance.new("UICorner")
-			local UICorner_7 = Instance.new("UICorner")
-			local Value = Instance.new("TextLabel")
-	
-			--Properties:
-			
-			TextButton.Name = "Item"
-			TextButton.Parent = MENU2
-			TextButton.BackgroundColor3 = Color3.fromRGB(16, 15, 16)
-			TextButton.BorderSizePixel = 0
-			TextButton.Position = UDim2.new(0, 0, 0, 50)
-			TextButton.Size = UDim2.new(0, 260, 0, 44)
-			TextButton.ZIndex = 3
-			TextButton.Font = Enum.Font.FredokaOne
-			TextButton.Text = "  "..text
-			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-			TextButton.TextSize = 14.000
-			TextButton.TextXAlignment = Enum.TextXAlignment.Left
-			TextButton.TextYAlignment = Enum.TextYAlignment.Top
-	
-			DropShadow.Name = "DropShadow"
-			DropShadow.Parent = TextButton
-			DropShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow.BorderSizePixel = 0
-			DropShadow.Position = UDim2.new(0, -1, 0, -1)
-			DropShadow.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner.Parent = DropShadow
-	
-			DropShadow_2.Name = "DropShadow"
-			DropShadow_2.Parent = TextButton
-			DropShadow_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_2.BorderSizePixel = 0
-			DropShadow_2.Position = UDim2.new(0, 1, 0, 1)
-			DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_2.Parent = DropShadow_2
-	
-			UICorner_3.Parent = TextButton
-	
-			DropShadow_3.Name = "DropShadow"
-			DropShadow_3.Parent = TextButton
-			DropShadow_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_3.BorderSizePixel = 0
-			DropShadow_3.Position = UDim2.new(0, 1, 0, -1)
-			DropShadow_3.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_4.Parent = DropShadow_3
-	
-			DropShadow_4.Name = "DropShadow"
-			DropShadow_4.Parent = TextButton
-			DropShadow_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_4.BorderSizePixel = 0
-			DropShadow_4.Position = UDim2.new(0, -1, 0, 1)
-			DropShadow_4.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_5.Parent = DropShadow_4
-	
-			SliderButton.Name = "SliderButton"
-			SliderButton.Parent = TextButton
-			SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SliderButton.BorderSizePixel = 0
-			SliderButton.Position = UDim2.new(0.0538461544, 0, 0.568181813, 0)
-			SliderButton.Size = UDim2.new(0, 235, 0, 4)
-			SliderButton.ZIndex = 6
-			SliderButton.Font = Enum.Font.SourceSans
-			SliderButton.Text = ""
-			SliderButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-			SliderButton.TextSize = 14.000
-	
-			SliderFrame.Name = "SliderFrame"
-			SliderFrame.Parent = SliderButton
-			SliderFrame.Active = true
-			SliderFrame.BackgroundColor3 = Color3.fromRGB(238, 0, 0)
-			SliderFrame.BorderSizePixel = 0
-			SliderFrame.Selectable = true
-			SliderFrame.Size = UDim2.new(0, 0, 0, 4)
-			SliderFrame.ZIndex = 6
-	
-			UICorner_6.Parent = SliderFrame
-	
-			UICorner_7.Parent = SliderButton
-	
-			Value.Name = "Value"
-			Value.Parent = TextButton
-			Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Value.BackgroundTransparency = 1.000
-			Value.Position = UDim2.new(0.719230771, 0, 0.0227273107, 0)
-			Value.Size = UDim2.new(0, 72, 0, 18)
-			Value.ZIndex = 3
-			Value.Font = Enum.Font.FredokaOne
-			Value.Text = 0
-			Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Value.TextSize = 14.000
-			
-			
-	
-			local frame = SliderFrame--your frame
-	
-			local TextLabel_2 = Value--Your locationtovalue
-			
-			local uis = game:GetService("UserInputService")
-			local mouse = game.Players.LocalPlayer:GetMouse()
-			
-			local bolinha = Instance.new("TextButton", SliderFrame)
-			bolinha.Text = ""
-			bolinha.AnchorPoint=Vector2.new(0.5, 0.5)
-			bolinha.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			bolinha.Position = UDim2.new(1,0,0.56818181,0)
-			bolinha.ZIndex = 10
-			bolinha.Size = UDim2.new(0, 10, 0, 10)
-	
-			
-			Instance.new("UICorner", bolinha).CornerRadius = UDim.new(0, 12)
-			local button = bolinha --your button
-			button.MouseButton1Down:Connect(function()
-				Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 235) * frame.AbsoluteSize.X) + tonumber(minvalue)) or 0
-				pcall(function()
-					callback(Value)
-				end)
-				frame.Size = UDim2.new(0, math.clamp(mouse.X - frame.AbsolutePosition.X, 0, 235), 0, 4)
-				moveconnection = mouse.Move:Connect(function()
-					TextLabel_2.Text = Value
-					Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 235) * frame.AbsoluteSize.X) + tonumber(minvalue))
-					pcall(function()
-						callback(Value)
-					end)
-					frame.Size = UDim2.new(0, math.clamp(mouse.X - frame.AbsolutePosition.X, 0, 235), 0, 4)
-				end)
-				releaseconnection = uis.InputEnded:Connect(function(Mouse)
-					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
-					Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 235) * frame.AbsoluteSize.X) + tonumber(minvalue))
-					pcall(function()
-						callback(Value)
-					end)
-					frame.Size = UDim2.new(0, math.clamp(mouse.X - frame.AbsolutePosition.X, 0, 235), 0, 4)
-					moveconnection:Disconnect()
-					releaseconnection:Disconnect()
-				end
-				end)
-			end)
-		end
-		function Tab:CriarBotao(text, callback)
-			local TextButton = Instance.new("TextButton")
-	
-			local UICorner = Instance.new("UICorner")
-			local DropShadow_2 = Instance.new("Frame")
-			local UICorner_2 = Instance.new("UICorner")
-			local UICorner_3 = Instance.new("UICorner")
-	
-			TextButton.Name = "Item"
-			TextButton.Parent = MENU2
-			TextButton.BackgroundColor3 = Color3.fromRGB(16, 15, 16)
-			TextButton.BorderSizePixel = 0
-			TextButton.Position = UDim2.new(8.71804523, 0, 1.47317064, 0)
-			TextButton.Size = UDim2.new(0, 260, 0, 22)
-			TextButton.ZIndex = 3
-			TextButton.Font = Enum.Font.FredokaOne
-			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-			TextButton.TextSize = 14.000
-			TextButton.Text = "  "..text
-			TextButton.TextXAlignment = Enum.TextXAlignment.Left
-			
-	
-	
-	
-	
-	
-			UICorner_3.Parent = TextButton
-			
-
-			local DropShadow = Instance.new("Frame")
-			local UICorner = Instance.new("UICorner")
-			local DropShadow_2 = Instance.new("Frame")
-			local UICorner_2 = Instance.new("UICorner")
-			local DropShadow_3 = Instance.new("Frame")
-			local UICorner_3 = Instance.new("UICorner")
-			local DropShadow_4 = Instance.new("Frame")
-			local UICorner_4 = Instance.new("UICorner")
-	
-
-	
-			DropShadow.Name = "DropShadow"
-			DropShadow.Parent = TextButton
-			DropShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow.BorderSizePixel = 0
-			DropShadow.Position = UDim2.new(0, -1, 0, -1)
-			DropShadow.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner.Parent = DropShadow
-	
-			DropShadow_2.Name = "DropShadow"
-			DropShadow_2.Parent = TextButton
-			DropShadow_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_2.BorderSizePixel = 0
-			DropShadow_2.Position = UDim2.new(0, 1, 0, 1)
-			DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_2.Parent = DropShadow_2
-	
-			DropShadow_3.Name = "DropShadow"
-			DropShadow_3.Parent = TextButton
-			DropShadow_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_3.BorderSizePixel = 0
-			DropShadow_3.Position = UDim2.new(0, 1, 0, -1)
-			DropShadow_3.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_3.Parent = DropShadow_3
-	
-			DropShadow_4.Name = "DropShadow"
-			DropShadow_4.Parent = TextButton
-			DropShadow_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_4.BorderSizePixel = 0
-			DropShadow_4.Position = UDim2.new(0, -1, 0, 1)
-			DropShadow_4.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_4.Parent = DropShadow_4
-
-			TextButton.MouseButton1Click:Connect(function()
-				pcall(callback)
-			end)
-		end
-		function Tab:CriarLabel(text, underline)
-            underline = underline or false
-            local TextButton = Instance.new("TextLabel")
-            local UICorner = Instance.new("UICorner")
-            local line1 = Instance.new("Frame")
-            local line2 = Instance.new("Frame")
-            
-            
-            TextButton.Name = "Item"
-            TextButton.Parent = MENU2
-            TextButton.BackgroundColor3 = Color3.fromRGB(16, 15, 16)
-            TextButton.BorderSizePixel = 0
-            TextButton.Size = UDim2.new(0, 260, 0, 22)
-            TextButton.ZIndex = 4
-            TextButton.Font = Enum.Font.FredokaOne
-            TextButton.Text = text
-            TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            TextButton.TextSize = 14.000
-            TextButton.TextXAlignment = (underline == false and Enum.TextXAlignment.Left) or (underline == true and Enum.TextXAlignment.Center)
-            UICorner.Parent = TextButton
-            
-            line1.Name = "line1"
-            line1.Parent = TextButton
-            line1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            line1.BorderSizePixel = 0
-            line1.Position = UDim2.new(0.0269230772, 0, 0.454545468, 0)
-            line1.Size = UDim2.new(0, 80, 0, 2)
-            line1.ZIndex = 5
-            line1.Visible = underline
-            
-            line2.Name = "line2"
-            line2.Parent = TextButton
-            line2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            line2.BorderSizePixel = 0
-            line2.Position = UDim2.new(0.661538422, 0, 0.454545468, 0)
-            line2.Size = UDim2.new(0, 80, 0, 2)
-            line2.ZIndex = 5
-            line2.Visible = underline
-
-			local RETORNAR = {}
-			local last = 0
-            spawn(function()
-                while true do
-                    last=last+0.1
-                    wait(0.1)
-                end
-            end)
-			function RETORNAR:Refresh(newtext)
-                if last > 5 then
-                    last = 0
-                    local Texto = newtext
-                    local TextLabel = TextButton
-        
-                    spawn(function()
-                        for i = 1,#Texto do
-                            TextLabel.Text = string.sub(Texto, 1, i)
-                            wait(0.01)
-                        end
-                    end)
-                else
-                    TextButton.Text = newtext
-                end
-			end
-			
-			return RETORNAR
-		end
-		function Tab:CriarToggle(text, callback)
-			local liga = Instance.new("TextButton")
-	
-			local UICorner = Instance.new("UICorner")
-	
-			local UICorner_2 = Instance.new("UICorner")
-			local UICorner_3 = Instance.new("UICorner")
-			local Check1 = Instance.new("Frame")
-			local UICorner_4 = Instance.new("UICorner")
-			local Check2 = Instance.new("ImageLabel")
-	
-	
-			liga.Name = "Item"
-			liga.Parent = MENU2
-			liga.BackgroundColor3 = Color3.fromRGB(16, 15, 16)
-			liga.BorderSizePixel = 0
-			liga.Position = UDim2.new(8.71804523, 0, 1.47317064, 0)
-			liga.Size = UDim2.new(0, 260, 0, 22)
-			liga.ZIndex = 3
-			liga.Font = Enum.Font.FredokaOne
-			liga.Text = "  "..text
-			liga.TextColor3 = Color3.fromRGB(255, 255, 255)
-			liga.TextSize = 14.000
-			liga.TextXAlignment = Enum.TextXAlignment.Left
-	
-	
-	
-			UICorner_3.Parent = liga
-	
-			Check1.Name = "Check1"
-			Check1.Parent = liga
-			Check1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Check1.BorderSizePixel = 0
-			Check1.Position = UDim2.new(0.867298603, 0, 0.318181813, 0)
-			Check1.Size = UDim2.new(0, 10, 0, 10)
-			Check1.ZIndex = 4
-	
-			UICorner_4.CornerRadius = UDim.new(0, 3)
-			UICorner_4.Parent = Check1
-	
-			Check2.Name = "Check2"
-			Check2.Parent = liga
-			Check2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Check2.Position = UDim2.new(0.867298603, 0, 0.318181843, 0)
-			Check2.Size = UDim2.new(0, 10, 0, 10)
-			Check2.Visible = false
-			Check2.ZIndex = 10
-			Check2.Image = "http://www.roblox.com/asset/?id=5228569533"
-			
-			local Toggled = false
-			
-			
-			liga.MouseButton1Click:Connect(function()
-				Toggled = not Toggled
-				
-				Check2.Visible = Toggled
-				
-				
-				pcall(callback, Toggled)
-			end)
-			
-			local DropShadow = Instance.new("Frame")
-			local UICorner = Instance.new("UICorner")
-			local DropShadow_2 = Instance.new("Frame")
-			local UICorner_2 = Instance.new("UICorner")
-			local DropShadow_3 = Instance.new("Frame")
-			local UICorner_3 = Instance.new("UICorner")
-			local DropShadow_4 = Instance.new("Frame")
-			local UICorner_4 = Instance.new("UICorner")
-	
-			DropShadow.Name = "DropShadow"
-			DropShadow.Parent = liga
-			DropShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow.BorderSizePixel = 0
-			DropShadow.Position = UDim2.new(0, -1, 0, -1)
-			DropShadow.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner.Parent = DropShadow
-	
-			DropShadow_2.Name = "DropShadow"
-			DropShadow_2.Parent = liga
-			DropShadow_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_2.BorderSizePixel = 0
-			DropShadow_2.Position = UDim2.new(0, 1, 0, 1)
-			DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_2.Parent = DropShadow_2
-	
-			DropShadow_3.Name = "DropShadow"
-			DropShadow_3.Parent = liga
-			DropShadow_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_3.BorderSizePixel = 0
-			DropShadow_3.Position = UDim2.new(0, 1, 0, -1)
-			DropShadow_3.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_3.Parent = DropShadow_3
-	
-			DropShadow_4.Name = "DropShadow"
-			DropShadow_4.Parent = liga
-			DropShadow_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropShadow_4.BorderSizePixel = 0
-			DropShadow_4.Position = UDim2.new(0, -1, 0, 1)
-			DropShadow_4.Size = UDim2.new(1, 0, 1, 0)
-	
-			UICorner_4.Parent = DropShadow_4
-		end
-		return Tab
-	end
-	
-	getgenv().newtab = Tab
-end
-coroutine.wrap(PKVKS_fake_script)()
-local function LLYDD_fake_script() 
-	local script = Instance.new('LocalScript', MENU)
-
-	local Texto = "MACRO X "
-	local TextLabel = script.Parent["MACRO X "]
-	
-	spawn(function()
-		while true do
-			for i = 1,#Texto do
-				TextLabel.Text = string.sub(Texto, 1, i)
-				wait(0.1)
-			end
-			wait(1)
-			TextLabel.Text = "MACRO X "
-		end
-	end)
-end
-coroutine.wrap(LLYDD_fake_script)()
-local function QOUJ_fake_script() 
-	local script = Instance.new('LocalScript', MENU)
-
-	repeat wait() until _G.ScriptLoaded
-	wait(1)
-	game:GetService("StarterGui"):SetCore("SendNotification", {
-		Title = "MACRO X "; 
-		Text = "Script carregado!"; 
-		Duration = 6; 
-		Icon = "rbxassetid://11092615099"; 
-	})
-end
-coroutine.wrap(QOUJ_fake_script)()
-local function ZPKD_fake_script() 
-	local script = Instance.new('LocalScript', MENU)
-
-	
-end
-coroutine.wrap(ZPKD_fake_script)()
-local function WDUGH_fake_script() 
-	local script = Instance.new('LocalScript', SCRIPT)
-
-	local Texto = "MACRO X"
-	local TextLabel = script.Parent["INICIO MACRO X "]
-	
-	for i = 1,#Texto do
-		TextLabel.Text = string.sub(Texto, 1, i)
-		wait(0.25)
-	end
-	wait(1)
-	local Texto = "CARREGANDO SCRIPT..."
-	local TextLabel = script.Parent["INICIO MACRO X "]
-	for i = 1,#Texto do
-		TextLabel.Text = string.sub(Texto, 1, i)
-		wait(0.10)
-	end
-	wait(math.random())
-	for i = #Texto,1,-1 do
-		TextLabel.Text = string.sub(Texto, 1, i)
-		wait(0.005)
-	end
-	TextLabel.Text = ''
-	_G.ScriptLoaded = true
-	script.Parent.MENU.Visible = true
-	script.Parent.MENU:TweenSize(UDim2.new(0, 389,0, 234), "InOut","Quart", 1, true)
-end
-coroutine.wrap(WDUGH_fake_script)()
-
-local aberto = true
-game:GetService("UserInputService").InputBegan:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.F2 then
-		if aberto then
-			aberto = false
-			MENU:TweenSize(UDim2.new(0,0,0,0), "Out", "Quart", 1, true)
-		else
-			aberto = true
-			MENU:TweenSize(UDim2.new(0, 389,0, 234), "Out", "Quart", 1, true)
-		end
-	end
-end)
-function dropdown(title, tab, callback)
-    local blur = Instance.new("BlurEffect", game.Lighting)
-    blur.Size = 0
-    game:GetService("TweenService"):Create(blur, TweenInfo.new(1, Enum.EasingStyle.Linear), {Size = 35}):Play()
-    MENU:TweenSize(UDim2.new(0,0,0,0), "Out", "Quart", 1, true)
-    local ScreenGui = Instance.new("ScreenGui")
-    local Dropdown = Instance.new("Frame")
-    local UICorner = Instance.new("UICorner")
-    local DropShadow = Instance.new("Frame")
-    local UICorner_2 = Instance.new("UICorner")
-    local DropShadow_2 = Instance.new("Frame")
-    local UICorner_3 = Instance.new("UICorner")
-    local DropShadow_3 = Instance.new("Frame")
-    local UICorner_4 = Instance.new("UICorner")
-    local DropShadow_4 = Instance.new("Frame")
-    local UICorner_5 = Instance.new("UICorner")
-    local TextLabel = Instance.new("TextLabel")
-    local UICorner_6 = Instance.new("UICorner")
-    local ScrollingFrame = Instance.new("ScrollingFrame")
-    
-    local UIListLayout = Instance.new("UIListLayout")
-    
-    
-    ScreenGui.Parent = game.CoreGui
-    
-    Dropdown.Name = "Dropdown"
-    Dropdown.Parent = ScreenGui
-    Dropdown.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-    Dropdown.BorderSizePixel = 0
-    Dropdown.AnchorPoint = Vector2.new(0.5, 0.5)
-    Dropdown.Position = UDim2.new(0.5, 0, 0.5, 0)
-    Dropdown.Size = UDim2.new(0,0,0,0)
-    Dropdown.ZIndex = 2
-    Dropdown.ClipsDescendants = true
-    Dropdown:TweenSize(UDim2.new(0.338834941, 0, 0.642857134, 0), "Out", "Quart", 1, true)
-    delay(1, function()
-        Dropdown.ClipsDescendants = false
-    end)
-    UICorner.Parent = Dropdown
-    
-    DropShadow.Name = "DropShadow"
-    DropShadow.Parent = Dropdown
-    DropShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    DropShadow.BorderSizePixel = 0
-    DropShadow.Position = UDim2.new(0.00286532962, 0, 0.00246913591, 0)
-    DropShadow.Size = UDim2.new(1, 0, 1, 0)
-    
-    UICorner_2.Parent = DropShadow
-    
-    DropShadow_2.Name = "DropShadow"
-    DropShadow_2.Parent = Dropdown
-    DropShadow_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    DropShadow_2.BorderSizePixel = 0
-    DropShadow_2.Position = UDim2.new(-0.00286532962, 0, -0.00246913591, 0)
-    DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
-    
-    UICorner_3.Parent = DropShadow_2
-    
-    DropShadow_3.Name = "DropShadow"
-    DropShadow_3.Parent = Dropdown
-    DropShadow_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    DropShadow_3.BorderSizePixel = 0
-    DropShadow_3.Position = UDim2.new(-0.00286532962, 0, 0.00246913591, 0)
-    DropShadow_3.Size = UDim2.new(1, 0, 1, 0)
-    
-    UICorner_4.Parent = DropShadow_3
-    
-    DropShadow_4.Name = "DropShadow"
-    DropShadow_4.Parent = Dropdown
-    DropShadow_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    DropShadow_4.BorderSizePixel = 0
-    DropShadow_4.Position = UDim2.new(0.00286532962, 0, -0.00246913591, 0)
-    DropShadow_4.Size = UDim2.new(1, 0, 1, 0)
-    
-    UICorner_5.Parent = DropShadow_4
-    
-    TextLabel.Parent = Dropdown
-    TextLabel.BackgroundColor3 = Color3.fromRGB(20,20,20)
-    TextLabel.BorderSizePixel = 0
-    TextLabel.Position = UDim2.new(-0.00286532962, 0, 0, 0)
-    TextLabel.Size = UDim2.new(1.00573063, 0, 0.123456791, 0)
-    TextLabel.ZIndex = 2
-    TextLabel.Font = Enum.Font.FredokaOne
-    TextLabel.Text = title..':'
-    TextLabel.BackgroundTransparency = 1
-
-    TextLabel.TextColor3 = Color3.fromRGB(255,255,255)
-    TextLabel.TextSize = 32.000
-    TextLabel.TextWrapped = true
-    
-    UICorner_6.Parent = TextLabel
-    
-    ScrollingFrame.Parent = Dropdown
-    ScrollingFrame.Active = true
-    ScrollingFrame.BackgroundColor3 = Color3.fromRGB(20,20,20)
-    ScrollingFrame.BorderSizePixel = 0
-    ScrollingFrame.Position = UDim2.new(0.0429799445, 0, 0.167901233, 0)
-    ScrollingFrame.Size = UDim2.new(0.914040089, 0, 0.792592585, 0)
-    ScrollingFrame.ZIndex = 3
-    ScrollingFrame.ScrollBarThickness = 3
-    UIListLayout.Parent = ScrollingFrame
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    UIListLayout.Padding = UDim.new(0, 5)
-    tab = tab or {}
-    
-    for i,v in pairs(tab) do
-        local template = Instance.new("TextButton")
-        template.Name = "template"
-        template.Parent = ScrollingFrame
-        template.Active = false
-        template.BackgroundColor3 = Color3.fromRGB(25,25,25)
-        template.BorderSizePixel = 0
-        template.Size = UDim2.new(1, 0, 0.1, 0)
-        template.Visible = true
-        template.ZIndex = 4
-        template.Font = Enum.Font.FredokaOne
-        template.Text = tostring(v)
-        template.TextColor3 = Color3.fromRGB(255,255,255)
-        template.TextSize = 20.000
-        Instance.new("UICorner", template)
-        template.MouseButton1Down:Connect(function()
-            Dropdown:TweenSize(UDim2.new(0,0,0,0), "Out", "Quart", 1, true)
-            Dropdown.ClipsDescendants = true
-            MENU:TweenSize(UDim2.new(0, 389,0, 234), "Out", "Quart", 1, true)
-            game:GetService("TweenService"):Create(blur, TweenInfo.new(1), {Size = 0}):Play()
-            game.Debris:AddItem(blur, 1)
-            game.Debris:AddItem(ScreenGui, 1)
-            pcall(callback, tostring(v))
-        end)
-    
-        local function SRIKL_fake_script() 
-            local script = Instance.new('LocalScript', template)
-    
-            script.Parent.MouseEnter:Connect(function()
-                game:GetService("TweenService"):Create(script.Parent, TweenInfo.new(0.3), {BackgroundColor3= Color3.fromRGB(20,20,20)}):Play()
-    
-            end)
-            script.Parent.MouseLeave:Connect(function()
-                game:GetService("TweenService"):Create(script.Parent, TweenInfo.new(0.3), {BackgroundColor3= Color3.fromRGB(25,25,25)}):Play()
-    
-            end)
-        end
-        coroutine.wrap(SRIKL_fake_script)()
-    end    
-end
+loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Main'))()
 
 repeat wait() until getgenv().newtab
 
 Tab = getgenv().newtab 
 
 if --[[Jailbreak]]game.PlaceId == 606849621 then
-
-local Tp1,Tp2 = loadstring(game:HttpGet('https://pastebin.com/raw/h3xxvJRe'))()
-repeat 
-wait(0.2)
-until Tp1 ~= nil and Tp2 ~= nil
-function Tp(Vector)
-	Tp1(Vector)
+function notificacao(um,dois,tres)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = um; 
+        Text = dois; 
+        Duration = tres; 
+    })
 end
 
-function getCamaro()
-    local vehicle, spec, nearest = nil, nil, math.huge
-    for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+local Tp1,Tp2 = loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/TP'))()
+repeat 
+wait()
+until Tp1 ~= nil and Tp2 ~= nil
+function Tp(Vector)
+Tp1(Vector)
+end
+
+function laser()
+    pcall(function()
+        local delete = {}
+        local deletado = false
+        local UserInputService = game:GetService("UserInputService")
     
-        if v.Name == "Enter Driver"  then
-            if v.ValidRoot.Name == "Camaro" or v.ValidRoot.Name == 'Jeep' then
-                local yourRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
-                local dist = (v.ValidRoot.PrimaryPart.Position - yourRoot.Position).Magnitude
-        
-                if dist < nearest then
-                    vehicle, spec, nearest = v.ValidRoot, v, dist
+        function onKeyPressed(input, gameProcessedEvent)
+            if input.KeyCode == Enum.KeyCode.G then
+                if deletado == false then 
+                    deletado = true 
+                    for i,v in pairs(workspace:GetDescendants()) do
+                        if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name == 'LasersMoving' or v.Name == 'Shadow' or v.Name == 'Light' or (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or v.Name == 'LaserCarousel' or (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')  then
+                            local oldParent = v.Parent
+                            v.Parent = game:GetService('ReplicatedStorage')
+                            spawn(function()
+                                repeat wait() until deletado == false 
+                                v.Parent = oldParent
+                            end)
+                        end
+                    end
+                else
+                    deletado = false
                 end
             end
         end
-    end
     
-    if vehicle ~= nil then
-        return vehicle, spec, nearest
-    else
-        return nil
+        UserInputService.InputBegan:Connect(onKeyPressed)
+    end)
+end
+
+function laser1()
+    notificacao("MACRO X", "Lasers deletados!", 5)
+    for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name == 'LasersMoving' or v.Name == 'Shadow' or v.Name == 'Light' or (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or v.Name == 'LaserCarousel' or (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')  then
+            local oldParent = v.Parent
+            v.Parent = game:GetService('ReplicatedStorage')
+        end
     end
 end
 
-function EntrarNoCarroMaisProximo()
-    local carro, spec, nearest = getCamaro()
+function fly()
+    pcall(function()
+        FLYSPEED = 20
+        game:GetService('UserInputService').InputBegan:Connect(function(a,b)
+        if b then return end
+        if a.KeyCode == Enum.KeyCode.LeftShift then
+        FLYSPEED = FLYSPEED + 50
+        end
+        end)
+        game:GetService('UserInputService').InputEnded:Connect(function(a,b)
+        if b then return end
+        if a.KeyCode == Enum.KeyCode.LeftShift then
+        FLYSPEED = FLYSPEED - 50
+        end
+        end)
+    
+            repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid") local mouse = game.Players.LocalPlayer:GetMouse() repeat wait() until mouse local plr = game.Players.LocalPlayer local torso = plr.Character.Head local flying = false local deb = true local ctrl = {f = 0, b = 0, l = 0, r = 0} local lastctrl = {f = 0, b = 0, l = 0, r = 0} local maxspeed = 5000 local speed = 5000 function Fly() local bg = Instance.new("BodyGyro", torso) bg.P = 10000 bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) bg.cframe = torso.CFrame local bv = Instance.new("BodyVelocity", torso) bv.velocity = Vector3.new(0,0.1,0) bv.maxForce = Vector3.new(9e9, 9e9, 9e9) repeat wait() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false if ctrl.l + ctrl.r ~= 100000 or ctrl.f + ctrl.b ~= 10000 then speed = speed+.0+(speed/maxspeed) if speed > maxspeed then speed = maxspeed end elseif not (ctrl.l + ctrl.r ~= 5 or ctrl.f + ctrl.b ~= 5) and speed ~= 5 then speed = speed-5 if speed > 5 then speed = -2 end end if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed else bv.velocity = Vector3.new(0,0.1,0) end bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) until not flying ctrl = {f = 0, b = 0, l = 0, r = 0} lastctrl = {f = 0, b = 0, l = 0, r = 0} speed = 5 bg:Destroy() bv:Destroy() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false end mouse.KeyDown:connect(function(key) if key:lower() == "x" then if flying then flying = false else flying = true Fly() end elseif key:lower() == "w" then ctrl.f = FLYSPEED elseif key:lower() == "s" then ctrl.b = -FLYSPEED elseif key:lower() == "a" then ctrl.l = -FLYSPEED elseif key:lower() == "d" then ctrl.r = FLYSPEED end end) mouse.KeyUp:connect(function(key) if key:lower() == "w" then ctrl.f = 0 elseif key:lower() == "s" then ctrl.b = 0 elseif key:lower() == "a" then ctrl.l = 0 elseif key:lower() == "d" then ctrl.r = 0 end end) Fly()    
+        end);
+        speaker.CharacterAdded:Connect(function(c)
+        c:WaitForChild("HumanoidRootPart")
+        wait(0.5)
+        pcall(function()
+        FLYSPEED = 20
+        game:GetService('UserInputService').InputBegan:Connect(function(a,b)
+        if b then return end
+        if a.KeyCode == Enum.KeyCode.LeftShift then
+        FLYSPEED = FLYSPEED + 50
+        end
+        end)
+        game:GetService('UserInputService').InputEnded:Connect(function(a,b)
+        if b then return end
+        if a.KeyCode == Enum.KeyCode.LeftShift then
+        FLYSPEED = FLYSPEED - 50
+        end
+        end)
+    
+        repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid") local mouse = game.Players.LocalPlayer:GetMouse() repeat wait() until mouse local plr = game.Players.LocalPlayer local torso = plr.Character.Head local flying = false local deb = true local ctrl = {f = 0, b = 0, l = 0, r = 0} local lastctrl = {f = 0, b = 0, l = 0, r = 0} local maxspeed = 5000 local speed = 5000 function Fly() local bg = Instance.new("BodyGyro", torso) bg.P = 10000 bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) bg.cframe = torso.CFrame local bv = Instance.new("BodyVelocity", torso) bv.velocity = Vector3.new(0,0.1,0) bv.maxForce = Vector3.new(9e9, 9e9, 9e9) repeat wait() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false if ctrl.l + ctrl.r ~= 100000 or ctrl.f + ctrl.b ~= 10000 then speed = speed+.0+(speed/maxspeed) if speed > maxspeed then speed = maxspeed end elseif not (ctrl.l + ctrl.r ~= 5 or ctrl.f + ctrl.b ~= 5) and speed ~= 5 then speed = speed-5 if speed > 5 then speed = -2 end end if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed else bv.velocity = Vector3.new(0,0.1,0) end bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) until not flying ctrl = {f = 0, b = 0, l = 0, r = 0} lastctrl = {f = 0, b = 0, l = 0, r = 0} speed = 5 bg:Destroy() bv:Destroy() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false end mouse.KeyDown:connect(function(key) if key:lower() == "x" then if flying then flying = false else flying = true Fly() end elseif key:lower() == "w" then ctrl.f = FLYSPEED elseif key:lower() == "s" then ctrl.b = -FLYSPEED elseif key:lower() == "a" then ctrl.l = -FLYSPEED elseif key:lower() == "d" then ctrl.r = FLYSPEED end end) mouse.KeyUp:connect(function(key) if key:lower() == "w" then ctrl.f = 0 elseif key:lower() == "s" then ctrl.b = 0 elseif key:lower() == "a" then ctrl.l = 0 elseif key:lower() == "d" then ctrl.r = 0 end end) Fly()    
+        end);
+        end)
+end
 
-    spec:Callback(true)
+function quest()
+    local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
+    for i,a in next, Teste.CircleAction.Specs do
+     a.Timed = false
+    end  
+local Led = game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
+local function Fire(name)
+for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+if v.Name == name then
+pcall(function()
+v.Duration = 0
+ v:Callback(true)
+end)
+end
+end
+end
+game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.RequestHack:FireServer()
+for i = 1,3 do
+local time = 1
+repeat task.wait() time+=0.01 until time > 3 or Led.BrickColor == BrickColor.new("Lime green")
+if time > 3 then return end
+game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer()
+repeat task.wait() until  Led.BrickColor == BrickColor.new("Really red")
+end
+end
+
+function casinocode()
+    local function code()
+        local code = ""
+        for i,v in pairs(game:GetService("Workspace").Casino.RobberyDoor.Codes:GetDescendants()) do
+            if v:IsA("TextLabel") and v.Text ~= "" then
+                code = code .. v.Text
+            end
+        end
+        return code
+    end
+    
+    game.StarterGui:SetCore('SendNotification', {
+        Title = 'Casino';
+        Text = 'Code: '..code();
+    })
+    workspace.Casino.RobberyDoor.Keypad.Pad.CasinoKeypadSubmit:FireServer(code)
+end
+
+function casinomoney()
+    for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+        if v.Name == "Collect" then
+            pcall(function()
+                v.Duration = 0
+                v:Callback(true)
+            end)
+        end
+    end
+end
+
+function sairall()
+for i = 1, 50 do
+    game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+    task.wait()
+end
+for i = 1, 50 do
+    game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+    task.wait()
+end
+for i = 1, 50 do
+    game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+    task.wait()
+end
 end
 
 local Farm = Tab('Farm')
@@ -983,19 +187,13 @@ local Outros = Tab('Outros')
 local Credits = Tab('Credits')
 
 
-Farm:CriarLabel('AUTO FARM:', true) --FARM
+Farm:CriarLabel('AUTO FARM:', true) 
 
 Farm:CriarBotao("Auto Museu", function()
-if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-local carro, a, b = getCamaro()
-Tp2(carro.Seat.Position)
-wait(2)
-EntrarNoCarroMaisProximo()
-end
-wait()
 Tp2(Vector3.new(1097.8641357421875, 139.19546508789062, 1316.987060546875))
 wait()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()  
+loadstring(game:HttpGet('https://pastebin.com/raw/HvL4uEP1'))()    
+wait(1)
 local c = false
 local callback = function(text)
 if text == "Continuar" then
@@ -1007,21 +205,16 @@ local BindableFunction = Instance.new('BindableFunction')
 BindableFunction.OnInvoke = callback 
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
-  Title = "AVISO!"; -- Titulo da sua notificacao
-  Text = "Para o SCRIPT funcionar, o museu deve estar sendo roubado!"; -- Texto da sua notificacao
-  Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
+  Title = "MACRO X"; -- Titulo da sua notificacao
+  Text = "Certifique-se que o Museu esteja sendo roubado, para continuar."; -- Texto da sua notificacao
+  Duration = 500; -- Tempo que sua notificacao vai ficar na tela;
   Icon = nil; -- Icon do seu menu, coloque assim "rbxassetid://12345"
   Button1 = "Continuar";
   Button2 = "Finalizar";
   Callback = BindableFunction
 })
 repeat wait()until c 
-for i,v in pairs(workspace:GetDescendants()) do
-    if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name == 'LasersMoving' or v.Name == 'Shadow' or v.Name == 'Light' or (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or v.Name == 'LaserCarousel' or (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')  then
-        local oldParent = v.Parent
-        v.Parent = game:GetService('ReplicatedStorage')
-    end
-end
+laser1()
 wait()
 Tp1(Vector3.new(1087.6317138671875, 148.90939331054688, 1318.946044921875)) --entrada
 wait()
@@ -1034,55 +227,20 @@ wait()
 Tp1(Vector3.new(1082.1168212890625, 123.45904541015625, 1337.5858154296875)) --entrada
 wait()
 Tp1(Vector3.new(1062.133056640625, 125.5890121459961, 1360.9136962890625)) --picture
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-wait(0.5)
-Tp1(Vector3.new(1074.9815673828125, 125.04867553710938, 1374.848876953125)) --picture
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-wait(0.5)
+loadstring(game:HttpGet('https://pastebin.com/raw/WCGQpLJz'))()  
+wait()
+Tp1(Vector3.new(1074.9815673828125, 125.04867553710938, 1374.848876953125)) 
+loadstring(game:HttpGet('https://pastebin.com/raw/WCGQpLJz'))()  
+wait()
 Tp1(Vector3.new(1085.880126953125, 125.53783416748047, 1385.20947265625)) --picture
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-wait(0.5)
+loadstring(game:HttpGet('https://pastebin.com/raw/WCGQpLJz'))()  
+wait()
 Tp1(Vector3.new(1093.3795166015625, 125.42046356201172, 1379.051025390625)) -- Picture
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-wait(0.5)
+loadstring(game:HttpGet('https://pastebin.com/raw/WCGQpLJz'))()  
+wait()
 Tp1(Vector3.new(1111.591552734375, 124.97447967529297, 1359.5125732421875)) --picture
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-wait(0.5)
+loadstring(game:HttpGet('https://pastebin.com/raw/WCGQpLJz'))()  
+wait()
 Tp1(Vector3.new(1082.69091796875, 126.37368774414062, 1336.087646484375)) --entrada
 wait()
 Tp1(Vector3.new(1097.53515625, 124.5686264038086, 1316.3984375)) --entrada
@@ -1090,25 +248,13 @@ wait()
 Tp1(Vector3.new(1103.222412109375, 115.07242584228516, 1303.017822265625)) --entrada
 wait()
 Tp1(Vector3.new(1124.586181640625, 109.91853332519531, 1267.691162109375)) --refaça para o mask
-    for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Mask" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
+loadstring(game:HttpGet('https://pastebin.com/raw/gFKbqDaR'))() 
+wait()
 Tp1(Vector3.new(1147.3427734375, 111.83490753173828, 1287.212890625)) --entrada
 wait()
 Tp1(Vector3.new(1170.815185546875, 105.72545623779297, 1260.014892578125)) --Relic
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Relic" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
+wait()
+loadstring(game:HttpGet('https://pastebin.com/raw/6BM3me3H'))()  
 wait()
 Tp1(Vector3.new(1141.25830078125, 117.42829895019531, 1300.60791015625)) --entrada
 wait()
@@ -1116,48 +262,19 @@ Tp1(Vector3.new(1101.044189453125, 105.79499816894531, 1280.4884033203125)) --en
 wait()
 local pos = Vector3.new(1093.6910400390625, 105.71947479248047, 1277.6243896484375) --sair 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+end)
 
-    end)
 Farm:CriarBotao("Auto Power Plant", function()
-if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-local carro, a, b = getCamaro()
-Tp2(carro.Seat.Position)
-wait(2)
-EntrarNoCarroMaisProximo()
-    end
-wait()
+laser1()
 Tp2(Vector3.new(57.718910217285156, 20.911163330078125, 2353.02685546875))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
+wait()
+loadstring(game:HttpGet('https://pastebin.com/raw/HvL4uEP1'))()  
 wait()    
 Tp1(Vector3.new(68.75518798828125, 21.001739501953125, 2339.879150390625))
 wait()
 Tp1(Vector3.new(87.5652847290039, 21.258285522460938, 2322.63427734375))
 wait()
-local c = false
-local callback = function(text)
-if text == "Continuar" then
-c=true
-end
-end
-
-local BindableFunction = Instance.new('BindableFunction')
-BindableFunction.OnInvoke = callback 
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-  Title = "Esperando..."; -- Titulo da sua notificacao
-  Text = "Faça sua Quest!"; -- Texto da sua notificacao
-  Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-  Icon = nil; -- Icon do seu menu, coloque assim "rbxassetid://12345"
-  Button1 = "Continuar";
-  Button2 = "Finalizar";
-  Callback = BindableFunction
-})
-repeat wait()until c
-local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()
-    return wait(9e9)
-    end
+loadstring(game:HttpGet('https://pastebin.com/raw/DdcD35RB'))()  
 wait()
 Tp1(Vector3.new(82.3072280883789, 21.001739501953125, 2343.699462890625))
 wait()
@@ -1175,27 +292,8 @@ Tp1(Vector3.new(124.86080169677734, -4.4400634765625, 2105.572265625))
 wait()
 Tp1(Vector3.new(119.48699951171875, -8.645960807800293, 2097.74658203125))
 wait()
-local c = false
-local callback = function(text)
-if text == "Continuar" then
-c=true
-end
-end
-
-local BindableFunction = Instance.new('BindableFunction')
-BindableFunction.OnInvoke = callback 
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-  Title = "Esperando..."; -- Titulo da sua notificacao
-  Text = "Faça sua Quest!"; -- Texto da sua notificacao
-  Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-  Icon = nil; -- Icon do seu menu, coloque assim "rbxassetid://12345"
-  Button1 = "Continuar";
-  Button2 = "Finalizar";
-  Callback = BindableFunction
-})
-repeat wait()until c
-wait(1)
+loadstring(game:HttpGet('https://pastebin.com/raw/DdcD35RB'))()  
+wait()
 Tp1(Vector3.new(101.30716705322266, -9.45310115814209, 2116.82177734375))
 wait()
 Tp1(Vector3.new(51.2113037109375, -11.6262788772583, 2084.80810546875))
@@ -1209,76 +307,50 @@ wait()
 Tp1(Vector3.new(110.30799102783203, 23.12737464904785, 2275.71435546875))
 wait()
 Tp1(Vector3.new(75.59400177001953, 21.727298736572266, 2292.10888671875))
-wait(0.9)
+wait(0.7)
 Tp1(Vector3.new(59.57359313964844, 21.001739501953125, 2304.82275390625))
 end)
 
 Farm:CriarBotao("Auto Casino", function()
-    local c = false
+local c = false
 local callback = function(text)
 if text == "Continuar" then
 c=true
 end
-end
-
+end   
 local BindableFunction = Instance.new('BindableFunction')
 BindableFunction.OnInvoke = callback 
-
 game:GetService("StarterGui"):SetCore("SendNotification", {
-  Title = "AVISO!"; -- Titulo da sua notificacao
-  Text = "O Auto Casino só irar funcionar caso o roubo não esteja sendo roubado!"; -- Texto da sua notificacao
-  Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-  Icon = nil; -- Icon do seu menu, coloque assim "rbxassetid://12345"
-  Button1 = "Continuar";
-  Button2 = "Finalizar";
-  Callback = BindableFunction
+Title = "MACRO X"; -- Titulo da sua notificacao
+Text = "Certifique-se que o Casino não esteja sendo roubado, para continuar."; -- Texto da sua notificacao
+Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
+Button1 = "Continuar";
+Button2 = "Finalizar";
+Callback = BindableFunction
 })
 repeat wait()until c
-for i,v in pairs(workspace:GetDescendants()) do
-    if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name == 'LasersMoving' or v.Name == 'Shadow' or v.Name == 'Light' or (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or v.Name == 'LaserCarousel' or (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')  then
-        local oldParent = v.Parent
-        v.Parent = game:GetService('ReplicatedStorage')
-    end
-end
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "SCRIPT instável"; -- Texto da sua notificacao
-        Duration = 15; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-73.93269348144531, 155.28050231933594, -4714.79833984375))
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
-    for i,v in pairs(workspace:GetDescendants()) do
-        if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name == 'LasersMoving' or v.Name == 'Shadow' or (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')  then
-            local oldParent = v.Parent
-            v.Parent = game:GetService('ReplicatedStorage')
-        end
-    end
-    wait()
-    Tp1(Vector3.new(-12.582771301269531, 155.28053283691406, -4734.11865234375))
-    wait()
-    Tp1(Vector3.new(-16.19143295288086, 155.32080078125, -4746.25537109375))
-    wait()
-    local pos = Vector3.new(-14.686151504516602, 155.30926513671875, -4750.18994140625) -- posicao
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-    wait()
-    local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()																  
-        return wait(9e9)  
-    end
-    wait(2.1)
-    local pos = Vector3.new(-20.571578979492188, 28.92701530456543, -4756.8232421875) -- posicao
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-    wait(1)
-    local Call = game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls['3']
-    fireclickdetector(Call.ClickDetector)
-    wait(2.9)
+laser1()
+Tp2(Vector3.new(-73.93269348144531, 155.28050231933594, -4714.79833984375))
+wait()
+loadstring(game:HttpGet('https://pastebin.com/raw/HvL4uEP1'))()  
+wait()
+loadstring(game:HttpGet('https://pastebin.com/raw/Z0fqXWAY'))()     
+wait()
+Tp1(Vector3.new(-12.582771301269531, 155.28053283691406, -4734.11865234375))
+wait()
+Tp1(Vector3.new(-16.19143295288086, 155.32080078125, -4746.25537109375))
+wait()
+local pos = Vector3.new(-14.686151504516602, 155.30926513671875, -4750.18994140625) -- posicao
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+wait()
+loadstring(game:HttpGet('https://pastebin.com/raw/nzbus1JP'))()  
+wait(2.1)
+local pos = Vector3.new(-20.571578979492188, 28.92701530456543, -4756.8232421875) -- posicao
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+wait(1)
+local Call = game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls['3']
+fireclickdetector(Call.ClickDetector)
+wait(2.9)
 Tp1(Vector3.new(-8.465522766113281, 71.58183288574219, -4720.38525390625))
 wait()
 Tp1(Vector3.new(52.5584602355957, 71.48004150390625, -4739.1640625))
@@ -1310,19 +382,20 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO
 wait()
 Tp1(Vector3.new(-111.75055694580078, 73.08425903320312, -4612.2138671875))
 loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-
 wait()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Casino'))()
-wait(4.1)
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "AVISO!"; -- Titulo da sua notificacao
-    Text = "Aguarde..."; -- Texto da sua notificacao
-    Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
-  })
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Casino'))()
-wait(4.1)
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Casino'))()
-wait(1)
+notificacao("MACRO X", "Aguarde...", 5)
+wait()
+spawn(function()
+quest()
+wait()
+quest()
+wait()
+quest()
+wait()
+quest()
+wait()
+end)
+wait(5)
 Tp1(Vector3.new(-82.11653137207031, 81.34656524658203, -4649.365234375))
 wait()
 Tp1(Vector3.new(-16.072145462036133, 71.52082061767578, -4746.28955078125))
@@ -1333,32 +406,14 @@ wait(1.6)
 local pos = Vector3.new(-18.78749656677246, 28.731122970581055, -4754.3154296875) -- posicao
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
 wait()
+notificacao("MACRO X", "Quase lá!", 4)
 local Call = game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls['1']
-    fireclickdetector(Call.ClickDetector)
+fireclickdetector(Call.ClickDetector)
 wait(3)
 Tp1(Vector3.new(-7.5441484451293945, -77.02445983886719, -4715.873046875))
 wait()       
 Tp1(Vector3.new(16.682323455810547, -77.02445983886719, -4722.1015625))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-if v.Name == "Break" then
-    pcall(function()
-        v.Duration = 0
-        v:Callback(true)
-    end)
-end
-end
-local Led = game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
-
-local function Fire(name)
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == name then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-end
+loadstring(game:HttpGet('https://pastebin.com/raw/SHvVy5rT'))()  
 wait(2)
 Tp1(Vector3.new(34.04362487792969, -77.26969909667969, -4727.18603515625))
 wait()       
@@ -1375,881 +430,320 @@ wait()
 Tp1(Vector3.new(95.20052337646484, -77.02481842041016, -4534.49462890625))
 wait()
 Tp1(Vector3.new(124.50833892822266, -77.07303619384766, -4528.50732421875))
-wait(1)
+wait()
 Tp1(Vector3.new(176.8719940185547, -68.84654235839844, -4526.02001953125))
 wait()
 Tp1(Vector3.new(207.6075897216797, -77.38936614990234, -4528.095703125))
 wait()
-Tp1(Vector3.new(262.6924133300781, -73.50946807861328, -4604.34619140625))
+tp1(Vector3.new(263.5859069824219, -74.1202392578125, -4610.9208984375))
+casinomoney()
+wait()
+tp1(Vector3.new(238.267333984375, -73.93839263916016, -4609.662109375))
+casinomoney()
+wait()
+tp1(Vector3.new(260.6963806152344, -73.73925018310547, -4595.2421875))
+casinomoney()
+wait()
+tp1(Vector3.new(250.03077697753906, -75.2540283203125, -4541.81689453125))
+casinomoney()
+wait()
+tp1(Vector3.new(257.3643493652344, -73.97522735595703, -4528.865234375))
+casinomoney()
+wait()
+tp1(Vector3.new(268.7808837890625, -72.74417114257812, -4523.64208984375))
+casinomoney()
+wait()
+tp1(Vector3.new(245.74923706054688, -75.19361114501953, -4510.25634765625))
+casinomoney()
+wait()
+tp1(Vector3.new(295.5885925292969, -74.23546600341797, -4483.4287109375))
+casinomoney()
+wait()
+tp1(Vector3.new(242.46987915039062, -74.92720794677734, -4460.9052734375))
+casinomoney()
+wait()
+tp1(Vector3.new(262.7638244628906, -75.46063995361328, -4438.46923828125))
+casinomoney()
+wait(1.1)
+local c = false
+local callback = function(text)
+if text == "Sim" then
+c=true
+end
+end   
+local BindableFunction = Instance.new('BindableFunction')
+BindableFunction.OnInvoke = callback 
+game:GetService("StarterGui"):SetCore("SendNotification", {
+Title = "MACRO X"; -- Titulo da sua notificacao
+Text = "Deseja sair do casino?"; -- Texto da sua notificacao
+Duration = 500; -- Tempo que sua notificacao vai ficar na tela;
+Button1 = "Sim";
+Button2 = "Não";
+Callback = BindableFunction
+})
+repeat wait()until c
 wait(1)
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-wait(1)
-Tp1(Vector3.new(265.8250732421875, -77.4970703125, -4618.00732421875))--money
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-wait(1)
-Tp1(Vector3.new(238.87599182128906, -73.45806121826172, -4599.853515625))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-wait(1)
-Tp1(Vector3.new(250.38670349121094, -74.78348541259766, -4544.89404296875))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-wait(1)
-Tp1(Vector3.new(251.08303833007812, -72.63604736328125, -4530.36279296875))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-wait(1)
-Tp1(Vector3.new(251.3050994873047, -72.97747802734375, -4530.140625))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-wait(1)
-Tp1(Vector3.new(251.8202362060547, -75.25544738769531, -4511.13134765625))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-    wait(1)
-Tp1(Vector3.new(274.3043518066406, -75.08033752441406, -4520.287109375))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-    wait(1)
-Tp1(Vector3.new(242.89585876464844, -73.83277130126953, -4461.779296875))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-    wait(1)
-Tp1(Vector3.new(264.98809814453125, -73.8932876586914, -4440.017578125))
-for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-    if v.Name == "Collect" then
-        pcall(function()
-            v.Duration = 0
-            v:Callback(true)
-        end)
-    end
-end
-    wait(1)
-    local c = false
-    local callback = function(text)
-    if text == "Sim" then
-    c=true
-    end
-    end
-    
-    local BindableFunction = Instance.new('BindableFunction')
-    BindableFunction.OnInvoke = callback 
-    
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-      Title = "AVISO!"; -- Titulo da sua notificacao
-      Text = "Deseja sair do casino?"; -- Texto da sua notificacao
-      Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-      Icon = nil; -- Icon do seu menu, coloque assim "rbxassetid://12345"
-      Button1 = "Sim";
-      Button2 = "Não";
-      Callback = BindableFunction
-    })
-    repeat wait()until c
-    local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()
-
-    return wait(9e9)
-
-    end
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
+sairall()
 end)	
 
 Farm:CriarBotao("Auto Rosquinha", function()
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-
-    end
-    Tp2(Vector3.new(93.49116516113281, 18.863420486450195, -1491.834228515625))
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
-    local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
-
-    for i,a in next, Teste.CircleAction.Specs do
-    a.Timed = true
-    end
-    wait(0.6)
-    Tp1(Vector3.new(97.2082748413086, 19.517820358276367, -1530.1361083984375))
-    wait(1)
-    Tp1(Vector3.new(96.95466613769531, 19.517820358276367, -1528.409912109375))
-    wait()
-    Tp1(Vector3.new(113.69667053222656, 19.717845916748047, -1578.6995849609375))
-    wait()
-    Tp1(Vector3.new(76.89389038085938, 19.717849731445312, -1589.548828125))
-    local c = false
-    local callback = function(text)
-    if text == "Continuar" then
-    c=true
-    end
-    end
-    
-    local BindableFunction = Instance.new('BindableFunction')
-    BindableFunction.OnInvoke = callback 
-    
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-      Title = "AVISO!"; -- Titulo da sua notificacao
-      Text = "Roube!"; -- Texto da sua notificacao
-      Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-      Button1 = "Continuar";
-      Button2 = "Parar";
-      Callback = BindableFunction
-    })
-    repeat wait()until c
-    wait()
-    Tp1(Vector3.new(83.08613586425781, 25.434106826782227, -1567.374755859375))
-    wait()
-    Tp1(Vector3.new(97.23929595947266, 19.453927993774414, -1533.5477294921875))
-    wait(2)
-    Tp1(Vector3.new(93.41072845458984, 18.95391082763672, -1512.1981201171875))
+Tp2(Vector3.new(93.49116516113281, 18.863420486450195, -1491.834228515625))
+loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
+loadstring(game:HttpGet('https://pastebin.com/raw/pW3a9dHC'))()  
+wait(0.6)
+Tp1(Vector3.new(97.2082748413086, 19.517820358276367, -1530.1361083984375))
+wait(1)
+Tp1(Vector3.new(96.95466613769531, 19.517820358276367, -1528.409912109375))
+wait()
+Tp1(Vector3.new(113.69667053222656, 19.717845916748047, -1578.6995849609375))
+wait()
+Tp1(Vector3.new(76.89389038085938, 19.717849731445312, -1589.548828125))
+loadstring(game:HttpGet('https://pastebin.com/raw/ptAjjuvX'))()  
+wait()
+Tp1(Vector3.new(83.08613586425781, 25.434106826782227, -1567.374755859375))
+wait()
+Tp1(Vector3.new(97.23929595947266, 19.453927993774414, -1533.5477294921875))
+wait(1)
+Tp1(Vector3.new(93.41072845458984, 18.95391082763672, -1512.1981201171875))
 end)
 
-Farm:CriarBotao("Auto Posto de Gasolina", function()
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    wait(0.6)
-    local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
-
-    for i,a in next, Teste.CircleAction.Specs do
-    a.Timed = true
-    end
-    Tp2(Vector3.new(-1536.947509765625, 18.13419532775879, 699.36572265625))
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
-    wait()
-    Tp1(Vector3.new(-1578.464599609375, 18.69811248779297, 706.9764404296875))
-    wait(1)
-    Tp1(Vector3.new(-1596.7197265625, 18.49811363220215, 708.4967041015625))
-    wait()
-    Tp1(Vector3.new(-1600.7578125, 18.49811363220215, 685.6148071289062))
-    local c = false
-    local callback = function(text)
-    if text == "Continuar" then
-    c=true
-    end
-    end
-    
-    local BindableFunction = Instance.new('BindableFunction')
-    BindableFunction.OnInvoke = callback 
-    
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-      Title = "AVISO!"; -- Titulo da sua notificacao
-      Text = "Roube!"; -- Texto da sua notificacao
-      Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-      Button1 = "Continuar";
-      Button2 = "Parar";
-      Callback = BindableFunction
-    })
-    repeat wait()until c
-    wait()
-    Tp1(Vector3.new(-1596.260986328125, 18.234195709228516, 710.9710693359375))
-    wait()
-    Tp1(Vector3.new(-1582.3359375, 18.234195709228516, 709.0425415039062))
-    wait(2)
-    Tp1(Vector3.new(-1564.400634765625, 18.13419532775879, 704.8306274414062))
+Farm:CriarBotao("Auto Posto de Gasolina", function() 
+Tp2(Vector3.new(-1536.947509765625, 18.13419532775879, 699.36572265625))
+loadstring(game:HttpGet('https://pastebin.com/raw/pW3a9dHC'))() 
+loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
+wait()
+Tp1(Vector3.new(-1578.464599609375, 18.69811248779297, 706.9764404296875))
+wait(1)
+Tp1(Vector3.new(-1596.7197265625, 18.49811363220215, 708.4967041015625))
+wait()
+Tp1(Vector3.new(-1600.7578125, 18.49811363220215, 685.6148071289062))
+loadstring(game:HttpGet('https://pastebin.com/raw/ptAjjuvX'))()  
+wait()
+Tp1(Vector3.new(-1596.260986328125, 18.234195709228516, 710.9710693359375))
+wait()
+Tp1(Vector3.new(-1582.3359375, 18.234195709228516, 709.0425415039062))
+wait(1)
+Tp1(Vector3.new(-1564.400634765625, 18.13419532775879, 704.8306274414062))
 
 end)
 
-Farm:CriarLabel('AUTO VENDER:', true) --Auto vender
+Farm:CriarLabel('AUTO VENDER:', true) 
 
 
 Farm:CriarBotao("Auto Vender (Vulcao)", function()
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(2278.767822265625, 18.856962203979492, -2081.54052734375))
-    wait(1)
-    Tp1(Vector3.new(2269.189453125, 19.306373596191406, -2141.168212890625))
-    wait(0.9)
-    Tp1(Vector3.new(2214.119140625, 19.12057113647461, -2465.166748046875))
-   Tp1(Vector3.new(2287.869140625, 19.265241622924805, -2579.176025390625))
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(2278.767822265625, 18.856962203979492, -2081.54052734375))
+wait(1)
+Tp1(Vector3.new(2269.189453125, 19.306373596191406, -2141.168212890625))
+wait(0.9)
+Tp1(Vector3.new(2214.119140625, 19.12057113647461, -2465.166748046875))
+Tp1(Vector3.new(2287.869140625, 19.265241622924805, -2579.176025390625))
 
 end)
 
 Farm:CriarBotao("Auto Vender (Base Cidade)", function()
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
 end)
 
 Farm:CriarBotao("Auto Vender (Cargo Plane)", function()
-
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-330.4154052734375, 21.541906356811523, 2061.408935546875))
-
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(-330.4154052734375, 21.541906356811523, 2061.408935546875))
 end)
 
 
-Farm:CriarLabel('AUTO SAIDAS:', true) --auto exit
+Farm:CriarLabel('AUTO SAIDAS:', true) 
 
 Farm:CriarBotao("Auto Sair Joalheria", function()
-    local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()
-
-    return wait(9e9)
-
-    end
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
+notificacao("MACRO X", "Aguarde...", 4)
+sairall()
 end)
 
 Farm:CriarBotao("Auto Sair Casino", function()
-    local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()
-
-    return wait(9e9)
-
-    end
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    end)
+notificacao("MACRO X", "Aguarde...", 4)
+sairall()  
+end)
     
-    Farm:CriarBotao("Auto Sair Cargo Plane", function()
-        local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-        local oldfunction = item.Ragdoll
-        item.Ragdoll = function()
-    
-        return wait(9e9)
-    
-        end
-        for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-            task.wait(0.01)
-        end
-        wait()
-        for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-            task.wait(0.01)
-        end
-        wait()
-        for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-            task.wait(0.01)
-        end
-        wait()
-        end)
+Farm:CriarBotao("Auto Sair Cargo Plane", function()
+notificacao("MACRO X", "Aguarde...", 4)
+sairall()
+end)
 
 Farm:CriarBotao("Auto Sair Vulcao", function()
-    Tp1(Vector3.new(2211.435791015625, 19.643844604492188, -2461.634765625))
-    Tp1(Vector3.new(2263.906494140625, 19.834983825683594, -2191.0849609375))
-    wait(1.1)
-    Tp1(Vector3.new(2296.775390625, 19.497699737548828, -2037.8616943359375))
+notificacao("MACRO X", "Aguarde...", 4)
+Tp1(Vector3.new(2211.435791015625, 19.643844604492188, -2461.634765625))
+Tp1(Vector3.new(2263.906494140625, 19.834983825683594, -2191.0849609375))
+wait(1.1)
+Tp1(Vector3.new(2296.775390625, 19.497699737548828, -2037.8616943359375))
     
-    end)
+end)
 
 
 Farm:CriarBotao("Auto Sair Museu", function()
-    local c = false
-    local callback = function(text)
-    if text == "Continuar" then
-    c=true
-    end
-    end
-    
-    local BindableFunction = Instance.new('BindableFunction')
-    BindableFunction.OnInvoke = callback 
-    
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-      Title = "AVISO!"; -- Titulo da sua notificacao
-      Text = "Vá para o meio, quando estiver lá, clique em Continuar."; -- Texto da sua notificacao
-      Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
-      Icon = nil; -- Icon do seu menu, coloque assim "rbxassetid://12345"
-      Button1 = "Continuar";
-      Button2 = "Finalizar";
-      Callback = BindableFunction
-    })
-    repeat wait()until c
+loadstring(game:HttpGet('https://pastebin.com/raw/xywgDUJ4'))()    
 Tp1(Vector3.new(1096.9019775390625, 106.05891418457031, 1279.9913330078125))
-    local pos = Vector3.new(1093.6910400390625, 105.71947479248047, 1277.6243896484375) -- posicao
-    --Teleport instantanio
-  
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-
+local pos = Vector3.new(1093.6910400390625, 105.71947479248047, 1277.6243896484375) -- posicao
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
 end)
 
 Farm:CriarBotao("Auto Sair Power Plant", function()
- 
-    Tp1(Vector3.new(101.30716705322266, -9.45310115814209, 2116.82177734375))
-    wait()
-    Tp1(Vector3.new(51.2113037109375, -11.6262788772583, 2084.80810546875))
-    wait()
-    Tp1(Vector3.new(28.298912048339844, -11.379730224609375, 2126.66162109375))
-    wait()
-    Tp1(Vector3.new(32.89760971069336, -15.409835815429688, 2140.35400390625))
-    wait()
-    Tp1(Vector3.new(63.517333984375, 0.7412600517272949, 2210.197021484375))
-    wait()
-    Tp1(Vector3.new(110.30799102783203, 23.12737464904785, 2275.71435546875))
-    wait()
-    Tp1(Vector3.new(75.59400177001953, 21.727298736572266, 2292.10888671875))
-    wait(0.9)
-    Tp1(Vector3.new(59.57359313964844, 21.001739501953125, 2304.82275390625))
-    end)
+notificacao("MACRO X", "Aguarde...", 4)
+Tp1(Vector3.new(101.30716705322266, -9.45310115814209, 2116.82177734375))
+wait()
+Tp1(Vector3.new(51.2113037109375, -11.6262788772583, 2084.80810546875))
+wait()
+Tp1(Vector3.new(28.298912048339844, -11.379730224609375, 2126.66162109375))
+wait()
+Tp1(Vector3.new(32.89760971069336, -15.409835815429688, 2140.35400390625))
+wait()
+Tp1(Vector3.new(63.517333984375, 0.7412600517272949, 2210.197021484375))
+wait()
+Tp1(Vector3.new(110.30799102783203, 23.12737464904785, 2275.71435546875))
+wait()
+Tp1(Vector3.new(75.59400177001953, 21.727298736572266, 2292.10888671875))
+wait(0.9)
+Tp1(Vector3.new(59.57359313964844, 21.001739501953125, 2304.82275390625))
+end)
 
-Combat:CriarLabel('COMBAT:', true) -- combat
+Combat:CriarLabel('COMBAT:', true)
 
 Combat:CriarBotao('Aimbot', function()
-
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Exunys/Aimbot-Script/main/Aimbot%20Script.lua'))()
-
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Exunys/Aimbot-Script/main/Aimbot%20Script.lua'))()
 end)
 
 Combat:CriarToggle('Silent Aim', function(bool)
-
-    getgenv().toggled = bool --/ true & false
-
-getgenv().old = getgenv().old or require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList
-
-if getgenv().toggled then
-	require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList = function(...)
-		local nearestDistance, nearestEnemy = 1000, nil
-	    for i,v in pairs(game:GetService("Players"):GetPlayers()) do
-	    	if v.Team ~= game:GetService("Players").LocalPlayer.Team and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-	    	    if (v.Character.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < nearestDistance then
-	    	    	nearestDistance, nearestEnemy = (v.Character.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude, v
-	    	    end
-	    	end
-	    end
-	    local arg = {old(...)}
-	    if (tostring(getfenv(2).script) == "BulletEmitter" or tostring(getfenv(2).script) == "Taser") and nearestEnemy then
-		    arg[1] = nearestEnemy.Character.HumanoidRootPart
-		    arg[2] = nearestEnemy.Character.HumanoidRootPart.Position
-		end
-	    return unpack(arg)
-	end
-else
-	require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList = getgenv().old
-end
+loadstring(game:HttpGet('https://pastebin.com/raw/sfAsWwGY'))()     
 end)
 
-Combat:CriarToggle('Kill Aura', function()
-
-    getgenv().toggled = true-- change this to false to stop kill aura. 
-
-if getgenv().killauraloaded then return end
-
-local old = require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList
-
-local function getNearestEnemy()
-    local nearestDistance, nearestEnemy = 1000, nil
-    local myTeam = tostring(game:GetService("Players").LocalPlayer.Team)
-    for i,v in pairs(game:GetService("Players"):GetPlayers()) do
-        local theirTeam = tostring(v.Team)
-	    if ((myTeam == "Police" and theirTeam == "Criminal") or theirTeam == "Police") and theirTeam ~= myTeam and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-	    	if (v.Character.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < nearestDistance then
-	    	    nearestDistance, nearestEnemy = (v.Character.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude, v
-	    	end
-	    end
-	end
-    return nearestEnemy
-end
-local function shoot()
-    local currentGun = require(game:GetService("ReplicatedStorage").Game:WaitForChild("ItemSystem"):WaitForChild("ItemSystem")).GetLocalEquipped()
-    if not currentGun then return end
-    require(game:GetService("ReplicatedStorage").Game:WaitForChild("Item"):WaitForChild("Gun"))._attemptShoot(currentGun)
-end
-getgenv().killauraloaded = true
-while wait(0.5) do
-	if getgenv().toggled == false then continue end
-	if not game:GetService("Players").LocalPlayer.Character then continue end
-	if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then continue end
-	
-    local nearestEnemy = getNearestEnemy()
-    if nearestEnemy then
-        require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList = function(...)
-	        local arg = {old(...)}
-	        if (tostring(getfenv(2).script) == "BulletEmitter" or tostring(getfenv(2).script) == "Taser") and nearestEnemy and nearestEnemy.Character and nearestEnemy.Character:FindFirstChild("HumanoidRootPart") and nearestEnemy.Character:FindFirstChild("Humanoid") and (nearestEnemy.Character.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 600 and nearestEnemy.Character.Humanoid.Health > 0 then
-		          arg[1] = nearestEnemy.Character.HumanoidRootPart
-		          arg[2] = nearestEnemy.Character.HumanoidRootPart.Position
-		      end
-	        return unpack(arg)
-	    end
-	    if not game:GetService("Players").LocalPlayer.Folder:FindFirstChild("Pistol") then
-	        fireclickdetector(workspace.Givers:GetChildren()[17].ClickDetector)
-	    end
-	    if game:GetService("Players").LocalPlayer.Folder:FindFirstChild("Pistol") then
-	        while game:GetService("Players").LocalPlayer.Folder:FindFirstChild("Pistol") and nearestEnemy and nearestEnemy.Character and nearestEnemy.Character:FindFirstChild("HumanoidRootPart") and nearestEnemy.Character:FindFirstChild("Humanoid") and (nearestEnemy.Character.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 600 and nearestEnemy.Character.Humanoid.Health > 0 do
-	            game:GetService("Players").LocalPlayer.Folder.Pistol.InventoryEquipRemote:FireServer(true)
-	            wait()
-	            shoot()
-	        end
-	    end
-	    if game:GetService("Players").LocalPlayer.Folder:FindFirstChild("Pistol") then
-	        game:GetService("Players").LocalPlayer.Folder.Pistol.InventoryEquipRemote:FireServer(false)
-	    end
-    else
-        require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList = old
-    end
-end
+Combat:CriarBotao('Kill Aura', function()
+loadstring(game:HttpGet('https://pastebin.com/raw/H8gQcxFb'))()   
 end)
 
 Combat:CriarLabel('DIVERSOS:', true)
 
-Combat:CriarSlider("Velocidade", 1 , 125 , function(value)
-
+Combat:CriarSlider("Velocidade", 1 , 225 , function(value)
 getgenv().WalkSpeedValue = value; 
 local Player = game:service'Players'.LocalPlayer;
 Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
 Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
 Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
 
-
 end)
 end)
 
 Combat:CriarSlider("Gravidade", 0 , 1000 , function(value)
-
 workspace.Gravity = value
-
 end)
+
 Teleportes:CriarLabel('TELEPORTES:', true)
 
 
 Teleportes:CriarBotao("TP Museu", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(1113.5445556640625, 139.10427856445312, 1297.2264404296875))
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(1113.5445556640625, 139.10427856445312, 1297.2264404296875))
 end)
 
-Teleportes:CriarBotao("TP Museu(SEM DELAY)", function()
-    local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()
-
-    return wait(9e9)
-
-    end
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
-        task.wait(0.01)
-    end
-    wait()
+Teleportes:CriarBotao("TP Museu (SEM DELAY)", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/mt2c1iuF'))()     
 end)
 
 Teleportes:CriarBotao("TP Joalheria", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(143.66824340820312, 17.883831024169922, 1379.358154296875))
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(143.66824340820312, 17.883831024169922, 1379.358154296875)) 
 end)	
 
 Teleportes:CriarBotao("TP Bank", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(43.04151153564453, 17.872217178344727, 764.78759765625))
+notificacao("MACRO X", "Não saia do carro!", 5)   
+Tp2(Vector3.new(43.04151153564453, 17.872217178344727, 764.78759765625))
 end)
 
 Teleportes:CriarBotao("TP Power Plant", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(46.77196502685547, 20.40790367126465, 2358.94482421875))
+notificacao("MACRO X", "Não saia do carro!", 5) 
+Tp2(Vector3.new(46.77196502685547, 20.40790367126465, 2358.94482421875))
 end)	
 
 Teleportes:CriarBotao("TP Casino", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-194.64422607421875, 19.190465927124023, -4584.3720703125))
+notificacao("MACRO X", "Não saia do carro!", 5) 
+Tp2(Vector3.new(-194.64422607421875, 19.190465927124023, -4584.3720703125)) 
 end)	
 
 Teleportes:CriarBotao("TP Aeroporto", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-1303.5528564453125, 41.84423828125, 2859.515869140625))
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(-1303.5528564453125, 41.84423828125, 2859.515869140625)) 
 end)
 
 Teleportes:CriarBotao("TP Tomb", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(610.7174072265625, 21.32147979736328, -485.48687744140625))
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(610.7174072265625, 21.32147979736328, -485.48687744140625))
 end)
 
 Teleportes:CriarBotao("TP Posto de Gasolina", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-1534.64453125, 18.461469650268555, 701.8700561523438))
+notificacao("MACRO X", "Não saia do carro!", 5)
+Tp2(Vector3.new(-1534.64453125, 18.461469650268555, 701.8700561523438))
 end)
 
 Teleportes:CriarBotao("TP Loja de Rosquinha", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(62.23844528198242, 18.963422775268555, -1517.5889892578125))
+notificacao("MACRO X", "Não saia do carro!", 5)  
+Tp2(Vector3.new(62.23844528198242, 18.963422775268555, -1517.5889892578125))
 end)	
 
 Teleportes:CriarBotao("TP Area 51", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(612.4613647460938, 19.61579132080078, -3616.880126953125))
+notificacao("MACRO X", "Não saia do carro!", 5)  
+Tp2(Vector3.new(612.4613647460938, 19.61579132080078, -3616.880126953125))
 end)
 
-Teleportes:CriarBotao("TP Trade", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-
+Teleportes:CriarBotao("TP Trade", function() 
+notificacao("MACRO X", "Não saia do carro!", 5) 
 Tp2(Vector3.new(2675.636962890625, 24.351089477539062, -3805.135986328125))
 end)
 
 Teleportes:CriarBotao("TP Loja de Armas", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-
+notificacao("MACRO X", "Não saia do carro!", 5) 
 Tp2(Vector3.new(10.926280975341797, 19.758268356323242, -1764.260498046875))
 end)
 
 Teleportes:CriarBotao("TP Loja de 1M", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(479.4014587402344, 19.485206604003906, -1593.4052734375))
+notificacao("MACRO X", "Não saia do carro!", 5) 
+Tp2(Vector3.new(479.4014587402344, 19.485206604003906, -1593.4052734375))
 end)
 
-Teleportes:CriarBotao("TP Vulcao(Dentro)", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
-    wait(1.2)
-    Tp1(Vector3.new(2270.21435546875, 19.57038688659668, -2155.13525390625))
-    wait(0.6)
-    Tp1(Vector3.new(2211.60791015625, 19.384634017944336, -2482.86328125))
-
-end)
-
-Teleportes:CriarBotao("TP Vulcao(Fora)", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
+Teleportes:CriarBotao("TP Vulcao", function()
+notificacao("MACRO X", "Não saia do carro!", 5)   
+Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
 end)	
 
 Teleportes:CriarBotao("TP Base Cidade", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
+notificacao("MACRO X", "Não saia do carro!", 5) 
+Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
 end)	
 
 Teleportes:CriarBotao("TP Prisao(Dentro)", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-1219.6141357421875, 18.449987411499023, -1759.02490234375))
+notificacao("MACRO X", "Não saia do carro!", 5) 
+Tp2(Vector3.new(-1219.6141357421875, 18.449987411499023, -1759.02490234375))
 end)
 
 Teleportes:CriarBotao("TP Prisao(Fora)", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(-1138.365234375, 18.39781951904297, -1389.2274169921875))
+Tp2(Vector3.new(-1138.365234375, 18.39781951904297, -1389.2274169921875))
+loadstring(game:HttpGet('https://pastebin.com/raw/HZBCd0pH'))()  
 end)
 
-Teleportes:CriarBotao("TP Mansion", function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!"; -- Titulo da sua notificacao
-        Text = "Não saia do carro!"; -- Texto da sua notificacao
-        Duration = 10; -- Tempo que sua notificacao vai ficar na tela;
-      })
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-        local carro, a, b = getCamaro()
-        Tp2(carro.Seat.Position)
-        wait(2)
-        EntrarNoCarroMaisProximo()
-    end
-    Tp2(Vector3.new(2920.753662109375, 57.75913619995117, -4601.60009765625))
+Teleportes:CriarBotao("TP Mansion", function()  
+notificacao("MACRO X", "Não saia do carro!", 5) 
+Tp2(Vector3.new(2920.753662109375, 57.75913619995117, -4601.60009765625))
 end)
 
 
 Loja:CriarLabel('KEY CARD:', true)
 
-Loja:CriarBotao('Key Card', function() game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "AVISO!"; -- Titulo da sua notificacao
-    Text = "Cartão adicionado!"; -- Texto da sua notificacao
-    Duration = 30; -- Tempo que sua notificacao vai ficar na tela;
-  })
-	local plrUtils = game:GetService("ReplicatedStorage").Game.PlayerUtils
+Loja:CriarBotao('Key Card', function() 
+notificacao("MACRO X", "Cartão Adicionado!", 3)
+local plrUtils = game:GetService("ReplicatedStorage").Game.PlayerUtils
 local oldHasKey = require(plrUtils).hasKey
 require(plrUtils).hasKey = function() 
-    return true
-end
+return true
+end  
 end)
+
 local armas = {}
 local args = {
 
@@ -2292,519 +786,94 @@ Outros:CriarLabel('CASINO:', true)
 
 
 Outros:CriarBotao('Auto Quest', function()
-
-
-    local Led = game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
-
-    local function Fire(name)
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == name then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
-            end
-        end
-    end
-    
-    game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.RequestHack:FireServer()
-    
-    
-    for i = 1,3 do
-    
-        local time = 1
-    
-        repeat task.wait() time+=0.01 until time > 3 or Led.BrickColor == BrickColor.new("Lime green")
-        if time > 3 then return end
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "MACRO X";
-            Text = "SUCESSO!!!"
-        })
-        game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer()
-        repeat task.wait() until  Led.BrickColor == BrickColor.new("Really red")
-        
-    end
-      
+quest()       
 end)
 
 Outros:CriarBotao('Auto Code', function()
-
-    local function code()
-        local code = ""
-        for i,v in pairs(game:GetService("Workspace").Casino.RobberyDoor.Codes:GetDescendants()) do
-            if v:IsA("TextLabel") and v.Text ~= "" then
-                code = code .. v.Text
-            end
-        end
-        return code
-    end
-    
-    game.StarterGui:SetCore('SendNotification', {
-        Title = 'Casino';
-        Text = 'Code: '..code();
-    })
-    workspace.Casino.RobberyDoor.Keypad.Pad.CasinoKeypadSubmit:FireServer(code())
-    
+casinocode()         
 end)
 
-    Outros:CriarBotao('Auto Hack Computadores', function()
-        Tp1(Vector3.new(-14.013900756835938, 71.48004150390625, -4736.6650390625))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(66.30123901367188, 69.58157348632812, -4702.05810546875))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(59.13119888305664, 73.08425903320312, -4662.07373046875))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(28.01329231262207, 73.08425903320312, -4652.1484375))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(22.27621841430664, 73.10338592529297, -4679.47314453125))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(-14.785689353942871, 73.08352661132812, -4667.76025390625))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(-0.04245381057262421, 73.08425903320312, -4643.23681640625))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(-23.657981872558594, 73.11416625976562, -4636.005859375))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(-53.55033493041992, 73.08426666259766, -4630.20166015625))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(-79.71204376220703, 73.08425903320312, -4621.2412109375))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(-111.75055694580078, 73.08425903320312, -4612.2138671875))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
-        wait()
-        Tp1(Vector3.new(-82.11653137207031, 81.34656524658203, -4649.365234375))
-        wait()
-
-end)
 Outros:CriarLabel('Desempenho:', true)
 
 Outros:CriarBotao('Remover Texturas', function()
+loadstring(game:HttpGet('https://pastebin.com/raw/vm77wTF1'))()  
+end)
 
+Outros:CriarBotao('FPS+', function()
+loadstring(game:HttpGet('https://pastebin.com/raw/GQhGz819'))()  
+end)
 
-
-	local Terrain = workspace:FindFirstChildOfClass('Terrain')
-        local Lighting = game.Lighting
-        local RunService = game:GetService("RunService")
-        Terrain.WaterWaveSize = 0
-        Terrain.WaterWaveSpeed = 0
-        Terrain.WaterReflectance = 0
-        Terrain.WaterTransparency = 0
-        Lighting.GlobalShadows = false
-        Lighting.FogEnd = 9e9
-        settings().Rendering.QualityLevel = 1
-        for i,v in pairs(game:GetDescendants()) do
-            if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
-                v.Material = "Plastic"
-                v.Reflectance = 0
-            elseif v:IsA("Decal") then
-                v.Transparency = 1
-            elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-                v.Lifetime = NumberRange.new(0)
-            elseif v:IsA("Explosion") then
-                v.BlastPressure = 1
-                v.BlastRadius = 1
-            end
-        end
-        for i,v in pairs(Lighting:GetDescendants()) do
-            if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
-                v.Enabled = false
-            end
-        end
-        workspace.DescendantAdded:Connect(function(child)
-            coroutine.wrap(function()
-                if child:IsA('ForceField') then
-                    RunService.Heartbeat:Wait()
-                    child:Destroy()
-                elseif child:IsA('Sparkles') then
-                    RunService.Heartbeat:Wait()
-                    child:Destroy()
-                elseif child:IsA('Smoke') or child:IsA('Fire') then
-                    RunService.Heartbeat:Wait()
-                    child:Destroy()
-                end
-            end)()
-        end)
-	end)
-
-    Outros:CriarBotao('FPS+', function()
-        game:GetService("RunService").RenderStepped:Wait()
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "MACRO X"; -- Titulo da sua notificacao
-            Text = "Otimização Concluida!"; -- Texto da sua notificacao
-            Duration = 7; -- Tempo que sua notificacao vai ficar na tela;
-          })
-    end)
-
-    Outros:CriarBotao('FPS++', function()
-        local RunService = game:GetService("RunService")
-local FpsLabel = script.Parent
-
-local TimeFunction = RunService:IsRunning() and time or os.clock
-
-local LastIteration, Start
-local FrameUpdateTable = {}
-
-local function HeartbeatUpdate()
-	LastIteration = TimeFunction()
-	for Index = #FrameUpdateTable, 1, -1 do
-		FrameUpdateTable[Index + 1] = FrameUpdateTable[Index] >= LastIteration - 1 and FrameUpdateTable[Index] or nil
-	end
-
-	FrameUpdateTable[1] = LastIteration
-	FpsLabel.Text = tostring(math.floor(TimeFunction() - Start >= 1 and #FrameUpdateTable or #FrameUpdateTable / (TimeFunction() - Start))) .. " FPS"
-end
-
-Start = TimeFunction()
-RunService.Heartbeat:Connect(HeartbeatUpdate)
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "MACRO X"; -- Titulo da sua notificacao
-    Text = "Otimização Concluida!"; -- Texto da sua notificacao
-    Duration = 7; -- Tempo que sua notificacao vai ficar na tela;
-  })
+Outros:CriarBotao('FPS++', function()
+loadstring(game:HttpGet('https://pastebin.com/raw/pqYEk7pr'))()  
 end)
 
 Outros:CriarBotao('FPS+++', function()
-    local RunService = game:GetService("RunService")
-local FpsLabel = script.Parent
-local TimeFunction = RunService:IsRunning() and time or os.clock
-
-local LastIteration, Start
-local FrameUpdateTable = {}
-
-local function HeartbeatUpdate()
-	LastIteration = TimeFunction()
-	for Index = #FrameUpdateTable, 1, -1 do
-		FrameUpdateTable[Index + 1] = FrameUpdateTable[Index] >= LastIteration - 1 and FrameUpdateTable[Index] or nil
-	end
-
-	FrameUpdateTable[1] = LastIteration
-	FpsLabel.Text = tostring(math.floor(TimeFunction() - Start >= 1 and #FrameUpdateTable or #FrameUpdateTable / (TimeFunction() - Start))) .. " FPS"
-end
-
-Start = TimeFunction()
-RunService.Heartbeat:Connect(HeartbeatUpdate)
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "MACRO X"; -- Titulo da sua notificacao
-    Text = "Otimização Concluida!"; -- Texto da sua notificacao
-    Duration = 7; -- Tempo que sua notificacao vai ficar na tela;
-  })
+loadstring(game:HttpGet('https://pastebin.com/raw/SPuVp7z8'))()   
 end)
 
 Outros:CriarLabel('OUTROS:', true)
 
 Outros:CriarBotao('"E" (SEM DELAY)', function(value)
-
-    local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
-
+local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
 for i,a in next, Teste.CircleAction.Specs do
-a.Timed = false
+ a.Timed = false
 end
-
+notificacao("MACRO X", "E (SEM DELAY) Ativado!", 10)
 end)  
 
-Outros:CriarBotao('Deletar lasers', function()
-    for i,v in pairs(workspace:GetDescendants()) do
-        if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name == 'LasersMoving' or v.Name == 'Shadow' or v.Name == 'Light' or (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or v.Name == 'LaserCarousel' or (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')  then
-            local oldParent = v.Parent
-            v.Parent = game:GetService('ReplicatedStorage')
-        end
-    end
+
+Outros:CriarBotao('Deletar lasers(G)', function()
+notificacao("MACRO X", "Precione G para (Remover/Colocar) os Lasers.", 10)
+laser()
 end) 
 
 Outros:CriarBotao('FLY(X)', function()
-    pcall(function()
-    FLYSPEED = 20
-    game:GetService('UserInputService').InputBegan:Connect(function(a,b)
-    if b then return end
-    if a.KeyCode == Enum.KeyCode.LeftShift then
-    FLYSPEED = FLYSPEED + 50
-    end
-    end)
-    game:GetService('UserInputService').InputEnded:Connect(function(a,b)
-    if b then return end
-    if a.KeyCode == Enum.KeyCode.LeftShift then
-    FLYSPEED = FLYSPEED - 50
-    end
-    end)
-
-        repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid") local mouse = game.Players.LocalPlayer:GetMouse() repeat wait() until mouse local plr = game.Players.LocalPlayer local torso = plr.Character.Head local flying = false local deb = true local ctrl = {f = 0, b = 0, l = 0, r = 0} local lastctrl = {f = 0, b = 0, l = 0, r = 0} local maxspeed = 5000 local speed = 5000 function Fly() local bg = Instance.new("BodyGyro", torso) bg.P = 10000 bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) bg.cframe = torso.CFrame local bv = Instance.new("BodyVelocity", torso) bv.velocity = Vector3.new(0,0.1,0) bv.maxForce = Vector3.new(9e9, 9e9, 9e9) repeat wait() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false if ctrl.l + ctrl.r ~= 100000 or ctrl.f + ctrl.b ~= 10000 then speed = speed+.0+(speed/maxspeed) if speed > maxspeed then speed = maxspeed end elseif not (ctrl.l + ctrl.r ~= 5 or ctrl.f + ctrl.b ~= 5) and speed ~= 5 then speed = speed-5 if speed > 5 then speed = -2 end end if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed else bv.velocity = Vector3.new(0,0.1,0) end bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) until not flying ctrl = {f = 0, b = 0, l = 0, r = 0} lastctrl = {f = 0, b = 0, l = 0, r = 0} speed = 5 bg:Destroy() bv:Destroy() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false end mouse.KeyDown:connect(function(key) if key:lower() == "x" then if flying then flying = false else flying = true Fly() end elseif key:lower() == "w" then ctrl.f = FLYSPEED elseif key:lower() == "s" then ctrl.b = -FLYSPEED elseif key:lower() == "a" then ctrl.l = -FLYSPEED elseif key:lower() == "d" then ctrl.r = FLYSPEED end end) mouse.KeyUp:connect(function(key) if key:lower() == "w" then ctrl.f = 0 elseif key:lower() == "s" then ctrl.b = 0 elseif key:lower() == "a" then ctrl.l = 0 elseif key:lower() == "d" then ctrl.r = 0 end end) Fly()    
-    end);
-    speaker.CharacterAdded:Connect(function(c)
-    c:WaitForChild("HumanoidRootPart")
-    wait(0.5)
-    pcall(function()
-    FLYSPEED = 20
-    game:GetService('UserInputService').InputBegan:Connect(function(a,b)
-    if b then return end
-    if a.KeyCode == Enum.KeyCode.LeftShift then
-    FLYSPEED = FLYSPEED + 50
-    end
-    end)
-    game:GetService('UserInputService').InputEnded:Connect(function(a,b)
-    if b then return end
-    if a.KeyCode == Enum.KeyCode.LeftShift then
-    FLYSPEED = FLYSPEED - 50
-    end
-    end)
-
-    repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid") local mouse = game.Players.LocalPlayer:GetMouse() repeat wait() until mouse local plr = game.Players.LocalPlayer local torso = plr.Character.Head local flying = false local deb = true local ctrl = {f = 0, b = 0, l = 0, r = 0} local lastctrl = {f = 0, b = 0, l = 0, r = 0} local maxspeed = 5000 local speed = 5000 function Fly() local bg = Instance.new("BodyGyro", torso) bg.P = 10000 bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) bg.cframe = torso.CFrame local bv = Instance.new("BodyVelocity", torso) bv.velocity = Vector3.new(0,0.1,0) bv.maxForce = Vector3.new(9e9, 9e9, 9e9) repeat wait() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false if ctrl.l + ctrl.r ~= 100000 or ctrl.f + ctrl.b ~= 10000 then speed = speed+.0+(speed/maxspeed) if speed > maxspeed then speed = maxspeed end elseif not (ctrl.l + ctrl.r ~= 5 or ctrl.f + ctrl.b ~= 5) and speed ~= 5 then speed = speed-5 if speed > 5 then speed = -2 end end if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed else bv.velocity = Vector3.new(0,0.1,0) end bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) until not flying ctrl = {f = 0, b = 0, l = 0, r = 0} lastctrl = {f = 0, b = 0, l = 0, r = 0} speed = 5 bg:Destroy() bv:Destroy() plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false end mouse.KeyDown:connect(function(key) if key:lower() == "x" then if flying then flying = false else flying = true Fly() end elseif key:lower() == "w" then ctrl.f = FLYSPEED elseif key:lower() == "s" then ctrl.b = -FLYSPEED elseif key:lower() == "a" then ctrl.l = -FLYSPEED elseif key:lower() == "d" then ctrl.r = FLYSPEED end end) mouse.KeyUp:connect(function(key) if key:lower() == "w" then ctrl.f = 0 elseif key:lower() == "s" then ctrl.b = 0 elseif key:lower() == "a" then ctrl.l = 0 elseif key:lower() == "d" then ctrl.r = 0 end end) Fly()    
-    end);
-    end)
+notificacao("MACRO X", "FLY Ativado!", 3)
+fly() 
 end)
 
 Outros:CriarBotao('Inf nitro', function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "AVISO!!!";
-        Text = "ATIVADO!";
-    })
-    for i,v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-                for _,b in pairs(v) do
-                if tostring(_) == "Nitro" then
-                while true do
-                v[tostring(_)] = 90
-                wait()
-                end
-                end
-            end
-        end
-    end
+notificacao("MACRO X", "Script com mal funcionamento.", 5)
+loadstring(game:HttpGet('https://pastebin.com/raw/aJMYeBnA'))()     
 end)
 
-
-Outros:CriarToggle('Anti dano de Queda', function(value)
-
-
-    local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()
-
-    return wait(9e9)
-
-    end
+Outros:CriarBotao('Anti dano de queda', function(value)
+loadstring(game:HttpGet('https://pastebin.com/raw/nzbus1JP'))() 
+notificacao("MACRO X", "Anti dano de queda ativado!", 3)
 end)
 
 Outros:CriarBotao('Iniciar Queda Livre', function(value)
-
-    local startSky
-    for i,v in pairs(getgc()) do
-        if type(v) == 'function' and getinfo(v).name == 'StartSkydiving' then
-            startSky = v
-        end
-    end
-    startSky()
-
+loadstring(game:HttpGet('https://pastebin.com/raw/s4kDNPyY'))()  
 end)
 
 Outros:CriarBotao('Criar Rampa', function()
-    local root = game.Players.LocalPlayer.Character.HumanoidRootPart
-
-    local clone = game:GetService("Workspace").NewRamp:Clone()
-
-    clone.Parent = Workspace
-    clone:FindFirstChild('RampWood').CFrame = root.CFrame * CFrame.new(0, 0, -5)
-    clone:FindFirstChild('RampLegs').CFrame = root.CFrame * CFrame.new(0, -3, -10)
-    clone:FindFirstChild('RampBase').CFrame = root.CFrame * CFrame.new(0, 0, -5)
-    clone:FindFirstChild('RampWood').CFrame = root.CFrame * CFrame.new(0, 0, -5)
-    clone:FindFirstChild('RampLegs').CanCollide = true
-    clone:FindFirstChild('RampBase').CanCollide = true
+loadstring(game:HttpGet('https://pastebin.com/raw/7jPMjwEL'))() 
+notificacao("MACRO X", "Rampa Criada!", 3) 
 end)
 
 Outros:CriarBotao('No Clip(Q)', function()
-    local NC = false
-    local NC_Clip
-    local Player = game.Players.LocalPlayer
-    local Char = Player.Character or Player.CharacterAdded:wait()
-    
-    local Mouse = Player:GetMouse()
-    
-    local Speed = 2
-    
-    local Service = game:GetService("ContextActionService")
-    local Camera = workspace.CurrentCamera
-    local Player = game:GetService("Players").LocalPlayer 
-    local Input = game:GetService("UserInputService") 
-    local Forward = false 
-    local Back = false 
-    local Left = false 
-    local Right = false 
-    local Up = false 
-    local Down = false 
-    local BodyPosition
-    local Menu
-    local Heart = {}
-    local VELOCIDADE = 5
-    
-    Player.Chatted:Connect(function(cmd)
-        cmd = cmd .. ' '
-        cmd = cmd:split(" ")
-        
-        if cmd[1] == "/e" then
-            if cmd[2] == "velo" then
-                VELOCIDADE = tonumber(cmd[3])
-            end
-        end
-    end)
-    Input.InputBegan:Connect(function(Key,b)if b then return end
-    if Key.KeyCode == Enum.KeyCode.LeftShift then
-        VELOCIDADE+=25
-    end
-        if Key.KeyCode == Enum.KeyCode.W or Key.KeyCode == Enum.KeyCode.Up then 
-            Forward = true 
-        end 
-        if Key.KeyCode == Enum.KeyCode.S or Key.KeyCode == Enum.KeyCode.Down then 
-            Back = true 
-        end 
-        if Key.KeyCode == Enum.KeyCode.A or Key.KeyCode == Enum.KeyCode.Left then
-            Left = true 
-        end 
-        if Key.KeyCode == Enum.KeyCode.D or Key.KeyCode == Enum.KeyCode.Right then 
-            Right = true 
-        end 
-        if Key.KeyCode == Enum.KeyCode.Space then 
-            Up = true 
-        end             
-        if Key.KeyCode == Enum.KeyCode.LeftControl then 
-            Down = true 
-        end 
-    end)
-    Input.InputEnded:Connect(function(Key, b)if b then return end
-    if Key.KeyCode == Enum.KeyCode.LeftShift then
-        VELOCIDADE-=25
-    end
-        if Key.KeyCode == Enum.KeyCode.W or Key.KeyCode == Enum.KeyCode.Up then 
-            Forward = false 
-        end 
-        if Key.KeyCode == Enum.KeyCode.S or Key.KeyCode == Enum.KeyCode.Down then 
-            Back = false 
-        end 
-        if Key.KeyCode == Enum.KeyCode.A or Key.KeyCode == Enum.KeyCode.Left then
-            Left = false 
-        end 
-        if Key.KeyCode == Enum.KeyCode.D or Key.KeyCode == Enum.KeyCode.Right then 
-            Right = false 
-        end 
-        if Key.KeyCode == Enum.KeyCode.Space then 
-            Up = false 
-        end 
-        if Key.KeyCode == Enum.KeyCode.LeftControl then 
-            Down = false 
-        end 
-    end)
-    Service:BindAction("To fly", function(name,state)
-        if state == Enum.UserInputState.Begin then
-            NC = not NC
-            
-            Char.Animate.Enabled = not NC
-            if NC then
-                spawn(function()
-                    
-                    NC_Clip = game:GetService("RunService").Stepped:Connect(function()
-                        for i,v in pairs(Char:GetDescendants()) do
-                            if v:IsA("BasePart") then
-                                v.CanCollide = false
-                            end
-                        end
-                    end)
-                    
-                end)
-                
-    
-                Heart[#Heart + 1] = game["Run Service"].Heartbeat:Connect(function()
-                    if Forward then 
-                        Player.Character:TranslateBy(Camera.CFrame.lookVector*VELOCIDADE) 
-                    end 
-                    if Back then 
-                        Player.Character:TranslateBy(-Camera.CFrame.lookVector*VELOCIDADE) 
-                    end 
-                    if Left then 
-                        Player.Character:TranslateBy(-Camera.CFrame:vectorToWorldSpace(Vector3.new(1,0,0))*VELOCIDADE) 
-                    end 
-                    if Right then 
-                        Player.Character:TranslateBy(Camera.CFrame:vectorToWorldSpace(Vector3.new(1,0,0))*VELOCIDADE) 
-                    end 
-                    if Up then Player.Character:TranslateBy(Camera.CFrame:vectorToWorldSpace(Vector3.new(0,1,0))*VELOCIDADE) 
-                    end 
-                    if Down then 
-                        Player.Character:TranslateBy(-Camera.CFrame:vectorToWorldSpace(Vector3.new(0,1,0))*VELOCIDADE) 
-                    end  
-                end)
-                spawn(function()
-                    while NC --[[Dont need "==true"]] do
-                    Char=game.Players.LocalPlayer.Character
-                        Char.HumanoidRootPart.Velocity = Vector3.new(0,1.5,0)
-                        task.wait()
-                    end
-                end)
-                
-            else
-                for i,v in pairs(Heart) do v:Disconnect() end
-            end
-            
-        end
-    end, false, Enum.KeyCode.Q)
-
+loadstring(game:HttpGet('https://pastebin.com/raw/KBMfjzGm'))() 
+notificacao("MACRO X", "No Clip Ativado!", 3)
 end)
 
 Outros:CriarBotao('Abrir Loja De Arma', function()
-    local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-    local oldfunction = item.Ragdoll
-    item.Ragdoll = function()
-
-    return wait(9e9)
-
-    end
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(11.476838111877441, 19.30390167236328, -1721.8671875))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(11.476838111877441, 19.30390167236328, -1721.8671875))
-        task.wait(0.01)
-    end
-    wait()
-    for i = 1, 50 do
-        game:GetService("Players").LocalPlayer.Character:PivotTo(CFrame.new(11.476838111877441, 19.30390167236328, -1721.8671875))
-        task.wait(0.01)
-    end
-    return
+loadstring(game:HttpGet('https://pastebin.com/raw/hxvEvJHG'))()    
+notificacao("MACRO X", "Loja aberta!", 3) 
 end)
 
 Outros:CriarBotao('Fechar Loja De Arma', function()
-    Tp1(Vector3.new(5.122807502746582, 19.30390167236328, -1721.6417236328125))
+notificacao("MACRO X", "Loja fechada!", 3) 
+Tp1(Vector3.new(5.122807502746582, 19.30390167236328, -1721.6417236328125))
 end)
 
 
 Credits:CriarLabel('DISCORD', true)
 
 Credits:CriarBotao('DISCORD', function() 
-
-setclipboard("by ヘンリケ#1111")
-        
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "DISCORD";
-            Text = "by ヘンリケ#1111";
-        })
-        wait(0.5)
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Discord";
-            Text = "Créditos no clipboard!";
-        })
-    end)
-
-    
-Credits:CriarBotao('MACRO X HUB', function()
-loadstring(game:HttpGet('https://pastebin.com/raw/5Sak5wZk'))()
+notificacao("MACRO X Discord", "BY ヘンリケ#1111", 10)
+wait()
+notificacao("MACRO X Discord", "Créditos no clipboard!", 10)
+setclipboard("https://pastebin.com/raw/XgD1sv52")         
 end)
 
 end
