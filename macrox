@@ -1,3 +1,4 @@
+
 loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/Main'))()
 
 repeat wait() until getgenv().newtab
@@ -5,20 +6,35 @@ repeat wait() until getgenv().newtab
 Tab = getgenv().newtab 
 
 if --[[Jailbreak]]game.PlaceId == 606849621 then
+
+local Tp1,Tp2 = loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/TP'))()
+repeat 
+wait()
+until Tp1 ~= nil and Tp2 ~= nil
+
+--FUNÇÕES:
+
+function Tp(Vector)
+Tp1(Vector)
+end
+
+function saircarro()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Space, false, game)
+    spawn(function()
+    pcall(function()
+    repeat wait() until game.Players.LocalPlayer.Character.Humanoid.Jump == true
+    game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.Space, false, game)
+    end)
+    end)
+    wait(1)
+end
+
 function notificacao(um,dois,tres)
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = um; 
         Text = dois; 
         Duration = tres; 
     })
-end
-
-local Tp1,Tp2 = loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/TP'))()
-repeat 
-wait()
-until Tp1 ~= nil and Tp2 ~= nil
-function Tp(Vector)
-Tp1(Vector)
 end
 
 function laser()
@@ -172,6 +188,65 @@ for i = 1, 50 do
 end
 end
 
+function hack()
+    for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+        if v.Name == "Hack" then
+            pcall(function()
+                v.Duration = 0
+                v:Callback(true)
+            end)
+        end
+    end
+    for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+        if v.Name == "Hack" then
+            pcall(function()
+                v.Duration = 0
+                v:Callback(true)
+            end)
+        end
+    end
+end
+
+function hack1()
+    for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+        if v.Name == "Disable Vault Security" then
+            pcall(function()
+                v.Duration = 0
+                v:Callback(true)
+            end)
+        end
+    end
+    for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+        if v.Name == "Disable Vault Security" then
+            pcall(function()
+                v.Duration = 0
+                v:Callback(true)
+            end)
+        end
+    end
+end
+
+function sairpower()
+Tp1(Vector3.new(101.30716705322266, -9.45310115814209, 2116.82177734375))
+wait()
+Tp1(Vector3.new(51.2113037109375, -11.6262788772583, 2084.80810546875))
+wait()
+Tp1(Vector3.new(28.298912048339844, -11.379730224609375, 2126.66162109375))
+wait()
+Tp1(Vector3.new(32.89760971069336, -15.409835815429688, 2140.35400390625))
+wait()
+Tp1(Vector3.new(63.517333984375, 0.7412600517272949, 2210.197021484375))
+wait()
+Tp1(Vector3.new(108.13888549804688, 18.045215606689453, 2268.4423828125))
+wait()
+Tp1(Vector3.new(106.5613021850586, 24.794153213500977, 2270.388427734375))
+wait()
+Tp1(Vector3.new(74.72679138183594, 26.465347290039062, 2289.9638671875))
+wait(0.7)
+Tp1(Vector3.new(67.83537292480469, 21.327346801757812, 2297.48876953125))
+end
+--MENU:
+
 local Farm = Tab('Farm')
 
 local Combat = Tab('Combat')
@@ -192,7 +267,7 @@ Farm:CriarLabel('AUTO FARM:', true)
 Farm:CriarBotao("Auto Museu", function()
 Tp2(Vector3.new(1097.8641357421875, 139.19546508789062, 1316.987060546875))
 wait()
-loadstring(game:HttpGet('https://pastebin.com/raw/HvL4uEP1'))()    
+saircarro()   
 wait(1)
 local c = false
 local callback = function(text)
@@ -268,13 +343,37 @@ Farm:CriarBotao("Auto Power Plant", function()
 laser1()
 Tp2(Vector3.new(57.718910217285156, 20.911163330078125, 2353.02685546875))
 wait()
-loadstring(game:HttpGet('https://pastebin.com/raw/HvL4uEP1'))()  
+saircarro()
 wait()    
 Tp1(Vector3.new(68.75518798828125, 21.001739501953125, 2339.879150390625))
 wait()
 Tp1(Vector3.new(87.5652847290039, 21.258285522460938, 2322.63427734375))
 wait()
-loadstring(game:HttpGet('https://pastebin.com/raw/DdcD35RB'))()  
+local c = false
+local callback = function(text)
+if text == "Continuar" then
+c=true
+end
+end
+
+local BindableFunction = Instance.new('BindableFunction')
+BindableFunction.OnInvoke = callback 
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+  Title = "Esperando..."; -- Titulo da sua notificacao
+  Text = "Faça sua Quest!"; -- Texto da sua notificacao
+  Duration = 50; -- Tempo que sua notificacao vai ficar na tela;
+  Icon = nil; -- Icon do seu menu, coloque assim "rbxassetid://12345"
+  Button1 = "Continuar";
+  Button2 = "Finalizar";
+  Callback = BindableFunction
+})
+repeat wait()until c
+local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
+    local oldfunction = item.Ragdoll
+    item.Ragdoll = function()
+    return wait(9e9)
+    end 
 wait()
 Tp1(Vector3.new(82.3072280883789, 21.001739501953125, 2343.699462890625))
 wait()
@@ -294,21 +393,7 @@ Tp1(Vector3.new(119.48699951171875, -8.645960807800293, 2097.74658203125))
 wait()
 loadstring(game:HttpGet('https://pastebin.com/raw/DdcD35RB'))()  
 wait()
-Tp1(Vector3.new(101.30716705322266, -9.45310115814209, 2116.82177734375))
-wait()
-Tp1(Vector3.new(51.2113037109375, -11.6262788772583, 2084.80810546875))
-wait()
-Tp1(Vector3.new(28.298912048339844, -11.379730224609375, 2126.66162109375))
-wait()
-Tp1(Vector3.new(32.89760971069336, -15.409835815429688, 2140.35400390625))
-wait()
-Tp1(Vector3.new(63.517333984375, 0.7412600517272949, 2210.197021484375))
-wait()
-Tp1(Vector3.new(110.30799102783203, 23.12737464904785, 2275.71435546875))
-wait()
-Tp1(Vector3.new(75.59400177001953, 21.727298736572266, 2292.10888671875))
-wait(0.7)
-Tp1(Vector3.new(59.57359313964844, 21.001739501953125, 2304.82275390625))
+sairpower()
 end)
 
 Farm:CriarBotao("Auto Casino", function()
@@ -332,9 +417,7 @@ repeat wait()until c
 laser1()
 Tp2(Vector3.new(-73.93269348144531, 155.28050231933594, -4714.79833984375))
 wait()
-loadstring(game:HttpGet('https://pastebin.com/raw/HvL4uEP1'))()  
-wait()
-loadstring(game:HttpGet('https://pastebin.com/raw/Z0fqXWAY'))()     
+saircarro()
 wait()
 Tp1(Vector3.new(-12.582771301269531, 155.28053283691406, -4734.11865234375))
 wait()
@@ -354,37 +437,47 @@ wait(2.9)
 Tp1(Vector3.new(-8.465522766113281, 71.58183288574219, -4720.38525390625))
 wait()
 Tp1(Vector3.new(52.5584602355957, 71.48004150390625, -4739.1640625))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(59.13119888305664, 73.08425903320312, -4662.07373046875))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(28.01329231262207, 73.08425903320312, -4652.1484375))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(22.27621841430664, 73.10338592529297, -4679.47314453125))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(-14.785689353942871, 73.08352661132812, -4667.76025390625))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(-0.04245381057262421, 73.08425903320312, -4643.23681640625))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(-23.657981872558594, 73.11416625976562, -4636.005859375))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(-53.55033493041992, 73.08426666259766, -4630.20166015625))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(-79.71204376220703, 73.08425903320312, -4621.2412109375))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 Tp1(Vector3.new(-111.75055694580078, 73.08425903320312, -4612.2138671875))
-loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/casino%20rob'))()
+hack()
+hack1()
 wait()
 notificacao("MACRO X", "Aguarde...", 5)
-wait()
+wait() 
 spawn(function()
 quest()
 wait()
@@ -396,6 +489,7 @@ quest()
 wait()
 end)
 wait(5)
+notificacao("MACRO X", "Quase lá!", 4)
 Tp1(Vector3.new(-82.11653137207031, 81.34656524658203, -4649.365234375))
 wait()
 Tp1(Vector3.new(-16.072145462036133, 71.52082061767578, -4746.28955078125))
@@ -406,7 +500,6 @@ wait(1.6)
 local pos = Vector3.new(-18.78749656677246, 28.731122970581055, -4754.3154296875) -- posicao
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
 wait()
-notificacao("MACRO X", "Quase lá!", 4)
 local Call = game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls['1']
 fireclickdetector(Call.ClickDetector)
 wait(3)
@@ -587,22 +680,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
 end)
 
 Farm:CriarBotao("Auto Sair Power Plant", function()
-notificacao("MACRO X", "Aguarde...", 4)
-Tp1(Vector3.new(101.30716705322266, -9.45310115814209, 2116.82177734375))
-wait()
-Tp1(Vector3.new(51.2113037109375, -11.6262788772583, 2084.80810546875))
-wait()
-Tp1(Vector3.new(28.298912048339844, -11.379730224609375, 2126.66162109375))
-wait()
-Tp1(Vector3.new(32.89760971069336, -15.409835815429688, 2140.35400390625))
-wait()
-Tp1(Vector3.new(63.517333984375, 0.7412600517272949, 2210.197021484375))
-wait()
-Tp1(Vector3.new(110.30799102783203, 23.12737464904785, 2275.71435546875))
-wait()
-Tp1(Vector3.new(75.59400177001953, 21.727298736572266, 2292.10888671875))
-wait(0.9)
-Tp1(Vector3.new(59.57359313964844, 21.001739501953125, 2304.82275390625))
+sairpower()
 end)
 
 Combat:CriarLabel('COMBAT:', true)
