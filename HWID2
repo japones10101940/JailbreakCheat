@@ -1,1 +1,33 @@
- loadstring(game:HttpGet("https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/HWID1"))()
+local continuee = false
+
+local ids = loadstring(game:HttpGet("https://raw.githubusercontent.com/japones10101940/JailbreakCheat/main/HWID1"))()
+
+
+
+for i,v in pairs(ids) do
+
+    if v == game:GetService("RbxAnalyticsService"):GetClientId() then 
+
+        continuee = true
+
+    end
+
+end
+
+
+
+if not continuee then
+
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+
+        title = "MACRO X ERROR!";
+
+        text = "HWID não registrada!"
+
+    })
+
+end
+
+
+
+repeat wait() until continuee 
