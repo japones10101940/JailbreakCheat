@@ -1849,11 +1849,14 @@ end
 
             Tp2(Vector3.new(2199.31787109375, 78.87100219726562, -2577.150634765625))
             Tp1(Vector3.new(2267.44287109375, 73.02130889892578, -2592.494873046875))
+            wait(0.1)
             Tp1(Vector3.new(2286.663818359375, 33.13221740722656, -2592.614990234375))
             repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.RobberyMoneyGui.Enabled == false
       wait(1)
             Tp1(Vector3.new(2277.3076171875, 70.68268585205078, -2591.248779296875))
+            wait(0.1)
             Tp1(Vector3.new(2195.732666015625, 77.68968963623047, -2584.357666015625))
+            wait(0.1)
             local old = use_car
             use_car = false
             Tp2(Vector3.new(2281.5146484375, 16.38672637939453, -2057.7392578125))
