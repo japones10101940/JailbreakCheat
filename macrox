@@ -1128,9 +1128,9 @@ end
 			end
 end
         wait(0.5)
-        Tp1(Vector3.new(1101.044189453125, 105.79499816894531, 1280.4884033203125)) -- entrada
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1101.044189453125, 105.79499816894531, 1280.4884033203125) -- entrada
         wait()
-        Tp1(Vector3.new(1141.1878662109375, 114.40751647949219, 1299.240966796875)) --grab
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1141.1878662109375, 114.40751647949219, 1299.240966796875)
         for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
 			if v.Name == "Grab Bone" then
 				pcall(function()
@@ -1140,18 +1140,7 @@ end
 			end
 end
         wait(0.5)
-        Tp1(Vector3.new(1145.9127197265625, 115.3492202758789, 1317.2255859375)) --grab
-        wait()
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Bone" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        Tp1(Vector3.new(1129.778076171875, 112.77814483642578, 1315.6688232421875)) --grab
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1145.9127197265625, 115.3492202758789, 1317.2255859375)
         wait()
         for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
 			if v.Name == "Grab Bone" then
@@ -1162,7 +1151,7 @@ end
 			end
 end
         wait(0.5)
-        Tp1(Vector3.new(1124.0072021484375, 112.57622528076172, 1302.7410888671875)) --grab
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1129.778076171875, 112.77814483642578, 1315.6688232421875)
         wait()
         for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
 			if v.Name == "Grab Bone" then
@@ -1173,8 +1162,17 @@ end
 			end
 end
         wait(0.5)
-        Tp1(Vector3.new(1137.17431640625, 111.84139251708984, 1303.709228515625))-- grab
-        wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1124.0072021484375, 112.57622528076172, 1302.7410888671875)
+        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+			if v.Name == "Grab Bone" then
+				pcall(function()
+					v.Duration = 0
+					v:Callback(true)
+				end)
+			end
+end
+        wait(0.5)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1137.17431640625, 111.84139251708984, 1303.709228515625)
         for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
 			if v.Name == "Grab Bone" then
 				pcall(function()
@@ -1849,21 +1847,18 @@ end
     Farm:CriarBotao("Auto Vender (Vulcao)", function()
         notificacao("MACRO X", "Não saia do carro!", 5)
 
-        Tp2(Vector3.new(2199.31787109375, 78.87100219726562, -2577.150634765625))
-
-        Tp1(Vector3.new(2267.44287109375, 73.02130889892578, -2592.494873046875))
-        Tp1(Vector3.new(2286.663818359375, 33.13221740722656, -2592.614990234375))
-        for i = 1, 10 do
-            getCar().Velocity = Vector3.new(0, 1, 0)
-            task.wait()
-        end
-        Tp1(Vector3.new(2277.3076171875, 70.68268585205078, -2591.248779296875))
-        Tp1(Vector3.new(2195.732666015625, 77.68968963623047, -2584.357666015625))
-        local old = use_car
-        use_car = false
-        Tp2(Vector3.new(2281.5146484375, 16.38672637939453, -2057.7392578125))
-        usecar = old
-    end)
+            Tp2(Vector3.new(2199.31787109375, 78.87100219726562, -2577.150634765625))
+            Tp1(Vector3.new(2267.44287109375, 73.02130889892578, -2592.494873046875))
+            Tp1(Vector3.new(2286.663818359375, 33.13221740722656, -2592.614990234375))
+            repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.RobberyMoneyGui.Enabled == false
+      wait(1)
+            Tp1(Vector3.new(2277.3076171875, 70.68268585205078, -2591.248779296875))
+            Tp1(Vector3.new(2195.732666015625, 77.68968963623047, -2584.357666015625))
+            local old = use_car
+            use_car = false
+            Tp2(Vector3.new(2281.5146484375, 16.38672637939453, -2057.7392578125))
+            usecar = old
+        end)
 
     Farm:CriarBotao("Auto Vender (Base Cidade)", function()
         notificacao("MACRO X", "Não saia do carro!", 5)
