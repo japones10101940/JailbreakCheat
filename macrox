@@ -8,8 +8,8 @@ Tab = getgenv().newtab
 
 if --[[Jailbreak]] game.PlaceId == 606849621 then
     function getCar()
-        for i, v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
-            if v.Name == "Seat" and v:FindFirstChild("PlayerName") ~= nil then
+        for i, v in pairs(game:GetService('Workspace').Vehicles:GetDescendants()) do
+            if v.Name == 'Seat' and v:FindFirstChild('PlayerName') ~= nil then
                 if v.PlayerName.Value == game.Players.LocalPlayer.Name then
                     return v.Parent.Engine
                 end
@@ -17,6 +17,42 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         end
         return nil
     end
+
+    local Robberys = {
+        ['1'] = 'Bank',
+        ['2'] = 'Jewelry Store',
+        ['3'] = 'Museum',
+        ['4'] = 'Power Plant',
+        ['5'] = 'Passenger Train',
+        ['6'] = 'Cargo Train',
+        ['7'] = 'Cargo Ship',
+        ['8'] = 'Cargo Plane',
+        ['9'] = 'Gas Station',
+        ['10'] = 'Donut Store',
+        ['11'] = 'Money Truck',
+        ['12'] = 'Home Vault',
+        ['13'] = 'Tomb',
+        ['14'] = 'Casino',
+        ['15'] = 'Mansion'
+    }
+
+    function get_rob(nome)
+        for i, v in pairs(Robberys) do
+            if v:lower() == nome:lower() then
+                return i
+            end
+        end
+    end
+
+    function is_opened(rob)
+        local roubo = get_rob(rob)
+
+        local State = game:GetService('ReplicatedStorage').RobberyState:FindFirstChild(roubo)
+
+        return (tostring(State) == 'nil' and 'fechado') or
+            ((State.Value == 1 and 'aberto') or (State.Value == 2 and 'roubando') or (State.Value == 3 and 'fechado'))
+    end
+
     function teleport_path_find(pos_custom, howmuch)
         howmuch = howmuch or 5
 
@@ -34,9 +70,12 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
 
         local function tpp(pos)
             local Finished = false
-            local sucess = pcall(function()
-                path:ComputeAsync(Dummy.HumanoidRootPart.Position, pos)
-            end)
+            local sucess =
+                pcall(
+                function()
+                    path:ComputeAsync(Dummy.HumanoidRootPart.Position, pos)
+                end
+            )
 
             if sucess then
                 waypoints = path:GetWaypoints()
@@ -71,25 +110,26 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
                 getRoot(speaker).Velocity = Vector3.new(0, 0, 0)
                 BodyGyro:Destroy()
                 BodyPosition:Destroy()
-
             end
         end
 
         tpp(pos_custom)
-
     end
     local loop
     local already_deleted = true
     function no_clip(bool)
         if bool and already_deleted then
             already_deleted = false
-            loop = game:GetService("RunService").Stepped:Connect(function()
-                for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                    if v:IsA("BasePart") then
-                        v.CanCollide = false
+            loop =
+                game:GetService('RunService').Stepped:Connect(
+                function()
+                    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                        if v:IsA('BasePart') then
+                            v.CanCollide = false
+                        end
                     end
                 end
-            end)
+            )
         else
             loop:Disconnect()
             already_deleted = true
@@ -105,40 +145,44 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
     no_clip(false)
 
     Notify = function(um, dois, tres)
-        spawn(function()
-            repeat
-                wait()
-            until game:GetService("Players").LocalPlayer.PlayerGui.NotificationGui ~= nil
-            local sound = Instance.new('Sound', workspace)
-            sound.SoundId = 'rbxassetid://700153902'
-            sound:Play()
-            for i, v in pairs(game.CoreGui:GetChildren()) do
-                if v.Name == 'NotificationGui' then
-                    v:Destroy()
+        spawn(
+            function()
+                repeat
+                    wait()
+                until game:GetService('Players').LocalPlayer.PlayerGui.NotificationGui ~= nil
+                local sound = Instance.new('Sound', workspace)
+                sound.SoundId = 'rbxassetid://700153902'
+                sound:Play()
+                for i, v in pairs(game.CoreGui:GetChildren()) do
+                    if v.Name == 'NotificationGui' then
+                        v:Destroy()
+                    end
                 end
+                local menu = game:GetService('Players').LocalPlayer.PlayerGui.NotificationGui:Clone()
+
+                menu.Parent = game.CoreGui
+                menu.Enabled = true
+
+                title = um .. '\n' .. dois
+                spawn(
+                    function()
+                        for i = 1, #title do
+                            menu.ContainerNotification.Message.Text = string.sub(title, 1, i)
+                            menu.Sound:Play()
+                            wait(0.05)
+                        end
+                        wait(tres)
+                        menu:Destroy()
+                        sound:Destroy()
+                    end
+                )
             end
-            local menu = game:GetService("Players").LocalPlayer.PlayerGui.NotificationGui:Clone()
-
-            menu.Parent = game.CoreGui
-            menu.Enabled = true
-
-            title = um .. "\n" .. dois
-            spawn(function()
-                for i = 1, #title do
-                    menu.ContainerNotification.Message.Text = string.sub(title, 1, i)
-                    menu.Sound:Play()
-                    wait(0.05)
-                end
-                wait(tres)
-                menu:Destroy()
-                sound:Destroy()
-            end)
-        end)
+        )
     end
 
     function esperar(bloco, numero, other)
         other = other or function()
-        end
+            end
         local dist = 5000
         repeat
             if other then
@@ -146,9 +190,9 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
             end
             local localplayer = game.Players.LocalPlayer
             local character = localplayer.Character or localplayer.CharacterAdded:wait()
-            local bloco_position = (typeof(bloco) == "Vector3" and bloco) or
-                                       (typeof(bloco) == "Instance" and bloco.Position)
-            local root_position = character:FindFirstChild("HumanoidRootPart").Position
+            local bloco_position =
+                (typeof(bloco) == 'Vector3' and bloco) or (typeof(bloco) == 'Instance' and bloco.Position)
+            local root_position = character:FindFirstChild('HumanoidRootPart').Position
 
             dist = (bloco_position - root_position).Magnitude
             task.wait()
@@ -158,9 +202,12 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
     local use_car = true
     local function getRoot(plr)
         plr = plr or game.Players.LocalPlayer
-        local sucess, root = pcall(function()
-            return plr.Character.HumanoidRootPart
-        end)
+        local sucess, root =
+            pcall(
+            function()
+                return plr.Character.HumanoidRootPart
+            end
+        )
 
         if not sucess then
             return false
@@ -169,8 +216,8 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         return root
     end
     function getCar()
-        for i, v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
-            if v.Name == "Seat" and v:FindFirstChild("PlayerName") ~= nil then
+        for i, v in pairs(game:GetService('Workspace').Vehicles:GetDescendants()) do
+            if v.Name == 'Seat' and v:FindFirstChild('PlayerName') ~= nil then
                 if v.PlayerName.Value == game.Players.LocalPlayer.Name then
                     return v.Parent.Engine
                 end
@@ -182,7 +229,7 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         local vehicle, spec, nearest = nil, nil, 10000
         local Root = getRoot(speaker)
         for i, v in next, require(game.ReplicatedStorage.Module.UI).CircleAction.Specs do
-            if v.Name == "Enter Driver" and v.ValidRoot.Name == "Camaro" --[[or Jeep]] then
+            if v.Name == 'Enter Driver' and v.ValidRoot.Name == 'Camaro' --[[or Jeep]] then
                 local dist = (v.ValidRoot.PrimaryPart.Position - Root.Position).Magnitude
 
                 if dist < nearest then
@@ -193,7 +240,7 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
 
         if vehicle ~= nil then
             return vehicle, spec, nearest
-            -- tp to 'vehicle.Seat' and call 'spec:Callback(true)'
+        -- tp to 'vehicle.Seat' and call 'spec:Callback(true)'
         end
     end
 
@@ -257,7 +304,7 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
             wait()
         until pode == true
         pode = false
-        velo = velo or 115
+        velo = velo or 140
         isup = false
         custom = nil
         custom = custom or nil
@@ -271,20 +318,26 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
             vector = FindPlayer(tostring(vector))
             if getRoot(vector) then
             else
-                game:GetService("StarterGui"):SetCore("SendNotification", {
-                    Title = "Error",
-                    Text = "Character of player is nil.",
-                    Duration = 5
-                })
+                game:GetService('StarterGui'):SetCore(
+                    'SendNotification',
+                    {
+                        Title = 'Error',
+                        Text = 'Character of player is nil.',
+                        Duration = 5
+                    }
+                )
                 return
             end
 
             if vector == nil then
-                game:GetService("StarterGui"):SetCore("SendNotification", {
-                    Title = "Error",
-                    Text = "Error to get player.",
-                    Duration = 5
-                })
+                game:GetService('StarterGui'):SetCore(
+                    'SendNotification',
+                    {
+                        Title = 'Error',
+                        Text = 'Error to get player.',
+                        Duration = 5
+                    }
+                )
                 return
             end
 
@@ -295,17 +348,19 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
             partPos = vector
         end
 
-        spawn(function()
-            if isplayer then
-                while reached == false and abort == false do
-                    vector = partPos.Position
-                    if isup then
-                        vector = vector + Vector3.new(0, 400, 0)
+        spawn(
+            function()
+                if isplayer then
+                    while reached == false and abort == false do
+                        vector = partPos.Position
+                        if isup then
+                            vector = vector + Vector3.new(0, 400, 0)
+                        end
+                        wait()
                     end
-                    wait()
                 end
             end
-        end)
+        )
 
         customvelo = customvelo or 5e4
         faltando = faltando or false
@@ -316,7 +371,7 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         end
         local aperta = false
 
-        local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
+        local item = require(game:GetService('ReplicatedStorage').Module.AlexRagdoll)
         local oldfunction = item.Ragdoll
         item.Ragdoll = function()
             return wait(9e9)
@@ -328,33 +383,37 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         BodyVelocity.P = 50000
         BodyVelocity.Parent = getRoot(speaker)
         local old = teleport_velo
-        local Loop = game:GetService('RunService').Stepped:Connect(function(_, step)
-
-            local yourRoot = getRoot(speaker)
-            local diff
-            diff = (vector - getRoot(speaker).Position)
-            if speaker.Character:FindFirstChild('Humanoid').Sit == true then
-                BodyVelocity.P = customvelo
-                teleport_velo = 625
-            else
-                teleport_velo = velo
+        local Loop =
+            game:GetService('RunService').Stepped:Connect(
+            function(_, step)
+                local yourRoot = getRoot(speaker)
+                local diff
+                diff = (vector - getRoot(speaker).Position)
+                if speaker.Character:FindFirstChild('Humanoid').Sit == true then
+                    BodyVelocity.P = customvelo
+                    teleport_velo = 440
+                else
+                    teleport_velo = velo
+                end
+                if (vector - getRoot(speaker).Position).Magnitude < 1 or speaker.Character.Humanoid.Health == 0 then
+                    reached = true
+                end
+                BodyVelocity.Position =
+                    getRoot(speaker).Position + diff.Unit * math.min(step * teleport_velo, diff.Magnitude)
+                if getCar() then
+                    getCar().BodyGyro.MaxTorque = Vector3.new(9e9, 0, 9e9)
+                end
             end
-            if (vector - getRoot(speaker).Position).Magnitude < 1 or speaker.Character.Humanoid.Health == 0 then
-                reached = true
-            end
-            BodyVelocity.Position = getRoot(speaker).Position + diff.Unit *
-                                        math.min(step * teleport_velo, diff.Magnitude)
-            if getCar() then
-                getCar().BodyGyro.MaxTorque = Vector3.new(9e9, 0, 9e9)
-            end
-        end)
+        )
 
         repeat
             task.wait()
             getRoot(speaker).Velocity = Vector3.new(0, 0, 0)
-            pcall(function()
-                getCar().Velocity = Vector3.new(0, 0, 0)
-            end)
+            pcall(
+                function()
+                    getCar().Velocity = Vector3.new(0, 0, 0)
+                end
+            )
         until reached == true or abort == true
         getRoot(speaker).Velocity = Vector3.new(0, 0, 0)
         Loop:Disconnect()
@@ -394,9 +453,12 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
 
     function Tp2(vector)
         local vehicle, spec = getCamaro()
-        if getHumanoid(speaker).Sit == false and use_car and (vector - getRoot(speaker).Position).Magnitude > 100 and
-            (vehicle and vehicle.Seat and (vehicle.Seat.Position - getRoot(speaker).Position).Magnitude <
-                (vector - getRoot(speaker).Position).Magnitude) then
+        if
+            getHumanoid(speaker).Sit == false and use_car and (vector - getRoot(speaker).Position).Magnitude > 100 and
+                (vehicle and vehicle.Seat and
+                    (vehicle.Seat.Position - getRoot(speaker).Position).Magnitude <
+                        (vector - getRoot(speaker).Position).Magnitude)
+         then
             tpporcima(vehicle.Seat.Position)
             spec:Callback(true)
             local esperando = 0
@@ -421,64 +483,86 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
     end
 
     function saircarro()
-        wait(1.3)
-        game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Space, false, game)
-        spawn(function()
-            pcall(function()
-                repeat
-                    wait()
-                until game.Players.LocalPlayer.Character.Humanoid.Jump == true
-                game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.Space, false, game)
-            end)
-        end)
-        wait(1)
+        if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+            spawn(
+                function()
+                    pcall(
+                        function()
+                            repeat
+                                game:GetService('VirtualInputManager'):SendKeyEvent(
+                                    true,
+                                    Enum.KeyCode.Space,
+                                    false,
+                                    game
+                                )
+                                wait()
+                            until game.Players.LocalPlayer.Character.Humanoid.Jump == true
+                            game:GetService('VirtualInputManager'):SendKeyEvent(false, Enum.KeyCode.Space, false, game)
+                        end
+                    )
+                end
+            )
+            wait(0.8)
+        end
     end
 
     function notificacaonormal(um, dois, tres)
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = um,
-            Text = dois,
-            Duration = tres
-        })
+        game:GetService('StarterGui'):SetCore(
+            'SendNotification',
+            {
+                Title = um,
+                Text = dois,
+                Duration = tres
+            }
+        )
     end
     function notificacao(um, dois, tres)
         Notify(um, dois, tres)
     end
 
     function laser()
-        pcall(function()
-            local delete = {}
-            local deletado = false
-            local UserInputService = game:GetService("UserInputService")
+        pcall(
+            function()
+                local delete = {}
+                local deletado = false
+                local UserInputService = game:GetService('UserInputService')
 
-            function onKeyPressed(input, gameProcessedEvent)
-                if input.KeyCode == Enum.KeyCode.G then
-                    if deletado == false then
-                        deletado = true
-                        for i, v in pairs(workspace:GetDescendants()) do
-                            if v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or v.Name ==
-                                'LasersMoving' or v.Name == 'Shadow' or v.Name == 'Light' or
-                                (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or v.Name == 'LaserCarousel' or
-                                (v.Name == 'InnerModel' and v.Parent.Name == 'Camera') then
-                                local oldParent = v.Parent
-                                v.Parent = game:GetService('ReplicatedStorage')
-                                spawn(function()
-                                    repeat
-                                        wait()
-                                    until deletado == false
-                                    v.Parent = oldParent
-                                end)
-                                task.wait()
+                function onKeyPressed(input, gameProcessedEvent)
+                    if input.KeyCode == Enum.KeyCode.G then
+                        if deletado == false then
+                            deletado = true
+                            for i, v in pairs(workspace:GetDescendants()) do
+                                if
+                                    v.Name == 'BarbedWire' or v.Name == 'Shadow' or v.Name == 'Lasers' or
+                                        v.Name == 'LasersMoving' or
+                                        v.Name == 'Shadow' or
+                                        v.Name == 'Light' or
+                                        (v:IsA('Part') and tostring(v.BrickColor) == 'Dusty Rose') or
+                                        v.Name == 'LaserCarousel' or
+                                        (v.Name == 'InnerModel' and v.Parent.Name == 'Camera')
+                                 then
+                                    local oldParent = v.Parent
+                                    v.Parent = game:GetService('ReplicatedStorage')
+                                    spawn(
+                                        function()
+                                            repeat
+                                                wait()
+                                            until deletado == false
+                                            v.Parent = oldParent
+                                        end
+                                    )
+                                    task.wait()
+                                end
                             end
+                        else
+                            deletado = false
                         end
-                    else
-                        deletado = false
                     end
                 end
-            end
 
-            UserInputService.InputBegan:Connect(onKeyPressed)
-        end)
+                UserInputService.InputBegan:Connect(onKeyPressed)
+            end
+        )
     end
 
     function laser1()
@@ -494,171 +578,35 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
     end
 
     function fly()
-        pcall(function()
-            FLYSPEED = 20
-            game:GetService('UserInputService').InputBegan:Connect(function(a, b)
-                if b then
-                    return
-                end
-                if a.KeyCode == Enum.KeyCode.LeftShift then
-                    FLYSPEED = FLYSPEED + 50
-                end
-            end)
-            game:GetService('UserInputService').InputEnded:Connect(function(a, b)
-                if b then
-                    return
-                end
-                if a.KeyCode == Enum.KeyCode.LeftShift then
-                    FLYSPEED = FLYSPEED - 50
-                end
-            end)
-
-            repeat
-                wait()
-            until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and
-                game.Players.LocalPlayer.Character:findFirstChild("Head") and
-                game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
-            local mouse = game.Players.LocalPlayer:GetMouse()
-            repeat
-                wait()
-            until mouse
-            local plr = game.Players.LocalPlayer
-            local torso = plr.Character.Head
-            local flying = false
-            local deb = true
-            local ctrl = {
-                f = 0,
-                b = 0,
-                l = 0,
-                r = 0
-            }
-            local lastctrl = {
-                f = 0,
-                b = 0,
-                l = 0,
-                r = 0
-            }
-            local maxspeed = 5000
-            local speed = 5000
-            function Fly()
-                local bg = Instance.new("BodyGyro", torso)
-                bg.P = 10000
-                bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-                bg.cframe = torso.CFrame
-                local bv = Instance.new("BodyVelocity", torso)
-                bv.velocity = Vector3.new(0, 0.1, 0)
-                bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-                repeat
-                    wait()
-                    plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false
-                    if ctrl.l + ctrl.r ~= 100000 or ctrl.f + ctrl.b ~= 10000 then
-                        speed = speed + .0 + (speed / maxspeed)
-                        if speed > maxspeed then
-                            speed = maxspeed
-                        end
-                    elseif not (ctrl.l + ctrl.r ~= 5 or ctrl.f + ctrl.b ~= 5) and speed ~= 5 then
-                        speed = speed - 5
-                        if speed > 5 then
-                            speed = -2
-                        end
-                    end
-                    if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then
-                        bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) +
-                                          ((game.Workspace.CurrentCamera.CoordinateFrame *
-                                              CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) -
-                                              game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
-                        lastctrl = {
-                            f = ctrl.f,
-                            b = ctrl.b,
-                            l = ctrl.l,
-                            r = ctrl.r
-                        }
-                    elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then
-                        bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector *
-                                          (lastctrl.f + lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame *
-                                          CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) -
-                                          game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
-                    else
-                        bv.velocity = Vector3.new(0, 0.1, 0)
-                    end
-                    bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame *
-                                    CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
-                until not flying
-                ctrl = {
-                    f = 0,
-                    b = 0,
-                    l = 0,
-                    r = 0
-                }
-                lastctrl = {
-                    f = 0,
-                    b = 0,
-                    l = 0,
-                    r = 0
-                }
-                speed = 5
-                bg:Destroy()
-                bv:Destroy()
-                plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false
-            end
-            mouse.KeyDown:connect(function(key)
-                if key:lower() == "x" then
-                    if flying then
-                        flying = false
-                    else
-                        flying = true
-                        Fly()
-                    end
-                elseif key:lower() == "w" then
-                    ctrl.f = FLYSPEED
-                elseif key:lower() == "s" then
-                    ctrl.b = -FLYSPEED
-                elseif key:lower() == "a" then
-                    ctrl.l = -FLYSPEED
-                elseif key:lower() == "d" then
-                    ctrl.r = FLYSPEED
-                end
-            end)
-            mouse.KeyUp:connect(function(key)
-                if key:lower() == "w" then
-                    ctrl.f = 0
-                elseif key:lower() == "s" then
-                    ctrl.b = 0
-                elseif key:lower() == "a" then
-                    ctrl.l = 0
-                elseif key:lower() == "d" then
-                    ctrl.r = 0
-                end
-            end)
-            Fly()
-        end);
-        speaker.CharacterAdded:Connect(function(c)
-            c:WaitForChild("HumanoidRootPart")
-            wait(0.5)
-            pcall(function()
+        pcall(
+            function()
                 FLYSPEED = 20
-                game:GetService('UserInputService').InputBegan:Connect(function(a, b)
-                    if b then
-                        return
+                game:GetService('UserInputService').InputBegan:Connect(
+                    function(a, b)
+                        if b then
+                            return
+                        end
+                        if a.KeyCode == Enum.KeyCode.LeftShift then
+                            FLYSPEED = FLYSPEED + 50
+                        end
                     end
-                    if a.KeyCode == Enum.KeyCode.LeftShift then
-                        FLYSPEED = FLYSPEED + 50
+                )
+                game:GetService('UserInputService').InputEnded:Connect(
+                    function(a, b)
+                        if b then
+                            return
+                        end
+                        if a.KeyCode == Enum.KeyCode.LeftShift then
+                            FLYSPEED = FLYSPEED - 50
+                        end
                     end
-                end)
-                game:GetService('UserInputService').InputEnded:Connect(function(a, b)
-                    if b then
-                        return
-                    end
-                    if a.KeyCode == Enum.KeyCode.LeftShift then
-                        FLYSPEED = FLYSPEED - 50
-                    end
-                end)
+                )
 
                 repeat
                     wait()
                 until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and
-                    game.Players.LocalPlayer.Character:findFirstChild("Head") and
-                    game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+                    game.Players.LocalPlayer.Character:findFirstChild('Head') and
+                    game.Players.LocalPlayer.Character:FindFirstChildWhichIsA('Humanoid')
                 local mouse = game.Players.LocalPlayer:GetMouse()
                 repeat
                     wait()
@@ -682,11 +630,11 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
                 local maxspeed = 5000
                 local speed = 5000
                 function Fly()
-                    local bg = Instance.new("BodyGyro", torso)
+                    local bg = Instance.new('BodyGyro', torso)
                     bg.P = 10000
                     bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
                     bg.cframe = torso.CFrame
-                    local bv = Instance.new("BodyVelocity", torso)
+                    local bv = Instance.new('BodyVelocity', torso)
                     bv.velocity = Vector3.new(0, 0.1, 0)
                     bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
                     repeat
@@ -706,9 +654,10 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
                         if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then
                             bv.velocity =
                                 ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) +
-                                    ((game.Workspace.CurrentCamera.CoordinateFrame *
-                                        CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) -
-                                        game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
+                                ((game.Workspace.CurrentCamera.CoordinateFrame *
+                                    CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) -
+                                    game.Workspace.CurrentCamera.CoordinateFrame.p)) *
+                                speed
                             lastctrl = {
                                 f = ctrl.f,
                                 b = ctrl.b,
@@ -716,16 +665,18 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
                                 r = ctrl.r
                             }
                         elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then
-                            bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector *
-                                              (lastctrl.f + lastctrl.b)) +
-                                              ((game.Workspace.CurrentCamera.CoordinateFrame *
-                                                  CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0)
-                                                      .p) - game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
+                            bv.velocity =
+                                ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f + lastctrl.b)) +
+                                ((game.Workspace.CurrentCamera.CoordinateFrame *
+                                    CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) -
+                                    game.Workspace.CurrentCamera.CoordinateFrame.p)) *
+                                speed
                         else
                             bv.velocity = Vector3.new(0, 0.1, 0)
                         end
-                        bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame *
-                                        CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
+                        bg.cframe =
+                            game.Workspace.CurrentCamera.CoordinateFrame *
+                            CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
                     until not flying
                     ctrl = {
                         f = 0,
@@ -744,207 +695,417 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
                     bv:Destroy()
                     plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false
                 end
-                mouse.KeyDown:connect(function(key)
-                    if key:lower() == "x" then
-                        if flying then
-                            flying = false
-                        else
-                            flying = true
-                            Fly()
+                mouse.KeyDown:connect(
+                    function(key)
+                        if key:lower() == 'x' then
+                            if flying then
+                                flying = false
+                            else
+                                flying = true
+                                Fly()
+                            end
+                        elseif key:lower() == 'w' then
+                            ctrl.f = FLYSPEED
+                        elseif key:lower() == 's' then
+                            ctrl.b = -FLYSPEED
+                        elseif key:lower() == 'a' then
+                            ctrl.l = -FLYSPEED
+                        elseif key:lower() == 'd' then
+                            ctrl.r = FLYSPEED
                         end
-                    elseif key:lower() == "w" then
-                        ctrl.f = FLYSPEED
-                    elseif key:lower() == "s" then
-                        ctrl.b = -FLYSPEED
-                    elseif key:lower() == "a" then
-                        ctrl.l = -FLYSPEED
-                    elseif key:lower() == "d" then
-                        ctrl.r = FLYSPEED
                     end
-                end)
-                mouse.KeyUp:connect(function(key)
-                    if key:lower() == "w" then
-                        ctrl.f = 0
-                    elseif key:lower() == "s" then
-                        ctrl.b = 0
-                    elseif key:lower() == "a" then
-                        ctrl.l = 0
-                    elseif key:lower() == "d" then
-                        ctrl.r = 0
+                )
+                mouse.KeyUp:connect(
+                    function(key)
+                        if key:lower() == 'w' then
+                            ctrl.f = 0
+                        elseif key:lower() == 's' then
+                            ctrl.b = 0
+                        elseif key:lower() == 'a' then
+                            ctrl.l = 0
+                        elseif key:lower() == 'd' then
+                            ctrl.r = 0
+                        end
                     end
-                end)
+                )
                 Fly()
-            end);
-        end)
+            end
+        )
+        speaker.CharacterAdded:Connect(
+            function(c)
+                c:WaitForChild('HumanoidRootPart')
+                wait(0.5)
+                pcall(
+                    function()
+                        FLYSPEED = 20
+                        game:GetService('UserInputService').InputBegan:Connect(
+                            function(a, b)
+                                if b then
+                                    return
+                                end
+                                if a.KeyCode == Enum.KeyCode.LeftShift then
+                                    FLYSPEED = FLYSPEED + 50
+                                end
+                            end
+                        )
+                        game:GetService('UserInputService').InputEnded:Connect(
+                            function(a, b)
+                                if b then
+                                    return
+                                end
+                                if a.KeyCode == Enum.KeyCode.LeftShift then
+                                    FLYSPEED = FLYSPEED - 50
+                                end
+                            end
+                        )
+
+                        repeat
+                            wait()
+                        until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and
+                            game.Players.LocalPlayer.Character:findFirstChild('Head') and
+                            game.Players.LocalPlayer.Character:FindFirstChildWhichIsA('Humanoid')
+                        local mouse = game.Players.LocalPlayer:GetMouse()
+                        repeat
+                            wait()
+                        until mouse
+                        local plr = game.Players.LocalPlayer
+                        local torso = plr.Character.Head
+                        local flying = false
+                        local deb = true
+                        local ctrl = {
+                            f = 0,
+                            b = 0,
+                            l = 0,
+                            r = 0
+                        }
+                        local lastctrl = {
+                            f = 0,
+                            b = 0,
+                            l = 0,
+                            r = 0
+                        }
+                        local maxspeed = 5000
+                        local speed = 5000
+                        function Fly()
+                            local bg = Instance.new('BodyGyro', torso)
+                            bg.P = 10000
+                            bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+                            bg.cframe = torso.CFrame
+                            local bv = Instance.new('BodyVelocity', torso)
+                            bv.velocity = Vector3.new(0, 0.1, 0)
+                            bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+                            repeat
+                                wait()
+                                plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false
+                                if ctrl.l + ctrl.r ~= 100000 or ctrl.f + ctrl.b ~= 10000 then
+                                    speed = speed + .0 + (speed / maxspeed)
+                                    if speed > maxspeed then
+                                        speed = maxspeed
+                                    end
+                                elseif not (ctrl.l + ctrl.r ~= 5 or ctrl.f + ctrl.b ~= 5) and speed ~= 5 then
+                                    speed = speed - 5
+                                    if speed > 5 then
+                                        speed = -2
+                                    end
+                                end
+                                if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then
+                                    bv.velocity =
+                                        ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) +
+                                        ((game.Workspace.CurrentCamera.CoordinateFrame *
+                                            CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) -
+                                            game.Workspace.CurrentCamera.CoordinateFrame.p)) *
+                                        speed
+                                    lastctrl = {
+                                        f = ctrl.f,
+                                        b = ctrl.b,
+                                        l = ctrl.l,
+                                        r = ctrl.r
+                                    }
+                                elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then
+                                    bv.velocity =
+                                        ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector *
+                                        (lastctrl.f + lastctrl.b)) +
+                                        ((game.Workspace.CurrentCamera.CoordinateFrame *
+                                            CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) -
+                                            game.Workspace.CurrentCamera.CoordinateFrame.p)) *
+                                        speed
+                                else
+                                    bv.velocity = Vector3.new(0, 0.1, 0)
+                                end
+                                bg.cframe =
+                                    game.Workspace.CurrentCamera.CoordinateFrame *
+                                    CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
+                            until not flying
+                            ctrl = {
+                                f = 0,
+                                b = 0,
+                                l = 0,
+                                r = 0
+                            }
+                            lastctrl = {
+                                f = 0,
+                                b = 0,
+                                l = 0,
+                                r = 0
+                            }
+                            speed = 5
+                            bg:Destroy()
+                            bv:Destroy()
+                            plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false
+                        end
+                        mouse.KeyDown:connect(
+                            function(key)
+                                if key:lower() == 'x' then
+                                    if flying then
+                                        flying = false
+                                    else
+                                        flying = true
+                                        Fly()
+                                    end
+                                elseif key:lower() == 'w' then
+                                    ctrl.f = FLYSPEED
+                                elseif key:lower() == 's' then
+                                    ctrl.b = -FLYSPEED
+                                elseif key:lower() == 'a' then
+                                    ctrl.l = -FLYSPEED
+                                elseif key:lower() == 'd' then
+                                    ctrl.r = FLYSPEED
+                                end
+                            end
+                        )
+                        mouse.KeyUp:connect(
+                            function(key)
+                                if key:lower() == 'w' then
+                                    ctrl.f = 0
+                                elseif key:lower() == 's' then
+                                    ctrl.b = 0
+                                elseif key:lower() == 'a' then
+                                    ctrl.l = 0
+                                elseif key:lower() == 'd' then
+                                    ctrl.r = 0
+                                end
+                            end
+                        )
+                        Fly()
+                    end
+                )
+            end
+        )
+    end
+
+    function venderjoa()
+        notificacao('MACRO X', 'Não saia do carro!', 5)
+        Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
+        wait(1)
+        carro()
     end
 
     function quest()
-        local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
+        notificacao('MACRO X', 'Quase lá!', 2)
+        local Teste = require(game:GetService('ReplicatedStorage').Module.UI)
         for i, a in next, Teste.CircleAction.Specs do
             a.Timed = false
         end
-        local Led = game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
+        local Led = game:GetService('Workspace').Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
         local function Fire(name)
             for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
                 if v.Name == name then
-                    pcall(function()
-                        v.Duration = 0
-                        v:Callback(true)
-                    end)
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
                 end
             end
         end
-        game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.RequestHack:FireServer()
+        game:GetService('Workspace').Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.RequestHack:FireServer()
         for i = 1, 3 do
             local time = 1
             repeat
                 task.wait()
                 time = time + 0.01
-            until time > 3 or Led.BrickColor == BrickColor.new("Lime green")
+            until time > 3 or Led.BrickColor == BrickColor.new('Lime green')
             if time > 3 then
                 return
             end
-            game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer()
+            game:GetService('Workspace').Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer(
+
+            )
             repeat
                 task.wait()
-            until Led.BrickColor == BrickColor.new("Really red")
+            until Led.BrickColor == BrickColor.new('Really red')
         end
     end
-
+    local function getCode()
+        local code = ''
+        for i, v in pairs(game:GetService('Workspace').Casino.RobberyDoor.Codes:GetDescendants()) do
+            if v:IsA('TextLabel') and v.Text ~= '' then
+                code = code .. v.Text
+            end
+        end
+        return code
+    end
     function casinocode()
         local function code()
-            local code = ""
-            for i, v in pairs(game:GetService("Workspace").Casino.RobberyDoor.Codes:GetDescendants()) do
-                if v:IsA("TextLabel") and v.Text ~= "" then
+            local code = ''
+            for i, v in pairs(game:GetService('Workspace').Casino.RobberyDoor.Codes:GetDescendants()) do
+                if v:IsA('TextLabel') and v.Text ~= '' then
                     code = code .. v.Text
                 end
             end
             return code
         end
 
-        game.StarterGui:SetCore('SendNotification', {
-            Title = 'Casino',
-            Text = 'Code: ' .. code()
-        })
+        game.StarterGui:SetCore(
+            'SendNotification',
+            {
+                Title = 'Casino',
+                Text = 'Code: ' .. code()
+            }
+        )
         workspace.Casino.RobberyDoor.Keypad.Pad.CasinoKeypadSubmit:FireServer(code)
     end
 
     function casinomoney()
         for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == "Collect" then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
+            if v.Name == 'Collect' then
+                pcall(
+                    function()
+                        v.Duration = 0
+                        v:Callback(true)
+                    end
+                )
             end
         end
     end
 
     function sairjoa()
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(168.41131591796875, 17.477458953857422, 1342.418701171875))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(168.41131591796875, 17.477458953857422, 1342.418701171875))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(168.41131591796875, 17.477458953857422, 1342.418701171875))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(168.41131591796875, 17.477458953857422, 1342.418701171875))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
     end
 
     function sairall()
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(1070.796142578125, 130.0579605102539, 1363.9810791015625)
+            )
             task.wait()
         end
     end
 
     function hack()
         for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == "Hack" then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
+            if v.Name == 'Hack' then
+                pcall(
+                    function()
+                        v.Duration = 0
+                        v:Callback(true)
+                    end
+                )
             end
         end
         for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == "Hack" then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
+            if v.Name == 'Hack' then
+                pcall(
+                    function()
+                        v.Duration = 0
+                        v:Callback(true)
+                    end
+                )
             end
         end
     end
 
     function hack1()
         for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == "Disable Vault Security" then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
+            if v.Name == 'Disable Vault Security' then
+                pcall(
+                    function()
+                        v.Duration = 0
+                        v:Callback(true)
+                    end
+                )
             end
         end
         for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == "Disable Vault Security" then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
+            if v.Name == 'Disable Vault Security' then
+                pcall(
+                    function()
+                        v.Duration = 0
+                        v:Callback(true)
+                    end
+                )
             end
         end
     end
@@ -967,29 +1128,57 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         Tp1(Vector3.new(74.72679138183594, 26.465347290039062, 2289.9638671875))
         wait(0.5)
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(63.639259338378906, 21.327346801757812, 2303.18310546875))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(63.639259338378906, 21.327346801757812, 2303.18310546875)
+            )
             task.wait()
         end
     end
 
-    function soco()
+    function carro()
+        local args = {
+            [1] = 'Chassis',
+            [2] = 'Camaro'
+        }
 
-        if not Punch then
-            local NOME = 'attemptPunch'
-            for i, v in next, getgc(true) do
-                if type(v) == 'function' and getinfo(v).name == NOME then
-                    getgenv().Punch = v
+        game:GetService('ReplicatedStorage'):WaitForChild('GarageSpawnVehicle'):FireServer(unpack(args))
+    end
+
+    function soco()
+        if not socar_whs then
+            local name = 'attemptPunch'
+
+            for i, v in pairs(getgc(true)) do
+                if typeof(v) == 'function' and getinfo(v).name == name then
+                    getgenv().socar_whs = v
                 end
             end
         end
 
-        Punch()
-
-        for i = 1, 5 do
-            Punch()
-            wait(0.65)
+        function socar_velocidade(numero)
+            setconstant(socar_whs, 3, numero)
         end
+
+        socar_velocidade(0)
+        local function vidro_proximo()
+            local vidro
+            local dist = 50
+            for i, v in pairs(workspace.Jewelrys:GetChildren()[1].Boxes:GetChildren()) do
+                local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude
+                if mag < dist then
+                    dist = mag
+                    vidro = v
+                end
+            end
+
+            return vidro
+        end
+        local tpm = 0
+        repeat
+            tpm = tpm + 0.1
+            socar_whs()
+            wait(0.05)
+        until tpm > 5 or (vidro_proximo() ~= nil and vidro_proximo().Transparency == 1)
     end
 
     -- MENU:
@@ -997,6 +1186,82 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
     local Farm = Tab('Farm')
 
     local Combat = Tab('Combat')
+
+    local MODS = Tab('MODS')
+
+    if not Deez then
+        for i, v in next, getgc(true) do
+            if type(v) == 'table' then
+                if rawget(v, 'Event') and rawget(v, 'GetVehiclePacket') then
+                    getgenv().Deez = v.GetVehiclePacket
+                end
+            end
+        end
+    end
+
+    local Height = nil
+    local GarageEngineSpeed = nil
+    local TurnSpeed = nil
+
+    spawn(
+        function()
+            while true do
+                pcall(
+                    function()
+                        if Height ~= nil then
+                            Deez().Height = Height
+                        end
+                        if GarageEngineSpeed ~= nil then
+                            Deez().GarageEngineSpeed = GarageEngineSpeed
+                        end
+                        if TurnSpeed ~= nil then
+                            Deez().TurnSpeed = TurnSpeed
+                        end
+
+                        if not Deez then
+                            for i, v in next, getgc(true) do
+                                if type(v) == 'table' then
+                                    if rawget(v, 'Event') and rawget(v, 'GetVehiclePacket') then
+                                        getgenv().Deez = v.GetVehiclePacket
+                                    end
+                                end
+                            end
+                        end
+                    end
+                )
+                wait(0.2)
+            end
+        end
+    )
+
+    MODS:CriarLabel('Carro MODS:', true)
+
+    MODS:CriarSlider(
+        'Car Speed',
+        0,
+        200,
+        function(value)
+            GarageEngineSpeed = value
+        end
+    )
+
+    MODS:CriarSlider(
+        'Car Height',
+        0,
+        100,
+        function(value)
+            Height = value
+        end
+    )
+
+    MODS:CriarSlider(
+        'Car turn speed',
+        0,
+        10,
+        function(value)
+            TurnSpeed = value
+        end
+    )
 
     local Teleportes = Tab('Teleportes')
 
@@ -1010,284 +1275,384 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
 
     Farm:CriarLabel('AUTO FARM:', true)
 
-    Farm:CriarBotao("Auto Museu", function()
-        Tp2(Vector3.new(1097.8641357421875, 139.19546508789062, 1316.987060546875))
-        wait()
-        saircarro()
-        wait(1)
-        local c = false
-        local callback = function(text)
-            if text == "Continuar" then
-                c = true
+    local AutoFarm = false
+    Farm:CriarToggle(
+        'Auto Farm',
+        function(bool)
+            AutoFarm = bool
+        end
+    )
+
+    local Part
+
+    local can = true
+    function plataforma()
+        if can then
+            can = false
+            if getCar() then
+                getCar().CFrame = CFrame.new(getCar().Position + Vector3.new(0, 600, 0))
+            else
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                    CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 600, 0))
+            end
+            Part = Instance.new('Part', workspace)
+            Part.Anchored = true
+            Part.CanCollide = true
+            Part.Size = Vector3.new(200, 0.5, 200)
+            Part.Position =
+                (getCar() and getCar().Position + Vector3.new(0, -3, 0)) or
+                (game.Players.LocalPlayer.Character.HumanoidRootPart and
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(0, 3, 0))
+        end
+    end
+    function deletar_plataforma()
+        if can == false then
+            can = true
+            Part:Destroy()
+        end
+    end
+    local function whatRob()
+        local whatRobb
+        if is_opened('casino') == 'aberto' or is_opened('casino') == 'roubando' then
+            whatRobb = 'casino'
+        elseif is_opened('jewelry store') == 'aberto' then
+            whatRobb = 'jewelry store'
+        end
+        return whatRobb
+    end
+    spawn(
+        function()
+            while true do
+                if AutoFarm then
+                    if tostring(whatRob()) == 'nil' then
+                        plataforma()
+                    end
+                    repeat
+                        wait()
+                    until whatRob() ~= nil or AutoFarm == false
+                    deletar_plataforma()
+                    if AutoFarm ~= false then
+                        local pode = true
+                        if whatRob() == 'casino' and pode then
+                            pode = false
+                            auto_casino()
+                            wait(1)
+                            autovendervulcao()
+                            plataforma()
+                        end
+                        if whatRob() == 'jewelry store' and pode then
+                            pode = false
+                            autojoa()
+                            wait(1)
+                        end
+                        if whatRob() == '1' and pode then
+                            pode = false
+                            Tp2(Vector3.new(93.49116516113281, 18.863420486450195, -1491.834228515625))
+                            saircarro()
+
+                            wait(0.6)
+                            Tp1(Vector3.new(97.2082748413086, 19.517820358276367, -1530.1361083984375))
+                            wait(1)
+                            Tp1(Vector3.new(96.95466613769531, 19.517820358276367, -1528.409912109375))
+                            wait()
+                            Tp1(Vector3.new(113.69667053222656, 19.717845916748047, -1578.6995849609375))
+                            wait()
+                            Tp1(Vector3.new(76.89389038085938, 19.717849731445312, -1589.548828125))
+                            local continuar = false
+                            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                                if v.Name == 'Rob' then
+                                    spawn(
+                                        function()
+                                            repeat
+                                                v.Duration = 0
+                                                local function achar()
+                                                    for i, v in pairs(game.Workspace.SmallStores:GetChildren()) do
+                                                        if i == 2 then
+                                                            return v
+                                                        end
+                                                    end
+                                                end
+
+                                                for i, v in next, require(
+                                                    game:GetService('ReplicatedStorage').Module.UI
+                                                ).CircleAction.Specs do
+                                                    if v.Name == 'Rob' then
+                                                        v.Duration = 0
+                                                        v:Callback(true)
+                                                    end
+                                                end
+                                            until is_opened('donut store') == 'fechado'
+                                            continuar = true
+                                        end
+                                    )
+                                end
+                            end
+                            repeat
+                                wait()
+                            until continuar
+                            Tp1(Vector3.new(83.08613586425781, 25.434106826782227, -1567.374755859375))
+                            wait()
+                            Tp1(Vector3.new(97.23929595947266, 19.453927993774414, -1533.5477294921875))
+                            wait(1)
+                            Tp1(Vector3.new(93.41072845458984, 18.95391082763672, -1512.1981201171875))
+                        end
+                    end
+                end
+                task.wait()
             end
         end
+    )
 
-        local BindableFunction = Instance.new('BindableFunction')
-        BindableFunction.OnInvoke = callback
-
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "MACRO X", -- Titulo da sua notificacao
-            Text = "Certifique-se que o Museu esteja sendo roubado, para continuar.", -- Texto da sua notificacao
-            Duration = 500, -- Tempo que sua notificacao vai ficar na tela;
-            Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
-            Button1 = "Continuar",
-            Button2 = "Finalizar",
-            Callback = BindableFunction
-        })
-        repeat
+    Farm:CriarBotao(
+        'Auto Museu',
+        function()
+            Tp2(Vector3.new(1097.8641357421875, 139.19546508789062, 1316.987060546875))
             wait()
-        until c
-        laser1()
-        wait()
-        Tp1(Vector3.new(1087.6317138671875, 148.90939331054688, 1318.946044921875)) -- entrada
-        wait()
-        Tp1(Vector3.new(1081.78759765625, 139.19479370117188, 1314.314453125)) -- entrada
-        wait()
-        Tp1(Vector3.new(1080.3800048828125, 130.40335083007812, 1313.182373046875)) -- entrada
-        wait()
-        Tp1(Vector3.new(1091.247314453125, 126.43343353271484, 1324.3424072265625)) -- entrada
-        wait()
-        Tp1(Vector3.new(1082.1168212890625, 123.45904541015625, 1337.5858154296875)) -- entrada
-        wait()
-        Tp1(Vector3.new(1062.133056640625, 125.5890121459961, 1360.9136962890625)) -- picture
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        Tp1(Vector3.new(1074.9815673828125, 125.04867553710938, 1374.848876953125))
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        Tp1(Vector3.new(1085.880126953125, 125.53783416748047, 1385.20947265625)) -- picture
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        Tp1(Vector3.new(1093.3795166015625, 125.42046356201172, 1379.051025390625)) -- Picture
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        Tp1(Vector3.new(1111.591552734375, 124.97447967529297, 1359.5125732421875)) -- picture
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Picture" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait()
-        Tp1(Vector3.new(1082.69091796875, 126.37368774414062, 1336.087646484375)) -- entrada
-        wait()
-        Tp1(Vector3.new(1097.53515625, 124.5686264038086, 1316.3984375)) -- entrada
-        wait()
-        Tp1(Vector3.new(1103.222412109375, 115.07242584228516, 1303.017822265625)) -- entrada
-        wait()
-        Tp1(Vector3.new(1124.586181640625, 109.91853332519531, 1267.691162109375)) -- refaça para o mask
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Mask" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        Tp1(Vector3.new(1147.3427734375, 111.83490753173828, 1287.212890625)) -- entrada
-        wait()
-        Tp1(Vector3.new(1170.815185546875, 105.72545623779297, 1260.014892578125)) -- Relic
-        wait()
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Relic" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1101.044189453125, 105.79499816894531, 1280.4884033203125) -- entrada
-        wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1141.1878662109375, 114.40751647949219, 1299.240966796875)
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Bone" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1145.9127197265625, 115.3492202758789, 1317.2255859375)
-        wait()
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Bone" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1129.778076171875, 112.77814483642578, 1315.6688232421875)
-        wait()
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Bone" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1124.0072021484375, 112.57622528076172, 1302.7410888671875)
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Bone" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1137.17431640625, 111.84139251708984, 1303.709228515625)
-        for i,v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-			if v.Name == "Grab Bone" then
-				pcall(function()
-					v.Duration = 0
-					v:Callback(true)
-				end)
-			end
-end
-        wait(0.5)
-        Tp1(Vector3.new(1153.2908935546875, 111.67343139648438, 1273.190185546875)) --sair
-        wait()
-        Tp1(Vector3.new(1111.1446533203125, 107.26339721679688, 1286.4696044921875)) --sair
-        wait()
-        Tp1(Vector3.new(1097.15234375, 105.79499816894531, 1278.4324951171875)) --sair
-        wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1093.6910400390625, 105.71947479248047, 1277.6243896484375)
-
-
-
-
-
-       
-    end)
-
-    Farm:CriarBotao("Auto Power Plant", function()
-        laser1()
-        Tp2(Vector3.new(57.718910217285156, 20.911163330078125, 2353.02685546875))
-        wait()
-        saircarro()
-        for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(62.6726875, 28.1642933, 2344.13477, 0.76847291, -0.117434345, -0.629013956, 0.017858224,
-                    0.986568213, -0.162370682, 0.63963306, 0.113544397, 0.760248125))
-            task.wait()
-        end
-        wait()
-        Tp1(Vector3.new(68.75518798828125, 21.001739501953125, 2339.879150390625))
-        wait()
-        Tp1(Vector3.new(87.5652847290039, 21.258285522460938, 2322.63427734375))
-        wait()
-        local c = false
-        local callback = function(text)
-            if text == "Continuar" then
-                c = true
+            saircarro()
+            wait(1)
+            local c = false
+            local callback = function(text)
+                if text == 'Continuar' then
+                    c = true
+                end
             end
-        end
 
-        local BindableFunction = Instance.new('BindableFunction')
-        BindableFunction.OnInvoke = callback
+            local BindableFunction = Instance.new('BindableFunction')
+            BindableFunction.OnInvoke = callback
 
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Esperando...", -- Titulo da sua notificacao
-            Text = "Faça sua Quest!", -- Texto da sua notificacao
-            Duration = 50, -- Tempo que sua notificacao vai ficar na tela;
-            Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
-            Button1 = "Continuar",
-            Button2 = "Finalizar",
-            Callback = BindableFunction
-        })
-        repeat
+            game:GetService('StarterGui'):SetCore(
+                'SendNotification',
+                {
+                    Title = 'MACRO X', -- Titulo da sua notificacao
+                    Text = 'Certifique-se que o Museu esteja sendo roubado, para continuar.', -- Texto da sua notificacao
+                    Duration = 500, -- Tempo que sua notificacao vai ficar na tela;
+                    Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
+                    Button1 = 'Continuar',
+                    Button2 = 'Finalizar',
+                    Callback = BindableFunction
+                }
+            )
+            repeat
+                wait()
+            until c
+            laser1()
             wait()
-        until c
-        local item = require(game:GetService("ReplicatedStorage").Module.AlexRagdoll)
-        local oldfunction = item.Ragdoll
-        item.Ragdoll = function()
-            return wait(9e9)
+            Tp1(Vector3.new(1087.6317138671875, 148.90939331054688, 1318.946044921875)) -- entrada
+            wait()
+            Tp1(Vector3.new(1081.78759765625, 139.19479370117188, 1314.314453125)) -- entrada
+            wait()
+            Tp1(Vector3.new(1080.3800048828125, 130.40335083007812, 1313.182373046875)) -- entrada
+            wait()
+            Tp1(Vector3.new(1091.247314453125, 126.43343353271484, 1324.3424072265625)) -- entrada
+            wait()
+            Tp1(Vector3.new(1082.1168212890625, 123.45904541015625, 1337.5858154296875)) -- entrada
+            wait()
+            Tp1(Vector3.new(1062.133056640625, 125.5890121459961, 1360.9136962890625)) -- picture
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Picture' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            Tp1(Vector3.new(1074.9815673828125, 125.04867553710938, 1374.848876953125))
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Picture' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            Tp1(Vector3.new(1085.880126953125, 125.53783416748047, 1385.20947265625)) -- picture
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Picture' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            Tp1(Vector3.new(1093.3795166015625, 125.42046356201172, 1379.051025390625)) -- Picture
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Picture' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            Tp1(Vector3.new(1111.591552734375, 124.97447967529297, 1359.5125732421875)) -- picture
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Picture' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait()
+            Tp1(Vector3.new(1082.69091796875, 126.37368774414062, 1336.087646484375)) -- entrada
+            wait()
+            Tp1(Vector3.new(1097.53515625, 124.5686264038086, 1316.3984375)) -- entrada
+            wait()
+            Tp1(Vector3.new(1103.222412109375, 115.07242584228516, 1303.017822265625)) -- entrada
+            wait()
+            Tp1(Vector3.new(1124.586181640625, 109.91853332519531, 1267.691162109375)) -- refaça para o mask
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Mask' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            Tp1(Vector3.new(1147.3427734375, 111.83490753173828, 1287.212890625)) -- entrada
+            wait()
+            Tp1(Vector3.new(1170.815185546875, 105.72545623779297, 1260.014892578125)) -- Relic
+            wait()
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Relic' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(1101.044189453125, 105.79499816894531, 1280.4884033203125) -- entrada
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(1141.1878662109375, 114.40751647949219, 1299.240966796875)
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Bone' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(1145.9127197265625, 115.3492202758789, 1317.2255859375)
+            wait()
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Bone' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(1129.778076171875, 112.77814483642578, 1315.6688232421875)
+            wait()
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Bone' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(1124.0072021484375, 112.57622528076172, 1302.7410888671875)
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Bone' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(1137.17431640625, 111.84139251708984, 1303.709228515625)
+            for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
+                if v.Name == 'Grab Bone' then
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
+                end
+            end
+            wait(0.5)
+            Tp1(Vector3.new(1153.2908935546875, 111.67343139648438, 1273.190185546875)) --sair
+            wait()
+            Tp1(Vector3.new(1111.1446533203125, 107.26339721679688, 1286.4696044921875)) --sair
+            wait()
+            Tp1(Vector3.new(1097.15234375, 105.79499816894531, 1278.4324951171875)) --sair
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(1093.6910400390625, 105.71947479248047, 1277.6243896484375)
         end
-        wait()
-        Tp1(Vector3.new(82.3072280883789, 21.001739501953125, 2343.699462890625))
-        wait()
-        Tp1(Vector3.new(90.25625610351562, 30.060749053955078, 2336.743408203125))
-        wait()
-        Tp1(Vector3.new(110.8700180053711, 29.93429183959961, 2324.288818359375))
-        wait()
-        Tp1(Vector3.new(147.18154907226562, 27.81900978088379, 2294.694580078125))
-        wait()
-        Tp1(Vector3.new(212.70887756347656, 21.343358993530273, 2245.644775390625))
-        wait()
-        Tp1(Vector3.new(139.73782348632812, -8.68800163269043, 2097.8369140625))
-        wait()
-        Tp1(Vector3.new(124.86080169677734, -4.4400634765625, 2105.572265625))
-        wait()
-        Tp1(Vector3.new(119.48699951171875, -8.645960807800293, 2097.74658203125))
-        wait()
-        loadstring(game:HttpGet('https://pastebin.com/raw/DdcD35RB'))()
-        wait()
-        sairpower()
-    end)
-
-    Farm:CriarBotao("Auto Casino", function()
+    )
+    function auto_casino()
         local andares = {
-            [1] = {game:GetService("Workspace").Casino.Elevator.Floors['1'],
-                   game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls["1"]},
-            [2] = {game:GetService("Workspace").Casino.Elevator.Floors['2'],
-                   game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls["2"]},
-            [3] = {game:GetService("Workspace").Casino.Elevator.Floors['3'],
-                   game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls["3"]},
-            [4] = {game:GetService("Workspace").Casino.Elevator.Floors['4'],
-                   game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls["4"]},
-            [5] = game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Floor
+            [1] = {
+                game:GetService('Workspace').Casino.Elevator.Floors['1'],
+                game:GetService('Workspace').Casino.Elevator.Car.InnerModel.Calls['1']
+            },
+            [2] = {
+                game:GetService('Workspace').Casino.Elevator.Floors['2'],
+                game:GetService('Workspace').Casino.Elevator.Car.InnerModel.Calls['2']
+            },
+            [3] = {
+                game:GetService('Workspace').Casino.Elevator.Floors['3'],
+                game:GetService('Workspace').Casino.Elevator.Car.InnerModel.Calls['3']
+            },
+            [4] = {
+                game:GetService('Workspace').Casino.Elevator.Floors['4'],
+                game:GetService('Workspace').Casino.Elevator.Car.InnerModel.Calls['4']
+            },
+            [5] = game:GetService('Workspace').Casino.Elevator.Car.InnerModel.Floor
         }
+
+        Tp2(Vector3.new(-13, 175, -4729))
         laser1()
-        Tp2(Vector3.new(-73.93269348144531, 155.28050231933594, -4714.79833984375))
         wait()
-        saircarro()
-        for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(-68.3530731, 163.090439, -4716.3584, 0.765967488, -0.0869052485, -0.636978269, 0.00661486294,
-                    0.991833866, -0.127365097, 0.642845273, 0.0933439955, 0.760287344))
-            task.wait()
-        end
         no_clip(true)
+        saircarro()
+
         wait()
-        Tp1(Vector3.new(-12.582771301269531, 155.28053283691406, -4734.11865234375))
+        Tp1(Vector3.new(-62, 178, -4725))
         wait()
+        Tp1(Vector3.new(-61, 159, -4723))
+        wait()
+
         Tp1(Vector3.new(-16.19143295288086, 155.32080078125, -4746.25537109375))
         wait()
         local pos = Vector3.new(-14.686151504516602, 155.30926513671875, -4750.18994140625) -- posicao
@@ -1307,13 +1672,13 @@ end
         Tp1(Vector3.new(52.433204650878906, 69.57959747314453, -4696.765625))
         Tp1(Vector3.new(59.1147575378418, 69.57962036132812, -4672.39111328125))
 
-        local Remote_Casino_Hack = "CasinoComputerHack"
+        local Remote_Casino_Hack = 'CasinoComputerHack'
 
         local hack_computer = false
 
         function tem_verde()
-            for i, v in pairs(game:GetService("Workspace").Casino.Computers:GetChildren()) do
-                if v.Name == "Computer" then
+            for i, v in pairs(game:GetService('Workspace').Casino.Computers:GetChildren()) do
+                if v.Name == 'Computer' then
                     if v.Display.Color == Color3.fromRGB(0, 255, 0) then
                         return true
                     end
@@ -1322,110 +1687,147 @@ end
             return false
         end
         if tem_verde() == false then
-            for i, v in pairs(game:GetService("Workspace").Casino.Computers:GetChildren()) do
-                if v.Name == "Computer" and hack_computer == false and tem_verde() ~= true then
-                    Tp1(v.Display.Position + Vector3.new(0, 5, 0))
+            for i, v in pairs(game:GetService('Workspace').Casino.Computers:GetChildren()) do
+                if v.Name == 'Computer' and hack_computer == false and tem_verde() ~= true then
+                    Tp1(v.Display.Position + Vector3.new(0, 6, 0))
                     v[Remote_Casino_Hack]:FireServer()
                     v[Remote_Casino_Hack]:FireServer()
 
                     if v.Display.Color == Color3.fromRGB(0, 255, 0) then
                         hack_computer = true
+                        wait(1)
                     end
-                    wait(0.50)
                 end
             end
         end
-        notificacao("MACRO X", "Aguarde...", 5)
+        notificacao('MACRO X', 'Aguarde...', 5)
         wait()
-        spawn(function()
-            quest()
-            wait()
-            quest()
-            wait()
-            quest()
-            wait()
-            quest()
-            wait()
-        end)
+        spawn(
+            function()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+                wait()
+                quest()
+            end
+        )
         Tp1(Vector3.new(-13.640522956848145, 86.44746398925781, -4656.88525390625))
         Tp1(Vector3.new(53.880680084228516, 84.94992065429688, -4678.259765625))
         Tp1(Vector3.new(46.85557174682617, 81.01252746582031, -4700.17822265625))
         Tp1(Vector3.new(25.313180923461914, 79.12664031982422, -4718.51513671875))
         Tp1(Vector3.new(-2.0819365978240967, 71.49842071533203, -4735.5205078125))
         Tp1(Vector3.new(-14.850430488586426, 71.47844696044922, -4743.4404296875))
-        notificacao("MACRO X", "Quase lá!", 5)
+        notificacao('MACRO X', 'Aguarde 15 Segundos...', 15)
+        wait(15)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+            CFrame.new(-16.072145462036133, 71.52082061767578, -4746.28955078125)
         wait()
-        Tp1(Vector3.new(-16.072145462036133, 71.52082061767578, -4746.28955078125))
-        wait()
-        esperar(andares[5], 15, function()
-            fireclickdetector(workspace.Casino.Elevator.Floors["3"].Call.ClickDetector)
-        end)
+        esperar(
+            andares[5],
+            15,
+            function()
+                fireclickdetector(workspace.Casino.Elevator.Floors['3'].Call.ClickDetector)
+            end
+        )
         wait(1)
         local pos = Vector3.new(-17.89362907409668, 71.49137878417969, -4750.1083984375) -- posicao
         Tp1(pos)
         wait(1.6)
 
-        local Call = game:GetService("Workspace").Casino.Elevator.Car.InnerModel.Calls['1']
+        local Call = game:GetService('Workspace').Casino.Elevator.Car.InnerModel.Calls['1']
 
-        esperar(Vector3.new(andares[5].Position.X, -77, andares[5].Position.Z), 5, function()
-            fireclickdetector(Call.ClickDetector)
-            pcall(function()
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = andares[5].CFrame + Vector3.new(0, 3, 0)
-            end)
-        end)
+        esperar(
+            Vector3.new(andares[5].Position.X, -77, andares[5].Position.Z),
+            5,
+            function()
+                fireclickdetector(Call.ClickDetector)
+                pcall(
+                    function()
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                            andares[5].CFrame + Vector3.new(0, 3, 0)
+                    end
+                )
+            end
+        )
         wait(1)
         Tp1(Vector3.new(-7.5441484451293945, -77.02445983886719, -4715.873046875))
         wait()
         Tp1(Vector3.new(16.682323455810547, -77.02445983886719, -4722.1015625))
         for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == "Break" then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
+            if v.Name == 'Break' then
+                pcall(
+                    function()
+                        v.Duration = 0
+                        v:Callback(true)
+                    end
+                )
             end
         end
-        local Led = game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
+        local Led = game:GetService('Workspace').Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
 
         local function Fire(name)
             for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
                 if v.Name == name then
-                    pcall(function()
-                        v.Duration = 0
-                        v:Callback(true)
-                    end)
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
                 end
             end
         end
-        wait(0.7)
+        wait(0.6)
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(34.04362487792969, -77.26969909667969, -4727.18603515625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(34.04362487792969, -77.26969909667969, -4727.18603515625)
+            )
             task.wait()
         end
         wait()
         Tp1(Vector3.new(49.96100997924805, -77.26969909667969, -4667.8203125))
         wait()
         Tp1(Vector3.new(26.1173038482666, -77.26969909667969, -4662.6728515625))
-        wait(0.5)
+        wait(0.3)
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(7.94412088394165, -77.26969909667969, -4654.79931640625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(7.94412088394165, -77.26969909667969, -4654.79931640625)
+            )
             task.wait()
         end
-        wait()
+        wait(0.3)
         Tp1(Vector3.new(33.69564437866211, -77.02262878417969, -4583.1396484375))
-        wait()
+        wait(0.3)
         Tp1(Vector3.new(63.65641403198242, -77.07304382324219, -4549.95556640625))
-        wait()
+        wait(0.3)
         Tp1(Vector3.new(95.20052337646484, -77.02481842041016, -4534.49462890625))
-        wait()
+        wait(0.3)
         Tp1(Vector3.new(124.50833892822266, -77.07303619384766, -4528.50732421875))
         wait()
         Tp1(Vector3.new(176.8719940185547, -68.84654235839844, -4526.02001953125))
-        wait()
+        wait(0.3)
         Tp1(Vector3.new(207.6075897216797, -77.38936614990234, -4528.095703125))
-        wait()
+        wait(0.3)
         Tp1(Vector3.new(263.5859069824219, -74.1202392578125, -4610.9208984375))
         casinomoney()
         wait()
@@ -1456,26 +1858,6 @@ end
         tp1(Vector3.new(262.7638244628906, -75.46063995361328, -4438.46923828125))
         casinomoney()
         wait(1.1)
-        local c = false
-        local callback = function(text)
-            if text == "Sim" then
-                c = true
-            end
-        end
-        local BindableFunction = Instance.new('BindableFunction')
-        BindableFunction.OnInvoke = callback
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "MACRO X", -- Titulo da sua notificacao
-            Text = "Deseja sair do casino?", -- Texto da sua notificacao
-            Duration = 500, -- Tempo que sua notificacao vai ficar na tela;
-            Button1 = "Sim",
-            Button2 = "Não",
-            Callback = BindableFunction
-        })
-        repeat
-            wait()
-        until c
-
         Tp1(Vector3.new(246.68569946289062, -72.08382415771484, -4486.98974609375))
         Tp1(Vector3.new(225.69534301757812, -72.5227279663086, -4500.30908203125))
         Tp1(Vector3.new(219.18287658691406, -72.7594985961914, -4513.04931640625))
@@ -1502,8 +1884,9 @@ end
         Tp1(Vector3.new(16.19205093383789, -76.36404418945312, -4658.92236328125))
         wait(0.6)
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(26.38858985900879, -78.10283660888672, -4662.189453125))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(26.38858985900879, -78.10283660888672, -4662.189453125)
+            )
             task.wait()
         end
         Tp1(Vector3.new(38.62568283081055, -77.20427703857422, -4665.71533203125))
@@ -1514,29 +1897,34 @@ end
         Tp1(Vector3.new(28.39911460876465, -76.68779754638672, -4725.46044921875))
 
         for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
-            if v.Name == "Break" then
-                pcall(function()
-                    v.Duration = 0
-                    v:Callback(true)
-                end)
+            if v.Name == 'Break' then
+                pcall(
+                    function()
+                        v.Duration = 0
+                        v:Callback(true)
+                    end
+                )
             end
         end
-        local Led = game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
+        local Led = game:GetService('Workspace').Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED
 
         local function Fire(name)
             for i, v in next, require(game:GetService('ReplicatedStorage').Module.UI).CircleAction.Specs do
                 if v.Name == name then
-                    pcall(function()
-                        v.Duration = 0
-                        v:Callback(true)
-                    end)
+                    pcall(
+                        function()
+                            v.Duration = 0
+                            v:Callback(true)
+                        end
+                    )
                 end
             end
         end
         wait(0.5)
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(18.774715423583984, -76.71837615966797, -4723.556640625))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(18.774715423583984, -76.71837615966797, -4723.556640625)
+            )
             task.wait()
         end
         Tp1(Vector3.new(13.894144058227539, -76.59082794189453, -4726.22314453125))
@@ -1544,98 +1932,206 @@ end
         Tp1(Vector3.new(-6.4069437980651855, -76.04350280761719, -4740.2861328125))
         Tp1(Vector3.new(-13.425470352172852, -76.01509857177734, -4739.02734375))
 
-        esperar(andares[5], 25, function()
-            fireclickdetector(workspace.Casino.Elevator.Floors["1"].Call.ClickDetector)
-        end)
+        esperar(
+            andares[5],
+            25,
+            function()
+                fireclickdetector(workspace.Casino.Elevator.Floors['1'].Call.ClickDetector)
+            end
+        )
         wait(1.5)
         Tp1(andares[5].Position + Vector3.new(0, 3, 0))
-        esperar(Vector3.new(-19, 155, -4756), 15, function()
-            instant(andares[5].Position + Vector3.new(0, 3, 0))
-            fireclickdetector(workspace.Casino.Elevator.Car.InnerModel.Calls["4"].ClickDetector)
-        end)
+        esperar(
+            Vector3.new(-19, 155, -4756),
+            15,
+            function()
+                instant(andares[5].Position + Vector3.new(0, 3, 0))
+                fireclickdetector(workspace.Casino.Elevator.Car.InnerModel.Calls['4'].ClickDetector)
+            end
+        )
         wait(1)
         Tp1(Vector3.new(-16.19143295288086, 155.32080078125, -4746.25537109375))
+        wait(0.2)
         Tp1(Vector3.new(-19.491065979003906, 155.27853393554688, -4725.35302734375))
+        wait(0.2)
         Tp1(Vector3.new(-50.802490234375, 155.278564453125, -4715.2138671875))
+        wait(0.2)
         Tp1(Vector3.new(-50.74596405029297, 191.5855255126953, -4715.4111328125))
+        wait(0.2)
         Tp1(Vector3.new(11.10008430480957, 174.97921752929688, -4734.27001953125))
+        wait(1)
+    end
 
-    end)
-
-    Farm:CriarBotao("Auto Joalheria", function()
-        laser1()
+    function autojoa()
         Tp2(Vector3.new(66.99860382080078, 18.001718521118164, 1319.859375))
-        local c = false
-        local callback = function(text)
-            if text == "Continuar" then
-                c = true
-            end
-        end
-
-        local BindableFunction = Instance.new('BindableFunction')
-        BindableFunction.OnInvoke = callback
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "MACRO X", -- Titulo da sua notificacao
-            Text = "Certifique-se que a joalheria não esteja sendo roubada, para continuar.", -- Texto da sua notificacao
-            Duration = 5000, -- Tempo que sua notificacao vai ficar na tela;
-            Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
-            Button1 = "Continuar",
-            Button2 = "Finalizar",
-            Callback = BindableFunction
-        })
-        repeat
-            wait()
-        until c
         saircarro()
+        laser1()
         for i = 1, 50 do
-            game:GetService("Players").LocalPlayer.Character:PivotTo(
-                CFrame.new(72.7713928, 24.385231, 1315.1593, -0.0641711727, -0.214322016, -0.974652827, -0.00736382138,
-                    0.976740956, -0.214296341, 0.997911751, -0.0065744794, -0.0642568469))
+            game:GetService('Players').LocalPlayer.Character:PivotTo(
+                CFrame.new(
+                    72.7713928,
+                    24.385231,
+                    1315.1593,
+                    -0.0641711727,
+                    -0.214322016,
+                    -0.974652827,
+                    -0.00736382138,
+                    0.976740956,
+                    -0.214296341,
+                    0.997911751,
+                    -0.0065744794,
+                    -0.0642568469
+                )
+            )
             task.wait()
         end
         wait(1)
         no_clip(true)
         Tp1(Vector3.new(98.52640533447266, 18.343517303466797, 1310.1895751953125))
         no_clip(false)
-        wait()
+        wait(1)
         Tp1(Vector3.new(102.5126953125, 18.343517303466797, 1287.6202392578125))
         wait()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(106.675346, 18.3435211, 1283.27734, 0.926526546, -9.28131598e-08, 0.376229346, 7.42212336e-08, 1,
-                6.39110667e-08, -0.376229346, -3.12910977e-08, 0.926526546)
+            CFrame.new(
+            106.675346,
+            18.3435211,
+            1283.27734,
+            0.926526546,
+            -9.28131598e-08,
+            0.376229346,
+            7.42212336e-08,
+            1,
+            6.39110667e-08,
+            -0.376229346,
+            -3.12910977e-08,
+            0.926526546
+        )
+        soco()
         soco()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(112.349228, 18.3435173, 1282.25354, 0.89783895, 5.02691186e-08, 0.440324008, -4.94152097e-08, 1,
-                -1.34042608e-08, -0.440324008, -9.72383596e-09, 0.89783895)
+            CFrame.new(
+            112.349228,
+            18.3435173,
+            1282.25354,
+            0.89783895,
+            5.02691186e-08,
+            0.440324008,
+            -4.94152097e-08,
+            1,
+            -1.34042608e-08,
+            -0.440324008,
+            -9.72383596e-09,
+            0.89783895
+        )
+        soco()
         soco()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(123.323601, 18.3435173, 1280.30444, 0.938110113, 9.92783988e-09, 0.34633714, -4.25881197e-08, 1,
-                8.6691557e-08, -0.34633714, -9.60760715e-08, 0.938110113)
+            CFrame.new(
+            123.323601,
+            18.3435173,
+            1280.30444,
+            0.938110113,
+            9.92783988e-09,
+            0.34633714,
+            -4.25881197e-08,
+            1,
+            8.6691557e-08,
+            -0.34633714,
+            -9.60760715e-08,
+            0.938110113
+        )
+        soco()
         soco()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(134.221954, 18.3435211, 1278.36011, 0.996637583, 1.26963133e-08, 0.0819360018, -1.1019381e-08, 1,
-                -2.09185682e-08, -0.0819360018, 1.99453485e-08, 0.996637583)
+            CFrame.new(
+            134.221954,
+            18.3435211,
+            1278.36011,
+            0.996637583,
+            1.26963133e-08,
+            0.0819360018,
+            -1.1019381e-08,
+            1,
+            -2.09185682e-08,
+            -0.0819360018,
+            1.99453485e-08,
+            0.996637583
+        )
+        soco()
         soco()
         wait()
         Tp1(Vector3.new(143.7548065185547, 18.343517303466797, 1288.7274169921875))
         wait(0.5)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(150.585922, 18.3435192, 1292.08789, 0.157432631, -8.32739246e-08, -0.987529755, -5.39889626e-08,
-                1, -9.29324386e-08, 0.987529755, 6.79463028e-08, 0.157432631)
+            CFrame.new(
+            150.585922,
+            18.3435192,
+            1292.08789,
+            0.157432631,
+            -8.32739246e-08,
+            -0.987529755,
+            -5.39889626e-08,
+            1,
+            -9.29324386e-08,
+            0.987529755,
+            6.79463028e-08,
+            0.157432631
+        )
+        soco()
         soco()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(153.18924, 18.5435257, 1305.5144, 0.204831913, -2.10335371e-09, -0.978797138, 1.22009487e-08, 1,
-                4.0436357e-10, 0.978797138, -1.20250805e-08, 0.204831913)
+            CFrame.new(
+            153.18924,
+            18.5435257,
+            1305.5144,
+            0.204831913,
+            -2.10335371e-09,
+            -0.978797138,
+            1.22009487e-08,
+            1,
+            4.0436357e-10,
+            0.978797138,
+            -1.20250805e-08,
+            0.204831913
+        )
+        soco()
         soco()
         Tp1(Vector3.new(146.1271514892578, 18.343517303466797, 1308.9866943359375))
         wait(0.5)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(141.996674, 19.7094498, 1310.59729, -0.126114652, 8.39728109e-09, 0.99201566, 6.05244255e-09, 1,
-                -7.69542297e-09, -0.99201566, 5.03361219e-09, -0.126114652)
+            CFrame.new(
+            141.996674,
+            19.7094498,
+            1310.59729,
+            -0.126114652,
+            8.39728109e-09,
+            0.99201566,
+            6.05244255e-09,
+            1,
+            -7.69542297e-09,
+            -0.99201566,
+            5.03361219e-09,
+            -0.126114652
+        )
+        soco()
         soco()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(140.700119, 19.7094574, 1303.50134, -0.0893774033, 6.99329761e-11, 0.995997846, 7.37407575e-08,
-                1, 6.54702692e-09, -0.995997846, 7.40307939e-08, -0.0893774033)
+            CFrame.new(
+            140.700119,
+            19.7094574,
+            1303.50134,
+            -0.0893774033,
+            6.99329761e-11,
+            0.995997846,
+            7.37407575e-08,
+            1,
+            6.54702692e-09,
+            -0.995997846,
+            7.40307939e-08,
+            -0.0893774033
+        )
+        soco()
         soco()
         wait()
         Tp1(Vector3.new(143.19908142089844, 19.528453826904297, 1286.20751953125))
@@ -1644,584 +2140,1586 @@ end
         wait()
         Tp1(Vector3.new(127.5137939453125, 21.910327911376953, 1302.3267822265625))
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(131.040588, 19.7094574, 1302.0603, 0.191431001, -7.52233262e-08, -0.98150605, -7.51365192e-09, 1,
-                -7.81061615e-08, 0.98150605, 2.23266365e-08, 0.191431001)
+            CFrame.new(
+            131.040588,
+            19.7094574,
+            1302.0603,
+            0.191431001,
+            -7.52233262e-08,
+            -0.98150605,
+            -7.51365192e-09,
+            1,
+            -7.81061615e-08,
+            0.98150605,
+            2.23266365e-08,
+            0.191431001
+        )
+        soco()
         soco()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
             CFrame.new(131.52877807617188, 19.34353256225586, 1306.924560546875)
         wait(0.3)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(132.621857, 19.5194473, 1311.98828, 0.646793127, 5.01643136e-08, -0.76266551, -4.00696898e-08, 1,
-                3.17931175e-08, 0.76266551, 9.99620031e-09, 0.646793127)
+            CFrame.new(
+            132.621857,
+            19.5194473,
+            1311.98828,
+            0.646793127,
+            5.01643136e-08,
+            -0.76266551,
+            -4.00696898e-08,
+            1,
+            3.17931175e-08,
+            0.76266551,
+            9.99620031e-09,
+            0.646793127
+        )
         soco()
-        spawn(function()
+        soco()
+        wait(1)
+        sairjoa()
+        wait(1)
+        carro()
+        autovendervulcao()
+    end
+
+    function autovendervulcao()
+        getCamaro()
+        Tp2(Vector3.new(2199.31787109375, 78.87100219726562, -2577.150634765625))
+        Tp1(Vector3.new(2267.44287109375, 73.02130889892578, -2592.494873046875))
+        wait(0.2)
+        Tp1(Vector3.new(2286.663818359375, 33.13221740722656, -2592.614990234375))
+        repeat
+            wait()
+        until game:GetService('Players').LocalPlayer.PlayerGui.RobberyMoneyGui.Enabled == false
+        wait(1)
+        Tp1(Vector3.new(2277.3076171875, 70.68268585205078, -2591.248779296875))
+        wait(0.2)
+        Tp1(Vector3.new(2195.732666015625, 77.68968963623047, -2584.357666015625))
+        wait(0.2)
+        local old = use_car
+        use_car = false
+        Tp2(Vector3.new(2281.5146484375, 16.38672637939453, -2057.7392578125))
+        usecar = old
+    end
+    Farm:CriarBotao(
+        'Auto Power Plant',
+        function()
+            laser1()
+            Tp2(Vector3.new(57.718910217285156, 20.911163330078125, 2353.02685546875))
+            wait()
+            saircarro()
+            for i = 1, 50 do
+                game:GetService('Players').LocalPlayer.Character:PivotTo(
+                    CFrame.new(
+                        62.6726875,
+                        28.1642933,
+                        2344.13477,
+                        0.76847291,
+                        -0.117434345,
+                        -0.629013956,
+                        0.017858224,
+                        0.986568213,
+                        -0.162370682,
+                        0.63963306,
+                        0.113544397,
+                        0.760248125
+                    )
+                )
+                task.wait()
+            end
+            wait()
+            Tp1(Vector3.new(68.75518798828125, 21.001739501953125, 2339.879150390625))
+            wait()
+            Tp1(Vector3.new(87.5652847290039, 21.258285522460938, 2322.63427734375))
+            wait()
             local c = false
             local callback = function(text)
-                if text == "Sim" then
+                if text == 'Continuar' then
                     c = true
                 end
             end
 
             local BindableFunction = Instance.new('BindableFunction')
             BindableFunction.OnInvoke = callback
-            game:GetService("StarterGui"):SetCore("SendNotification", {
-                Title = "MACRO X", -- Titulo da sua notificacao
-                Text = "Deseja Sair Da Joalheria?", -- Texto da sua notificacao
-                Duration = 5000, -- Tempo que sua notificacao vai ficar na tela;
-                Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
-                Button1 = "Sim",
-                Button2 = "Não",
-                Callback = BindableFunction
-            })
+
+            game:GetService('StarterGui'):SetCore(
+                'SendNotification',
+                {
+                    Title = 'Esperando...', -- Titulo da sua notificacao
+                    Text = 'Faça sua Quest!', -- Texto da sua notificacao
+                    Duration = 50, -- Tempo que sua notificacao vai ficar na tela;
+                    Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
+                    Button1 = 'Continuar',
+                    Button2 = 'Finalizar',
+                    Callback = BindableFunction
+                }
+            )
             repeat
                 wait()
             until c
-            sairjoa()
-        end)
-
-        local c = false
-        local callback = function(text)
-            if text == "Continuar" then
-                c = true
+            local item = require(game:GetService('ReplicatedStorage').Module.AlexRagdoll)
+            local oldfunction = item.Ragdoll
+            item.Ragdoll = function()
+                return wait(9e9)
             end
-        end
-
-        local BindableFunction = Instance.new('BindableFunction')
-        BindableFunction.OnInvoke = callback
-
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "MACRO X", -- Titulo da sua notificacao
-            Text = "Caso a sua BAG não esteja cheia, clique em continuar.", -- Texto da sua notificacao
-            Duration = 50, -- Tempo que sua notificacao vai ficar na tela;
-            Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
-            Button1 = "Continuar",
-            Button2 = "Finalizar",
-            Callback = BindableFunction
-        })
-        repeat
             wait()
-        until c
-        Tp1(Vector3.new(120.08013916015625, 22.348106384277344, 1313.916015625))
-        wait()
-        Tp1(Vector3.new(114.43290710449219, 27.879840850830078, 1340.078857421875))
-        wait()
-        Tp1(Vector3.new(106.84902954101562, 24.69591522216797, 1336.7972412109375))
-        wait()
-        Tp1(Vector3.new(102.17277526855469, 28.590991973876953, 1311.7034912109375))
-        wait()
-        Tp1(Vector3.new(98.08993530273438, 43.43876266479492, 1288.240966796875))
-        wait()
-        Tp1(Vector3.new(125.87613677978516, 38.72551345825195, 1300.330322265625))
-        wait(1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(130.968643, 37.8853951, 1301.34521, 0.0210348796, -7.18391462e-08, -0.999778748, -3.50701779e-09,
-                1, -7.19288309e-08, 0.999778748, 5.01925612e-09, 0.0210348796)
-        soco()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(132.021729, 37.5194626, 1309.25037, 0.0457629189, 9.59854063e-08, -0.998952329, -6.13057693e-09,
-                1, 9.58052269e-08, 0.998952329, 1.73982739e-09, 0.0457629189)
-        soco()
-        wait()
-        Tp1(Vector3.new(115.36222076416016, 41.09823989868164, 1317.8128662109375))
-        wait(1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(113.02681, 36.559433, 1318.83167, -0.188281968, -1.55465436e-08, 0.98211503, -8.89373553e-08, 1,
-                -1.22058608e-09, -0.98211503, -8.75765238e-08, -0.188281968)
-        soco()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(111.623337, 36.7494392, 1311.48291, -0.102482595, 9.96751695e-08, 0.994734824, 2.96529805e-08, 1,
-                -9.71477547e-08, -0.994734824, 1.95408969e-08, -0.102482595)
-        soco()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(109.997131, 36.3435173, 1301.15894, -0.0305752419, -8.05919242e-09, 0.999532461, -4.56354741e-08,
-                1, 6.66699407e-09, -0.999532461, -4.54102924e-08, -0.0305752419)
-        soco()
-        wait(0.4)
-        Tp1(Vector3.new(117.97954559326172, 36.3435173034668, 1286.353759765625))
-        wait(1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(117.104507, 36.7494125, 1280.03503, 0.963598073, 6.84526142e-08, 0.267355055, -6.54373835e-08, 1,
-                -2.01876951e-08, -0.267355055, 1.95780969e-09, 0.963598073)
-        soco()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(124.292831, 36.3435173, 1278.97266, 0.999362409, 2.68210476e-09, 0.0357041657, -2.57613086e-09,
-                1, -3.01411052e-09, -0.0357041657, 2.92021007e-09, 0.999362409)
-        soco()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(134.217529, 36.7494316, 1277.08728, 0.984623611, -4.55814266e-08, 0.174689323, 3.11459445e-08, 1,
-                8.53766906e-08, -0.174689323, -7.86230387e-08, 0.984623611)
-        soco()
-        wait(0.5)
-        Tp1(Vector3.new(142.71112060546875, 40.28428268432617, 1295.6131591796875))
-        wait(1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(140.196823, 37.3435402, 1299.27295, -0.399964958, 3.96258892e-09, 0.91653043, 1.95118393e-08, 1,
-                4.19130997e-09, -0.91653043, 1.95595717e-08, -0.399964958)
-        soco()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-            CFrame.new(141.219147, 37.709465, 1307.4292, -0.213938296, -9.4959546e-08, 0.976847172, 4.86211995e-08, 1,
-                1.0785871e-07, -0.976847172, 7.05705929e-08, -0.213938296)
-        soco()
-    end)
-
-    Farm:CriarBotao("Auto Rosquinha", function()
-        Tp2(Vector3.new(93.49116516113281, 18.863420486450195, -1491.834228515625))
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
-        loadstring(game:HttpGet('https://pastebin.com/raw/pW3a9dHC'))()
-        wait(0.6)
-        Tp1(Vector3.new(97.2082748413086, 19.517820358276367, -1530.1361083984375))
-        wait(1)
-        Tp1(Vector3.new(96.95466613769531, 19.517820358276367, -1528.409912109375))
-        wait()
-        Tp1(Vector3.new(113.69667053222656, 19.717845916748047, -1578.6995849609375))
-        wait()
-        Tp1(Vector3.new(76.89389038085938, 19.717849731445312, -1589.548828125))
-        loadstring(game:HttpGet('https://pastebin.com/raw/ptAjjuvX'))()
-        wait()
-        Tp1(Vector3.new(83.08613586425781, 25.434106826782227, -1567.374755859375))
-        wait()
-        Tp1(Vector3.new(97.23929595947266, 19.453927993774414, -1533.5477294921875))
-        wait(1)
-        Tp1(Vector3.new(93.41072845458984, 18.95391082763672, -1512.1981201171875))
-    end)
-
-    Farm:CriarBotao("Auto Posto de Gasolina", function()
-        Tp2(Vector3.new(-1536.947509765625, 18.13419532775879, 699.36572265625))
-        loadstring(game:HttpGet('https://pastebin.com/raw/pW3a9dHC'))()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
-        wait()
-        Tp1(Vector3.new(-1578.464599609375, 18.69811248779297, 706.9764404296875))
-        wait(1)
-        Tp1(Vector3.new(-1596.7197265625, 18.49811363220215, 708.4967041015625))
-        wait()
-        Tp1(Vector3.new(-1600.7578125, 18.49811363220215, 685.6148071289062))
-        loadstring(game:HttpGet('https://pastebin.com/raw/ptAjjuvX'))()
-        wait()
-        Tp1(Vector3.new(-1596.260986328125, 18.234195709228516, 710.9710693359375))
-        wait()
-        Tp1(Vector3.new(-1582.3359375, 18.234195709228516, 709.0425415039062))
-        wait(1)
-        Tp1(Vector3.new(-1564.400634765625, 18.13419532775879, 704.8306274414062))
-
-    end)
-
-    Farm:CriarBotao("Auto Airdrop", function()
-        notificacao("MACRO X", "Risco de KICK!", 5)
-        local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
-        for i, a in next, Teste.CircleAction.Specs do
-            a.Timed = true
+            Tp1(Vector3.new(82.3072280883789, 21.001739501953125, 2343.699462890625))
+            wait()
+            Tp1(Vector3.new(90.25625610351562, 30.060749053955078, 2336.743408203125))
+            wait()
+            Tp1(Vector3.new(110.8700180053711, 29.93429183959961, 2324.288818359375))
+            wait()
+            Tp1(Vector3.new(147.18154907226562, 27.81900978088379, 2294.694580078125))
+            wait()
+            Tp1(Vector3.new(212.70887756347656, 21.343358993530273, 2245.644775390625))
+            wait()
+            Tp1(Vector3.new(139.73782348632812, -8.68800163269043, 2097.8369140625))
+            wait()
+            Tp1(Vector3.new(124.86080169677734, -4.4400634765625, 2105.572265625))
+            wait()
+            Tp1(Vector3.new(119.48699951171875, -8.645960807800293, 2097.74658203125))
+            wait()
+            loadstring(game:HttpGet('https://pastebin.com/raw/DdcD35RB'))()
+            wait()
+            sairpower()
         end
-        function drop(v)
-            if v.Name == "Drop" then
-                Tp2(v.Top.Position)
-                saircarro()
-                wait(1)
+    )
 
-                spawn(function()
-                    notificacao("MACRO X", "Colete o AirDrop!", 30)
-                    notificacaonormal("MACRO X", "Colete o AirDrop!", 30)
-                    no_clip(true)
-                    while getHumanoid(speaker).Health > 0 do
-                        getRoot(speaker).CFrame = v.Top.CFrame * CFrame.new(0, -3.9, 0)
-                        no_clip(false)
-                        local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
-                        for i, a in next, Teste.CircleAction.Specs do
-                            a.Timed = true
+    Farm:CriarBotao(
+        'Auto Casino',
+        function()
+            auto_casino()
+        end
+    )
+
+    Farm:CriarBotao(
+        'Auto Joalheria',
+        function()
+            laser1()
+            Tp2(Vector3.new(66.99860382080078, 18.001718521118164, 1319.859375))
+            local c = false
+            local callback = function(text)
+                if text == 'Continuar' then
+                    c = true
+                end
+            end
+
+            local BindableFunction = Instance.new('BindableFunction')
+            BindableFunction.OnInvoke = callback
+            if is_opened('jewelry store') ~= 'aberto' then
+                return false
+            end
+            repeat
+                wait()
+            until c
+            saircarro()
+            for i = 1, 3 do
+                game:GetService('Players').LocalPlayer.Character:PivotTo(
+                    CFrame.new(
+                        72.7713928,
+                        24.385231,
+                        1315.1593,
+                        -0.0641711727,
+                        -0.214322016,
+                        -0.974652827,
+                        -0.00736382138,
+                        0.976740956,
+                        -0.214296341,
+                        0.997911751,
+                        -0.0065744794,
+                        -0.0642568469
+                    )
+                )
+                task.wait()
+            end
+            wait(1)
+            no_clip(true)
+            Tp1(Vector3.new(98.52640533447266, 18.343517303466797, 1310.1895751953125))
+            no_clip(false)
+            wait()
+            Tp1(Vector3.new(102.5126953125, 18.343517303466797, 1287.6202392578125))
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                106.675346,
+                18.3435211,
+                1283.27734,
+                0.926526546,
+                -9.28131598e-08,
+                0.376229346,
+                7.42212336e-08,
+                1,
+                6.39110667e-08,
+                -0.376229346,
+                -3.12910977e-08,
+                0.926526546
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                112.349228,
+                18.3435173,
+                1282.25354,
+                0.89783895,
+                5.02691186e-08,
+                0.440324008,
+                -4.94152097e-08,
+                1,
+                -1.34042608e-08,
+                -0.440324008,
+                -9.72383596e-09,
+                0.89783895
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                123.323601,
+                18.3435173,
+                1280.30444,
+                0.938110113,
+                9.92783988e-09,
+                0.34633714,
+                -4.25881197e-08,
+                1,
+                8.6691557e-08,
+                -0.34633714,
+                -9.60760715e-08,
+                0.938110113
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                134.221954,
+                18.3435211,
+                1278.36011,
+                0.996637583,
+                1.26963133e-08,
+                0.0819360018,
+                -1.1019381e-08,
+                1,
+                -2.09185682e-08,
+                -0.0819360018,
+                1.99453485e-08,
+                0.996637583
+            )
+            soco()
+            wait()
+            Tp1(Vector3.new(143.7548065185547, 18.343517303466797, 1288.7274169921875))
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                150.585922,
+                18.3435192,
+                1292.08789,
+                0.157432631,
+                -8.32739246e-08,
+                -0.987529755,
+                -5.39889626e-08,
+                1,
+                -9.29324386e-08,
+                0.987529755,
+                6.79463028e-08,
+                0.157432631
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                153.18924,
+                18.5435257,
+                1305.5144,
+                0.204831913,
+                -2.10335371e-09,
+                -0.978797138,
+                1.22009487e-08,
+                1,
+                4.0436357e-10,
+                0.978797138,
+                -1.20250805e-08,
+                0.204831913
+            )
+            soco()
+            Tp1(Vector3.new(146.1271514892578, 18.343517303466797, 1308.9866943359375))
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                141.996674,
+                19.7094498,
+                1310.59729,
+                -0.126114652,
+                8.39728109e-09,
+                0.99201566,
+                6.05244255e-09,
+                1,
+                -7.69542297e-09,
+                -0.99201566,
+                5.03361219e-09,
+                -0.126114652
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                140.700119,
+                19.7094574,
+                1303.50134,
+                -0.0893774033,
+                6.99329761e-11,
+                0.995997846,
+                7.37407575e-08,
+                1,
+                6.54702692e-09,
+                -0.995997846,
+                7.40307939e-08,
+                -0.0893774033
+            )
+            soco()
+            wait()
+            Tp1(Vector3.new(143.19908142089844, 19.528453826904297, 1286.20751953125))
+            wait()
+            Tp1(Vector3.new(114.94091033935547, 18.343521118164062, 1289.545166015625))
+            wait()
+            Tp1(Vector3.new(127.5137939453125, 21.910327911376953, 1302.3267822265625))
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                131.040588,
+                19.7094574,
+                1302.0603,
+                0.191431001,
+                -7.52233262e-08,
+                -0.98150605,
+                -7.51365192e-09,
+                1,
+                -7.81061615e-08,
+                0.98150605,
+                2.23266365e-08,
+                0.191431001
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(131.52877807617188, 19.34353256225586, 1306.924560546875)
+            wait(0.3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                132.621857,
+                19.5194473,
+                1311.98828,
+                0.646793127,
+                5.01643136e-08,
+                -0.76266551,
+                -4.00696898e-08,
+                1,
+                3.17931175e-08,
+                0.76266551,
+                9.99620031e-09,
+                0.646793127
+            )
+            soco()
+            spawn(
+                function()
+                    local c = false
+                    local callback = function(text)
+                        if text == 'Sim' then
+                            c = true
                         end
-                        task.wait()
                     end
-                end)
+
+                    local BindableFunction = Instance.new('BindableFunction')
+                    BindableFunction.OnInvoke = callback
+                    game:GetService('StarterGui'):SetCore(
+                        'SendNotification',
+                        {
+                            Title = 'MACRO X', -- Titulo da sua notificacao
+                            Text = 'Deseja Sair Da Joalheria?', -- Texto da sua notificacao
+                            Duration = 5000, -- Tempo que sua notificacao vai ficar na tela;
+                            Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
+                            Button1 = 'Sim',
+                            Button2 = 'Não',
+                            Callback = BindableFunction
+                        }
+                    )
+                    repeat
+                        wait()
+                    until c
+                    sairjoa()
+                end
+            )
+
+            local c = false
+            local callback = function(text)
+                if text == 'Continuar' then
+                    c = true
+                end
+            end
+
+            local BindableFunction = Instance.new('BindableFunction')
+            BindableFunction.OnInvoke = callback
+
+            game:GetService('StarterGui'):SetCore(
+                'SendNotification',
+                {
+                    Title = 'MACRO X', -- Titulo da sua notificacao
+                    Text = 'Caso a sua BAG não esteja cheia, clique em continuar.', -- Texto da sua notificacao
+                    Duration = 50, -- Tempo que sua notificacao vai ficar na tela;
+                    Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
+                    Button1 = 'Continuar',
+                    Button2 = 'Finalizar',
+                    Callback = BindableFunction
+                }
+            )
+            repeat
+                wait()
+            until c
+            Tp1(Vector3.new(120.08013916015625, 22.348106384277344, 1313.916015625))
+            wait()
+            Tp1(Vector3.new(114.43290710449219, 27.879840850830078, 1340.078857421875))
+            wait()
+            Tp1(Vector3.new(106.84902954101562, 24.69591522216797, 1336.7972412109375))
+            wait()
+            Tp1(Vector3.new(102.17277526855469, 28.590991973876953, 1311.7034912109375))
+            wait()
+            Tp1(Vector3.new(98.08993530273438, 43.43876266479492, 1288.240966796875))
+            wait()
+            Tp1(Vector3.new(125.87613677978516, 38.72551345825195, 1300.330322265625))
+            wait(1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                130.968643,
+                37.8853951,
+                1301.34521,
+                0.0210348796,
+                -7.18391462e-08,
+                -0.999778748,
+                -3.50701779e-09,
+                1,
+                -7.19288309e-08,
+                0.999778748,
+                5.01925612e-09,
+                0.0210348796
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                132.021729,
+                37.5194626,
+                1309.25037,
+                0.0457629189,
+                9.59854063e-08,
+                -0.998952329,
+                -6.13057693e-09,
+                1,
+                9.58052269e-08,
+                0.998952329,
+                1.73982739e-09,
+                0.0457629189
+            )
+            soco()
+            wait()
+            Tp1(Vector3.new(115.36222076416016, 41.09823989868164, 1317.8128662109375))
+            wait(1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                113.02681,
+                36.559433,
+                1318.83167,
+                -0.188281968,
+                -1.55465436e-08,
+                0.98211503,
+                -8.89373553e-08,
+                1,
+                -1.22058608e-09,
+                -0.98211503,
+                -8.75765238e-08,
+                -0.188281968
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                111.623337,
+                36.7494392,
+                1311.48291,
+                -0.102482595,
+                9.96751695e-08,
+                0.994734824,
+                2.96529805e-08,
+                1,
+                -9.71477547e-08,
+                -0.994734824,
+                1.95408969e-08,
+                -0.102482595
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                109.997131,
+                36.3435173,
+                1301.15894,
+                -0.0305752419,
+                -8.05919242e-09,
+                0.999532461,
+                -4.56354741e-08,
+                1,
+                6.66699407e-09,
+                -0.999532461,
+                -4.54102924e-08,
+                -0.0305752419
+            )
+            soco()
+            wait(0.4)
+            Tp1(Vector3.new(117.97954559326172, 36.3435173034668, 1286.353759765625))
+            wait(1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                117.104507,
+                36.7494125,
+                1280.03503,
+                0.963598073,
+                6.84526142e-08,
+                0.267355055,
+                -6.54373835e-08,
+                1,
+                -2.01876951e-08,
+                -0.267355055,
+                1.95780969e-09,
+                0.963598073
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                124.292831,
+                36.3435173,
+                1278.97266,
+                0.999362409,
+                2.68210476e-09,
+                0.0357041657,
+                -2.57613086e-09,
+                1,
+                -3.01411052e-09,
+                -0.0357041657,
+                2.92021007e-09,
+                0.999362409
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                134.217529,
+                36.7494316,
+                1277.08728,
+                0.984623611,
+                -4.55814266e-08,
+                0.174689323,
+                3.11459445e-08,
+                1,
+                8.53766906e-08,
+                -0.174689323,
+                -7.86230387e-08,
+                0.984623611
+            )
+            soco()
+            wait(0.5)
+            Tp1(Vector3.new(142.71112060546875, 40.28428268432617, 1295.6131591796875))
+            wait(1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                140.196823,
+                37.3435402,
+                1299.27295,
+                -0.399964958,
+                3.96258892e-09,
+                0.91653043,
+                1.95118393e-08,
+                1,
+                4.19130997e-09,
+                -0.91653043,
+                1.95595717e-08,
+                -0.399964958
+            )
+            soco()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                141.219147,
+                37.709465,
+                1307.4292,
+                -0.213938296,
+                -9.4959546e-08,
+                0.976847172,
+                4.86211995e-08,
+                1,
+                1.0785871e-07,
+                -0.976847172,
+                7.05705929e-08,
+                -0.213938296
+            )
+            soco()
+        end
+    )
+
+    Farm:CriarBotao(
+        'Auto TOMB',
+        function()
+            Tp2(Vector3.new(613.7263793945312, 20.73607635498047, -474.29730224609375))
+            saircarro()
+            Tp1(Vector3.new(560.4760131835938, 42.05010223388672, -480.7063293457031))
+            wait()
+            Tp1(Vector3.new(527.6751708984375, 29.263933181762695, -482.93109130859375))
+            wait()
+            local c = false
+            local callback = function(text)
+                if text == 'Continuar' then
+                    c = true
+                end
+            end
+
+            local BindableFunction = Instance.new('BindableFunction')
+            BindableFunction.OnInvoke = callback
+
+            game:GetService('StarterGui'):SetCore(
+                'SendNotification',
+                {
+                    Title = 'MACRO X', -- Titulo da sua notificacao
+                    Text = 'Certifique-se que o TOMB esteja sendo roubado, para continuar.', -- Texto da sua notificacao
+                    Duration = 500, -- Tempo que sua notificacao vai ficar na tela;
+                    Icon = nil, -- Icon do seu menu, coloque assim "rbxassetid://12345"
+                    Button1 = 'Continuar',
+                    Button2 = 'Finalizar',
+                    Callback = BindableFunction
+                }
+            )
+            repeat
+                wait()
+            until c
+            Tp1(Vector3.new(547.3104858398438, 33.72941207885742, -545.8751831054688))
+            local item = require(game:GetService('ReplicatedStorage').Module.AlexRagdoll)
+            local oldfunction = item.Ragdoll
+            item.Ragdoll = function()
+                return wait(9e9)
+            end
+            wait(3)
+            Tp1(Vector3.new(547.8833618164062, -42.2345085144043, -543.1612548828125))
+            wait()
+            Tp1(Vector3.new(545.0657958984375, -47.920589447021484, -527.2089233398438))
+            wait()
+            Tp1(Vector3.new(541.7916870117188, -52.58758544921875, -508.5987243652344))
+            wait()
+            Tp1(Vector3.new(538.307373046875, -51.733821868896484, -450.59002685546875))
+            wait()
+            Tp1(Vector3.new(525.182373046875, -53.011199951171875, -426.8836364746094))
+            wait()
+            Tp1(Vector3.new(523.97265625, -57.27778625488281, -370.6399230957031))
+            wait()
+            Tp1(Vector3.new(522.99560546875, -56.827781677246094, -337.845703125))
+            wait()
+            Tp1(Vector3.new(537.7426147460938, -55.90801239013672, -313.9194030761719))
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                551.271912,
+                -63.5440216,
+                -291.779114,
+                -0.851789117,
+                9.79303039e-08,
+                -0.523884833,
+                8.18702972e-08,
+                1,
+                5.38173204e-08,
+                0.523884833,
+                2.95039815e-09,
+                -0.851789117
+            )
+            wait(0.2)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                570.904907,
+                -72.2851791,
+                -260.74942,
+                -0.839600205,
+                5.88705866e-08,
+                -0.543204784,
+                6.81584069e-08,
+                1,
+                3.02790282e-09,
+                0.543204784,
+                -3.44817472e-08,
+                -0.839600205
+            )
+            wait(0.2)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                583.04126,
+                -73.3555756,
+                -244.611298,
+                -0.80222857,
+                -7.89310235e-08,
+                -0.59701699,
+                -3.56515457e-08,
+                1,
+                -8.43030179e-08,
+                0.59701699,
+                -4.63457113e-08,
+                -0.80222857
+            )
+            wait(0.2)
+            Tp1(Vector3.new(618.216064453125, -70.9961929321289, -230.3093719482422))
+            wait()
+            Tp1(Vector3.new(642.2637939453125, -71.32540893554688, -226.76589965820312))
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                653.506165,
+                -76.5639725,
+                -234.626205,
+                0.559302211,
+                2.13725038e-08,
+                -0.828963816,
+                -1.91995468e-08,
+                1,
+                1.28282487e-08,
+                0.828963816,
+                8.74086226e-09,
+                0.559302211
+            )
+            wait(0.3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                666.968323,
+                -76.5640869,
+                -239.960571,
+                0.331408262,
+                -2.75194108e-08,
+                -0.943487465,
+                -5.74037318e-10,
+                1,
+                -2.93693905e-08,
+                0.943487465,
+                1.02748556e-08,
+                0.331408262
+            )
+            wait(0.3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                685.138916,
+                -87.5834885,
+                -241.142609,
+                0.682929575,
+                -0.196388274,
+                -0.703589976,
+                -0.0102835167,
+                0.960502803,
+                -0.278080136,
+                0.730411828,
+                0.197144523,
+                0.653936207
+            )
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                698.494995,
+                -89.6657791,
+                -240.751114,
+                0.565867484,
+                -0.182684585,
+                -0.804002702,
+                -0.0326780044,
+                0.969408691,
+                -0.243267164,
+                0.823848367,
+                0.163930178,
+                0.542587101
+            )
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                709.757874,
+                -87.5637741,
+                -237.291611,
+                -0.021333199,
+                -2.60625725e-08,
+                0.999772429,
+                1.54374096e-08,
+                1,
+                2.63979096e-08,
+                -0.999772429,
+                1.59970472e-08,
+                -0.021333199
+            )
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                717.271729,
+                -92.072113,
+                -214.673737,
+                -0.32902205,
+                -0.195074588,
+                -0.923953652,
+                0.0144478828,
+                0.977276087,
+                -0.211477488,
+                0.944211721,
+                -0.0829299316,
+                -0.318726987
+            )
+            Tp1(Vector3.new(785.4052734375, -86.4058837890625, -210.08096313476562)) --chegando na 2 parte
+            wait()
+            Tp1(Vector3.new(803.534912109375, -89.1286392211914, -207.0092315673828))
+            wait()
+            Tp1(Vector3.new(822.456298828125, -83.57098388671875, -205.03919982910156))
+            wait() --[[
+    Tp1(Vector3.new( --3 parte
+    wait()
+    Tp1(Vector3.new(
+    wait()
+    Tp1(Vector3.new(
+    wait()
+    Tp1(Vector3.new(
+    wait()
+    Tp1(Vector3.new(
+    wait()]]
+        end
+    )
+
+    Farm:CriarBotao(
+        'Auto Rosquinha',
+        function()
+            Tp2(Vector3.new(93.49116516113281, 18.863420486450195, -1491.834228515625))
+            saircarro()
+            loadstring(game:HttpGet('https://pastebin.com/raw/pW3a9dHC'))()
+            wait(0.6)
+            Tp1(Vector3.new(97.2082748413086, 19.517820358276367, -1530.1361083984375))
+            wait(1)
+            Tp1(Vector3.new(96.95466613769531, 19.517820358276367, -1528.409912109375))
+            wait()
+            Tp1(Vector3.new(113.69667053222656, 19.717845916748047, -1578.6995849609375))
+            wait()
+            Tp1(Vector3.new(76.89389038085938, 19.717849731445312, -1589.548828125))
+            loadstring(game:HttpGet('https://pastebin.com/raw/ptAjjuvX'))()
+            wait()
+            Tp1(Vector3.new(83.08613586425781, 25.434106826782227, -1567.374755859375))
+            wait()
+            Tp1(Vector3.new(97.23929595947266, 19.453927993774414, -1533.5477294921875))
+            wait(1)
+            Tp1(Vector3.new(93.41072845458984, 18.95391082763672, -1512.1981201171875))
+        end
+    )
+
+    Farm:CriarBotao(
+        'Auto Posto de Gasolina',
+        function()
+            Tp2(Vector3.new(-1536.947509765625, 18.13419532775879, 699.36572265625))
+            loadstring(game:HttpGet('https://pastebin.com/raw/pW3a9dHC'))()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/MXJailbreak/Byjapa/main/Carro'))()
+            wait()
+            Tp1(Vector3.new(-1578.464599609375, 18.69811248779297, 706.9764404296875))
+            wait(1)
+            Tp1(Vector3.new(-1596.7197265625, 18.49811363220215, 708.4967041015625))
+            wait()
+            Tp1(Vector3.new(-1600.7578125, 18.49811363220215, 685.6148071289062))
+            loadstring(game:HttpGet('https://pastebin.com/raw/ptAjjuvX'))()
+            wait()
+            Tp1(Vector3.new(-1596.260986328125, 18.234195709228516, 710.9710693359375))
+            wait()
+            Tp1(Vector3.new(-1582.3359375, 18.234195709228516, 709.0425415039062))
+            wait(1)
+            Tp1(Vector3.new(-1564.400634765625, 18.13419532775879, 704.8306274414062))
+        end
+    )
+
+    Farm:CriarBotao(
+        'Auto Airdrop',
+        function()
+            notificacao('MACRO X', 'Risco de KICK!', 5)
+            local Teste = require(game:GetService('ReplicatedStorage').Module.UI)
+            for i, a in next, Teste.CircleAction.Specs do
+                a.Timed = true
+            end
+            function drop(v)
+                if v.Name == 'Drop' then
+                    Tp2(v.Top.Position)
+                    saircarro()
+                    wait(1)
+
+                    spawn(
+                        function()
+                            notificacao('MACRO X', 'Colete o AirDrop!', 30)
+                            notificacaonormal('MACRO X', 'Colete o AirDrop!', 30)
+                            no_clip(true)
+                            while getHumanoid(speaker).Health > 0 do
+                                getRoot(speaker).CFrame = v.Top.CFrame * CFrame.new(0, -3.9, 0)
+                                no_clip(false)
+                                local Teste = require(game:GetService('ReplicatedStorage').Module.UI)
+                                for i, a in next, Teste.CircleAction.Specs do
+                                    a.Timed = true
+                                end
+                                task.wait()
+                            end
+                        end
+                    )
+                end
+            end
+
+            for i, v in pairs(workspace:GetChildren()) do
+                if v.Name == 'Drop' then
+                    drop(v)
+                end
             end
         end
-
-        for i, v in pairs(workspace:GetChildren()) do
-            if v.Name == "Drop" then
-                drop(v)
-            end
-        end
-
-    end)
+    )
 
     Farm:CriarLabel('AUTO VENDER:', true)
 
-    Farm:CriarBotao("Auto Vender (Vulcao)", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
+    Farm:CriarBotao(
+        'Auto Vender (Vulcao)',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
 
-            Tp2(Vector3.new(2199.31787109375, 78.87100219726562, -2577.150634765625))
-            Tp1(Vector3.new(2267.44287109375, 73.02130889892578, -2592.494873046875))
-            wait(0.1)
-            Tp1(Vector3.new(2286.663818359375, 33.13221740722656, -2592.614990234375))
-            repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.RobberyMoneyGui.Enabled == false
-      wait(1)
-            Tp1(Vector3.new(2277.3076171875, 70.68268585205078, -2591.248779296875))
-            wait(0.1)
-            Tp1(Vector3.new(2195.732666015625, 77.68968963623047, -2584.357666015625))
-            wait(0.1)
-            local old = use_car
-            use_car = false
-            Tp2(Vector3.new(2281.5146484375, 16.38672637939453, -2057.7392578125))
-            usecar = old
-        end)
+            autovendervulcao()
+        end
+    )
 
-    Farm:CriarBotao("Auto Vender (Base Cidade)", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
-    end)
+    Farm:CriarBotao(
+        'Auto Vender (Base Cidade)',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
+        end
+    )
 
-    Farm:CriarBotao("Auto Vender (Cargo Plane)", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(-330.4154052734375, 21.541906356811523, 2061.408935546875))
-    end)
+    Farm:CriarBotao(
+        'Auto Vender (Cargo Plane)',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(-330.4154052734375, 21.541906356811523, 2061.408935546875))
+        end
+    )
 
     Farm:CriarLabel('AUTO SAIDAS:', true)
 
-    Farm:CriarBotao("Auto Sair Joalheria", function()
-        notificacao("MACRO X", "Aguarde...", 4)
-        sairall()
-    end)
+    Farm:CriarBotao(
+        'Auto Sair Joalheria',
+        function()
+            notificacao('MACRO X', 'Aguarde...', 4)
+            sairall()
+        end
+    )
 
-    Farm:CriarBotao("Auto Sair Casino", function()
-        notificacao("MACRO X", "Aguarde...", 4)
-        sairall()
-    end)
+    Farm:CriarBotao(
+        'Auto Sair Casino',
+        function()
+            notificacao('MACRO X', 'Aguarde...', 4)
+            sairall()
+        end
+    )
 
-    Farm:CriarBotao("Auto Sair Cargo Plane", function()
-        notificacao("MACRO X", "Aguarde...", 4)
-        sairall()
-    end)
+    Farm:CriarBotao(
+        'Auto Sair Cargo Plane',
+        function()
+            notificacao('MACRO X', 'Aguarde...', 4)
+            sairall()
+        end
+    )
 
-    Farm:CriarBotao("Auto Sair Vulcao", function()
-        notificacao("MACRO X", "Aguarde...", 4)
-        Tp1(Vector3.new(2211.435791015625, 19.643844604492188, -2461.634765625))
-        Tp1(Vector3.new(2263.906494140625, 19.834983825683594, -2191.0849609375))
-        wait(1.1)
-        Tp1(Vector3.new(2296.775390625, 19.497699737548828, -2037.8616943359375))
+    Farm:CriarBotao(
+        'Auto Sair Vulcao',
+        function()
+            notificacao('MACRO X', 'Aguarde...', 4)
+            Tp1(Vector3.new(2211.435791015625, 19.643844604492188, -2461.634765625))
+            Tp1(Vector3.new(2263.906494140625, 19.834983825683594, -2191.0849609375))
+            wait(1.1)
+            Tp1(Vector3.new(2296.775390625, 19.497699737548828, -2037.8616943359375))
+        end
+    )
 
-    end)
+    Farm:CriarBotao(
+        'Auto Sair Museu',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/xywgDUJ4'))()
+            Tp1(Vector3.new(1096.9019775390625, 106.05891418457031, 1279.9913330078125))
+            local pos = Vector3.new(1093.6910400390625, 105.71947479248047, 1277.6243896484375) -- posicao
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+        end
+    )
 
-    Farm:CriarBotao("Auto Sair Museu", function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/xywgDUJ4'))()
-        Tp1(Vector3.new(1096.9019775390625, 106.05891418457031, 1279.9913330078125))
-        local pos = Vector3.new(1093.6910400390625, 105.71947479248047, 1277.6243896484375) -- posicao
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-    end)
+    Farm:CriarBotao(
+        'Auto Sair Power Plant',
+        function()
+            sairpower()
+        end
+    )
 
-    Farm:CriarBotao("Auto Sair Power Plant", function()
-        sairpower()
-    end)
-
-    Combat:CriarLabel("Aimbot", true)
+    Combat:CriarLabel('Aimbot', true)
     local aimconfig = {
         aimbot = false,
         aimbot2 = false,
         teamcheck = false,
         fov = 0
     }
-    game:GetService("UserInputService").InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton2 then
-            aimconfig.aimbot2 = true
+    game:GetService('UserInputService').InputBegan:Connect(
+        function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton2 then
+                aimconfig.aimbot2 = true
+            end
         end
-    end)
-    game:GetService("UserInputService").InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton2 then
-            aimconfig.aimbot2 = false
+    )
+    game:GetService('UserInputService').InputEnded:Connect(
+        function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton2 then
+                aimconfig.aimbot2 = false
+            end
         end
-    end)
+    )
 
-    Combat:CriarToggle('Aimbot', function(bool)
-        aimconfig.aimbot = bool
-    end)
-    Combat:CriarToggle("Aimbot team check", function(bool)
-        aimconfig.teamcheck = bool
-    end)
-    Combat:CriarSlider("Aim fov", 0, 120, function(bool)
-        aimconfig.fov = bool
-    end)
-
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if aimconfig.aimbot == true and aimconfig.aimbot2 == true then
-            workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position,
-                getClosestPlayer(aimconfig.fov).Character.Head.Position)
+    Combat:CriarToggle(
+        'Aimbot',
+        function(bool)
+            aimconfig.aimbot = bool
         end
-    end)
+    )
+    Combat:CriarToggle(
+        'Aimbot team check',
+        function(bool)
+            aimconfig.teamcheck = bool
+        end
+    )
+    Combat:CriarSlider(
+        'Aim fov',
+        0,
+        120,
+        function(bool)
+            aimconfig.fov = bool
+        end
+    )
+
+    game:GetService('RunService').RenderStepped:Connect(
+        function()
+            if aimconfig.aimbot == true and aimconfig.aimbot2 == true then
+                workspace.CurrentCamera.CFrame =
+                    CFrame.new(
+                    workspace.CurrentCamera.CFrame.Position,
+                    getClosestPlayer(aimconfig.fov).Character.Head.Position
+                )
+            end
+        end
+    )
 
     Combat:CriarLabel('COMBAT:', true)
 
-    Combat:CriarToggle('Silent Aim', function(bool)
-        loadstring(game:HttpGet('https://pastebin.com/raw/sfAsWwGY'))()
-    end)
+    Combat:CriarToggle(
+        'Silent Aim',
+        function(bool)
+            loadstring(game:HttpGet('https://pastebin.com/raw/sfAsWwGY'))()
+        end
+    )
 
-    Combat:CriarBotao('Kill Aura', function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/H8gQcxFb'))()
-    end)
+    Combat:CriarBotao(
+        'Kill Aura',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/H8gQcxFb'))()
+        end
+    )
 
     Combat:CriarLabel('DIVERSOS:', true)
 
-    Combat:CriarSlider("Velocidade", 1, 225, function(value)
-        getgenv().WalkSpeedValue = value;
-        local Player = game:service 'Players'.LocalPlayer;
-        Player.Character.Humanoid:GetPropertyChangedSignal 'WalkSpeed':Connect(function()
-            Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
-            Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+    Combat:CriarSlider(
+        'Velocidade',
+        1,
+        225,
+        function(value)
+            getgenv().WalkSpeedValue = value
+            local Player = game:service 'Players'.LocalPlayer
+            Player.Character.Humanoid:GetPropertyChangedSignal 'WalkSpeed':Connect(
+                function()
+                    Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue
+                    Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue
+                end
+            )
+        end
+    )
 
-        end)
-    end)
-
-    Combat:CriarSlider("Gravidade", 0, 1000, function(value)
-        workspace.Gravity = value
-    end)
+    Combat:CriarSlider(
+        'Gravidade',
+        0,
+        1000,
+        function(value)
+            workspace.Gravity = value
+        end
+    )
 
     Teleportes:CriarLabel('TELEPORTES:', true)
 
-    Teleportes:CriarBotao("TP Museu", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(1113.5445556640625, 139.10427856445312, 1297.2264404296875))
-    end)
+    Teleportes:CriarBotao(
+        'TP Museu',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(1113.5445556640625, 139.10427856445312, 1297.2264404296875))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Museu (SEM DELAY)", function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/mt2c1iuF'))()
-    end)
+    Teleportes:CriarBotao(
+        'TP Museu (SEM DELAY)',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/mt2c1iuF'))()
+        end
+    )
 
-    Teleportes:CriarBotao("TP Joalheria", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(143.66824340820312, 17.883831024169922, 1379.358154296875))
-    end)
+    Teleportes:CriarBotao(
+        'TP Joalheria',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(143.66824340820312, 17.883831024169922, 1379.358154296875))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Bank", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(43.04151153564453, 17.872217178344727, 764.78759765625))
-    end)
+    Teleportes:CriarBotao(
+        'TP Bank',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(43.04151153564453, 17.872217178344727, 764.78759765625))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Power Plant", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(46.77196502685547, 20.40790367126465, 2358.94482421875))
-    end)
+    Teleportes:CriarBotao(
+        'TP Power Plant',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(46.77196502685547, 20.40790367126465, 2358.94482421875))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Casino", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(-194.64422607421875, 19.190465927124023, -4584.3720703125))
-    end)
+    Teleportes:CriarBotao(
+        'TP Casino',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(-194.64422607421875, 19.190465927124023, -4584.3720703125))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Aeroporto", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(-1303.5528564453125, 41.84423828125, 2859.515869140625))
-    end)
+    Teleportes:CriarBotao(
+        'TP Aeroporto',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(-1303.5528564453125, 41.84423828125, 2859.515869140625))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Tomb", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(610.7174072265625, 21.32147979736328, -485.48687744140625))
-    end)
+    Teleportes:CriarBotao(
+        'TP Tomb',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(610.7174072265625, 21.32147979736328, -485.48687744140625))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Posto de Gasolina", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(-1534.64453125, 18.461469650268555, 701.8700561523438))
-    end)
+    Teleportes:CriarBotao(
+        'TP Posto de Gasolina',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(-1534.64453125, 18.461469650268555, 701.8700561523438))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Loja de Rosquinha", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(62.23844528198242, 18.963422775268555, -1517.5889892578125))
-    end)
+    Teleportes:CriarBotao(
+        'TP Loja de Rosquinha',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(62.23844528198242, 18.963422775268555, -1517.5889892578125))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Area 51", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(612.4613647460938, 19.61579132080078, -3616.880126953125))
-    end)
+    Teleportes:CriarBotao(
+        'TP Area 51',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(612.4613647460938, 19.61579132080078, -3616.880126953125))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Trade", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(2675.636962890625, 24.351089477539062, -3805.135986328125))
-    end)
+    Teleportes:CriarBotao(
+        'TP Trade',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(2675.636962890625, 24.351089477539062, -3805.135986328125))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Loja de Armas", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(10.926280975341797, 19.758268356323242, -1764.260498046875))
-    end)
+    Teleportes:CriarBotao(
+        'TP Loja de Armas',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(10.926280975341797, 19.758268356323242, -1764.260498046875))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Loja de 1M", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(479.4014587402344, 19.485206604003906, -1593.4052734375))
-    end)
+    Teleportes:CriarBotao(
+        'TP Loja de 1M',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(479.4014587402344, 19.485206604003906, -1593.4052734375))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Vulcao", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
-    end)
+    Teleportes:CriarBotao(
+        'TP Vulcao',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(2277.160888671875, 18.90064239501953, -2055.906494140625))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Base Cidade", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
-    end)
+    Teleportes:CriarBotao(
+        'TP Base Cidade',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(-246.013916015625, 17.881628036499023, 1616.1649169921875))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Prisao(Dentro)", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(-1219.6141357421875, 18.449987411499023, -1759.02490234375))
-    end)
+    Teleportes:CriarBotao(
+        'TP Prisao(Dentro)',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(-1219.6141357421875, 18.449987411499023, -1759.02490234375))
+        end
+    )
 
-    Teleportes:CriarBotao("TP Prisao(Fora)", function()
-        Tp2(Vector3.new(-1138.365234375, 18.39781951904297, -1389.2274169921875))
-        loadstring(game:HttpGet('https://pastebin.com/raw/HZBCd0pH'))()
-    end)
+    Teleportes:CriarBotao(
+        'TP Prisao(Fora)',
+        function()
+            Tp2(Vector3.new(-1138.365234375, 18.39781951904297, -1389.2274169921875))
+            loadstring(game:HttpGet('https://pastebin.com/raw/HZBCd0pH'))()
+        end
+    )
 
-    Teleportes:CriarBotao("TP Mansion", function()
-        notificacao("MACRO X", "Não saia do carro!", 5)
-        Tp2(Vector3.new(2920.753662109375, 57.75913619995117, -4601.60009765625))
-    end)
+    Teleportes:CriarBotao(
+        'TP Mansion',
+        function()
+            notificacao('MACRO X', 'Não saia do carro!', 5)
+            Tp2(Vector3.new(2920.753662109375, 57.75913619995117, -4601.60009765625))
+        end
+    )
 
     Loja:CriarLabel('KEY CARD:', true)
 
-    Loja:CriarBotao('Key Card', function()
-        notificacao("MACRO X", "Cartão Adicionado!", 3)
-        local plrUtils = game:GetService("ReplicatedStorage").Game.PlayerUtils
-        local oldHasKey = require(plrUtils).hasKey
-        require(plrUtils).hasKey = function()
-            return true
+    Loja:CriarBotao(
+        'Key Card',
+        function()
+            notificacao('MACRO X', 'Cartão Adicionado!', 3)
+            local plrUtils = game:GetService('ReplicatedStorage').Game.PlayerUtils
+            local oldHasKey = require(plrUtils).hasKey
+            require(plrUtils).hasKey = function()
+                return true
+            end
         end
-    end)
+    )
 
     local armas = {}
     local args = {}
-    for i, v in pairs(game:GetService("Workspace").Givers:GetChildren()) do
+    for i, v in pairs(game:GetService('Workspace').Givers:GetChildren()) do
         if v:FindFirstChild('Item') and v:FindFirstChild('ClickDetector') then
             if not table.find(armas, v.Item.Value) then
                 armas[#armas + 1] = v.Item.Value
                 args[#args + 1] = {v.Item.Value, v.ClickDetector}
                 if v.Item.Value == 'HatPolice' then
-                    args[#args + 1] = {'Roupa normal',
-                                       game:GetService("Workspace").ClothingRacks.ClothingRack.Hitbox.ClickDetector}
+                    args[#args + 1] = {
+                        'Roupa normal',
+                        game:GetService('Workspace').ClothingRacks.ClothingRack.Hitbox.ClickDetector
+                    }
                 end
             end
         end
     end
-    Loja:CriarLabel("ARMAS:", true)
+    Loja:CriarLabel('ARMAS:', true)
     for i, v in pairs(args) do
-        Loja:CriarBotao(v[1], function()
-            fireclickdetector(v[2])
-        end)
+        Loja:CriarBotao(
+            v[1],
+            function()
+                fireclickdetector(v[2])
+            end
+        )
     end
     ESPS:CriarLabel('ESPS:', true)
 
-    ESPS:CriarToggle('ESP Player', function()
-        loadstring(game:HttpGet "https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/ESP%20J")()
-    end)
+    local esp_enabled = false
 
-    ESPS:CriarToggle('ESP Airdrop', function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/japones10101940/MACRO-X---OFICIAL/main/ESP%20AIR'))()
-    end)
+    local loops = {}
+
+    function esp(v)
+        local Line = Drawing.new('Line')
+        Line.Color = Color3.fromRGB(255, 0, 0)
+        Line.Transparency = 0.5
+        Line.Thickness = 2
+        Line.Visible = false
+        function add_esp()
+            spawn(
+                function()
+                    loops[v.Name] = {
+                        game:GetService('RunService').RenderStepped:Connect(
+                            function()
+                                if
+                                    v.Character and v.Character:FindFirstChild('Humanoid') and
+                                        v.Character:FindFirstChild('Humanoid').Health > 0 and
+                                        v.Character:FindFirstChild('HumanoidRootPart')
+                                 then
+                                    local Vector, OnScreen =
+                                        workspace.CurrentCamera:worldToViewportPoint(
+                                        v.Character.HumanoidRootPart.Position
+                                    )
+                                    local Vector22, OnScreen2 =
+                                        workspace.CurrentCamera:worldToViewportPoint(
+                                        game.Players.LocalPlayer.Character.LowerTorso.Position
+                                    )
+                                    if Vector and Vector2 and OnScreen then
+                                        Line.Visible = esp_enabled
+                                        Line.Color = v.TeamColor.Color
+                                        Line.From = Vector2.new(Vector22.X, Vector22.Y)
+                                        Line.To = Vector2.new(Vector.X, Vector.Y)
+                                    else
+                                        Line.Visible = false
+                                    end
+                                else
+                                    Line.Visible = false
+                                end
+
+                                wait()
+                            end
+                        ),
+                        Line
+                    }
+                end
+            )
+        end
+
+        coroutine.wrap(add_esp)()
+    end
+
+    for i, v in pairs(game.Players:GetChildren()) do
+        if v ~= game.Players.LocalPlayer then
+            esp(v)
+        end
+    end
+
+    game.Players.PlayerAdded:Connect(
+        function(v)
+            esp(v)
+        end
+    )
+
+    game.Players.ChildRemoved:Connect(
+        function(v)
+            loops[v.Name][1]:Disconnect()
+            loops[v.Name][2]:Remove()
+            table.remove(loops, table.find(loops, v.Name))
+        end
+    )
+
+    ESPS:CriarToggle(
+        'ESP Player',
+        function(bool)
+            esp_enabled = bool
+        end
+    )
 
     Outros:CriarLabel('CASINO:', true)
 
-    Outros:CriarBotao('Auto Quest', function()
-        quest()
-    end)
+    Outros:CriarBotao(
+        'Auto Quest',
+        function()
+            quest()
+        end
+    )
 
-    Outros:CriarBotao('Auto Code', function()
-        casinocode()
-    end)
+    Outros:CriarBotao(
+        'Auto Code',
+        function()
+            casinocode()
+        end
+    )
 
     Outros:CriarLabel('Desempenho:', true)
 
-    Outros:CriarBotao('Remover Texturas', function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/vm77wTF1'))()
-    end)
+    Outros:CriarBotao(
+        'Remover Texturas',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/vm77wTF1'))()
+        end
+    )
 
-    Outros:CriarBotao('FPS+', function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/GQhGz819'))()
-    end)
+    Outros:CriarBotao(
+        'FPS+',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/GQhGz819'))()
+        end
+    )
 
-    Outros:CriarBotao('FPS++', function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/pqYEk7pr'))()
-    end)
+    Outros:CriarBotao(
+        'FPS++',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/pqYEk7pr'))()
+        end
+    )
 
-    Outros:CriarBotao('FPS+++', function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/SPuVp7z8'))()
-    end)
+    Outros:CriarBotao(
+        'FPS+++',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/SPuVp7z8'))()
+        end
+    )
 
     Outros:CriarLabel('OUTROS:', true)
-
-    Outros:CriarBotao('"E" (SEM DELAY)', function(value)
-        local Teste = require(game:GetService("ReplicatedStorage").Module.UI)
-        for i, a in next, Teste.CircleAction.Specs do
-            a.Timed = false
+    local notificar_roubos = false
+    Outros:CriarToggle(
+        'Notificar roubos',
+        function(bool)
+            notificar_roubos = bool
         end
-        notificacao("MACRO X", "E (SEM DELAY) Ativado!", 10)
-    end)
+    )
+    --[[
+    for i,v in pairs(Robberys) do 
+        spawn(function()
+            while true do 
+                local old =  is_opened(v)
+                repeat wait() until is_opened(v) ~= old 
+                if notificar_roubos and is_opened(v) ~= "roubando" then 
+                    notificacao(v, is_opened(v), 5)
+                end
+            end
+        end)
+    end
+]]
+    Outros:CriarBotao(
+        '"E" (SEM DELAY)',
+        function(value)
+            local Teste = require(game:GetService('ReplicatedStorage').Module.UI)
+            for i, a in next, Teste.CircleAction.Specs do
+                a.Timed = false
+            end
+            notificacao('MACRO X', 'E (SEM DELAY) Ativado!', 10)
+        end
+    )
 
-    Outros:CriarBotao('Deletar lasers(G)', function()
-        notificacao("MACRO X", "Precione G para (Remover/Colocar) os Lasers.", 10)
-        laser()
-    end)
+    Outros:CriarBotao(
+        'Deletar lasers(G)',
+        function()
+            notificacao('MACRO X', 'Precione G para (Remover/Colocar) os Lasers.', 10)
+            laser()
+        end
+    )
 
-    Outros:CriarBotao('FLY(X)', function()
-        notificacao("MACRO X", "FLY Ativado!", 3)
-        fly()
-    end)
+    Outros:CriarBotao(
+        'FLY(X)',
+        function()
+            notificacao('MACRO X', 'FLY Ativado!', 3)
+            fly()
+        end
+    )
 
-    Outros:CriarBotao('Inf nitro', function()
-        for i, v in pairs(getgc(true)) do
-            if typeof(v) == "table" then
-                for _, b in pairs(v) do
-                    if tostring(_) == "Nitro" then
-                        game:GetService("RunService").Heartbeat:Connect(function()
-                            v[tostring(_)] = 9e9
-                        end)
+    Outros:CriarBotao(
+        'Soco Rapido',
+        function()
+            notificacao('Soco Rápido Ativado!', 3)
+            if not socar_whs then
+                local name = 'attemptPunch'
+
+                for i, v in pairs(getgc(true)) do
+                    if typeof(v) == 'function' and getinfo(v).name == name then
+                        getgenv().socar_whs = v
+                    end
+                end
+            end
+
+            function socar_velocidade(numero)
+                setconstant(socar_whs, 3, numero)
+            end
+            socar_velocidade(0)
+        end
+    )
+    Outros:CriarBotao(
+        'Inf nitro',
+        function()
+            for i, v in pairs(getgc(true)) do
+                if typeof(v) == 'table' then
+                    for _, b in pairs(v) do
+                        if tostring(_) == 'Nitro' then
+                            game:GetService('RunService').Heartbeat:Connect(
+                                function()
+                                    v[tostring(_)] = 9e9
+                                end
+                            )
+                        end
                     end
                 end
             end
         end
-    end)
+    )
 
-    Outros:CriarBotao('Anti dano de queda', function(value)
-        loadstring(game:HttpGet('https://pastebin.com/raw/nzbus1JP'))()
-        notificacao("MACRO X", "Anti dano de queda ativado!", 3)
-    end)
-
-    Outros:CriarBotao('Iniciar Queda Livre', function(value)
-        loadstring(game:HttpGet('https://pastebin.com/raw/s4kDNPyY'))()
-    end)
-
-    Outros:CriarBotao('Criar Rampa', function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/7jPMjwEL'))()
-        notificacao("MACRO X", "Rampa Criada!", 3)
-    end)
-
-    Outros:CriarToggle('No Clip (Liga desliga)', function(bool)
-        no_clip(bool)
-    end)
-
-    Outros:CriarBotao('Abrir Loja De Arma', function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/hxvEvJHG'))()
-        notificacao("MACRO X", "Loja aberta!", 3)
-    end)
-
-    
-    Outros:CriarBotao('Fechar Loja De Arma', function()
-        notificacao("MACRO X", "Loja fechada!", 3)
-        Tp1(Vector3.new(5.122807502746582, 19.30390167236328, -1721.6417236328125))
-    end)
-    game.Players.LocalPlayer.Idled:Connect(function()
-        if antiafk then 
-            local VirtualUser = game:GetService("VirtualUser")
-            VirtualUser:CaptureController()
-            VirtualUser:ClickButton2(Vector2.new())
+    Outros:CriarBotao(
+        'Anti dano de queda',
+        function(value)
+            loadstring(game:HttpGet('https://pastebin.com/raw/nzbus1JP'))()
+            notificacao('MACRO X', 'Anti dano de queda ativado!', 3)
         end
-    end)
+    )
+
+    Outros:CriarBotao(
+        'Iniciar Queda Livre',
+        function(value)
+            loadstring(game:HttpGet('https://pastebin.com/raw/s4kDNPyY'))()
+        end
+    )
+
+    Outros:CriarBotao(
+        'Criar Rampa',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/7jPMjwEL'))()
+            notificacao('MACRO X', 'Rampa Criada!', 3)
+        end
+    )
+
+    Outros:CriarToggle(
+        'No Clip (Liga desliga)',
+        function(bool)
+            no_clip(bool)
+        end
+    )
+
+    Outros:CriarBotao(
+        'Abrir Loja De Arma',
+        function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/hxvEvJHG'))()
+            notificacao('MACRO X', 'Loja aberta!', 3)
+        end
+    )
+
+    Outros:CriarBotao(
+        'Fechar Loja De Arma',
+        function()
+            notificacao('MACRO X', 'Loja fechada!', 3)
+            Tp1(Vector3.new(5.122807502746582, 19.30390167236328, -1721.6417236328125))
+        end
+    )
+    game.Players.LocalPlayer.Idled:Connect(
+        function()
+            if antiafk then
+                local VirtualUser = game:GetService('VirtualUser')
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+            end
+        end
+    )
     local antiafk = false
 
-    Outros:CriarToggle("Anti AFK", function(button)
-        notificacao("Anti afk", (button == true and "ligado") or (button == false and "desligado"))
-        antiafk = button
-    end)
-
+    Outros:CriarToggle(
+        'Anti AFK',
+        function(button)
+            notificacao('Anti afk', (button == true and 'ligado') or (button == false and 'desligado'))
+            antiafk = button
+        end
+    )
 
     Credits:CriarLabel('DISCORD', true)
 
-    Credits:CriarBotao('DISCORD', function()
-        notificacaonormal("MACRO X Discord", "BY ヘンリケ#1111", 10)
-        wait()
-        notificacao("MACRO X Discord", "Créditos no clipboard!", 10)
-        setclipboard("https://pastebin.com/raw/XgD1sv52")
-    end)
-
+    Credits:CriarBotao(
+        'DISCORD',
+        function()
+            notificacaonormal('MACRO X Discord', 'BY ヘンリケ#1111', 10)
+            wait()
+            notificacao('MACRO X Discord', 'Créditos no clipboard!', 10)
+            setclipboard('https://pastebin.com/raw/XgD1sv52')
+        end
+    )
 end
-
--- ALt + Shift + F
