@@ -886,11 +886,10 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         end)
     end
 
-    function farmcarro() carro() end
+
 
     function venderjoa()
         carro()
-        notificacao('MACRO X', 'Não saia do carro!', 5)
         Tp2(Vector3.new(-246.013916015625, 17.881628036499023,
                         1616.1649169921875))
         wait(1)
@@ -1123,12 +1122,12 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
             local Part = Instance.new("Part", workspace)
             Part.Anchored = true
             Part.CanCollide = true
-            Part.Size = Vector3.new(40, 0.5, 40)
-            Part.Position = Vector3.new(-165.25157165527344, 386.55218505859375,
-                                        -4895.79931640625)
+            Part.Size = Vector3.new(30, 0.5, 0)
+            Part.Position = Vector3.new(98.3237533569336, 526.4260864257812, -364.5108947753906)
             wait(1)
-            Tp2(Vector3.new(-165.25157165527344, 386.55218505859375,
-                            -4895.79931640625))
+            Tp2(Vector3.new(98.3237533569336, 526.4260864257812, -364.5108947753906))
+            wait(2)
+            notificacao("MACRO X", "Esperando...  (:", 7)
         end
     end
 
@@ -1779,7 +1778,7 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
                 end)
             end
         end
-        wait(0.5)
+        wait(0.3)
         local Led = game:GetService('Workspace').Casino.HackableVaults
                         .VaultDoorMain.InnerModel.Model.UnlockedLED
         for i = 1, 50 do
@@ -1793,7 +1792,7 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         Tp1(Vector3.new(49.96100997924805, -77.26969909667969, -4667.8203125))
         wait()
         Tp1(Vector3.new(26.1173038482666, -77.26969909667969, -4662.6728515625))
-        wait(0.5)
+        wait(0.1)
         for i = 1, 50 do
             game:GetService('Players').LocalPlayer.Character:PivotTo(CFrame.new(
                                                                          7.94412088394165,
@@ -1852,65 +1851,64 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
         tp1(
             Vector3.new(262.7638244628906, -75.46063995361328, -4438.46923828125))
         casinomoney()
-        wait(1.1)
         Tp1(Vector3.new(246.68569946289062, -72.08382415771484,
                         -4486.98974609375))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(225.69534301757812, -72.5227279663086, -4500.30908203125))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(219.18287658691406, -72.7594985961914, -4513.04931640625))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(206.97079467773438, -73.04559326171875,
                         -4521.59423828125))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(191.861083984375, -73.31571960449219, -4524.02099609375))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(181.4308319091797, -73.5186996459961, -4527.3046875))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(166.8794708251953, -73.76962280273438, -4528.74755859375))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(145.12677001953125, -74.07138061523438, -4523.783203125))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(133.14071655273438, -74.29678344726562, -4526.7900390625))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(120.99102020263672, -74.48636627197266, -4526.0615234375))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(109.86833190917969, -74.69288635253906, -4528.5947265625))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(98.50103759765625, -74.90229797363281, -4531.0224609375))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(89.5340347290039, -75.10472869873047, -4536.5546875))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(80.0338134765625, -75.32087707519531, -4542.58251953125))
         Tp1(
             Vector3.new(68.39435577392578, -75.58573150634766, -4549.96923828125))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(54.92230224609375, -74.94100189208984, -4560.271484375))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(43.65658187866211, -75.29472351074219, -4576.87890625))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(36.29990768432617, -75.50173950195312, -4585.396484375))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(27.72158432006836, -75.77055358886719, -4597.99169921875))
-        wait(0.2)
+        wait()
         Tp1(Vector3.new(24.157438278198242, -75.97286224365234,
                         -4612.02685546875))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(22.54392433166504, -75.97261810302734, -4617.81591796875))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(14.417302131652832, -75.96724700927734, -4648.1513671875))
         Tp1(
             Vector3.new(16.19205093383789, -76.36404418945312, -4658.92236328125))
-        wait(0.2)
+        wait()
         Tp1(
             Vector3.new(16.19205093383789, -76.36404418945312, -4658.92236328125))
         wait(0.2)
@@ -2010,7 +2008,7 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
     end
 
     function autojoa()
-        farmcarro()
+carro()
         Tp2(Vector3.new(66.99860382080078, 18.001718521118164, 1319.859375))
         saircarro()
         laser1()
@@ -2215,7 +2213,6 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
     end
 
     function autovendervulcao()
-        getCamaro()
         Tp2(Vector3.new(2199.31787109375, 78.87100219726562, -2577.150634765625))
         Tp1(Vector3.new(2267.44287109375, 73.02130889892578, -2592.494873046875))
         wait(0.2)
