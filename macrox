@@ -235,27 +235,27 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
                 if dist < nearest then
                     vehicle, spec, nearest = v.ValidRoot, v, dist
                     if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-                        for i, v in next,
-                        require(game:GetService('ReplicatedStorage').Module.UI).CircleAction
-                            .Specs do
-                if v.Name == 'Enter Driver' then
-                    pcall(function()
-                        v.Duration = 1
-                        v:Callback(true)
-                    end)
+                        for i, v in next, require(
+                                        game:GetService('ReplicatedStorage').Module
+                                            .UI).CircleAction.Specs do
+                            if v.Name == 'Enter Driver' then
+                                pcall(function()
+                                    v.Duration = 1
+                                    v:Callback(true)
+                                end)
+                            end
+                        end
+                    end
                 end
             end
-                end
-            end
-        end
         end
         if vehicle ~= nil then
             return vehicle, spec, nearest
-       else
+        else
             notificacao("MACRO X", "Camaro não encontrado!", 5)
         end
     end
-    
+
     function instant(pos)
         if getCar() then getCar().CFrame = CFrame.new(pos) end
         if not getCar() then
@@ -438,14 +438,14 @@ if --[[Jailbreak]] game.PlaceId == 606849621 then
             end
         end
     end
-function noticarro()
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then 
-        notificacao("MACRO X","Teleportando...", 3)
+    function noticarro()
+        if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+            notificacao("MACRO X", "Teleportando...", 3)
         else
-       notificacao("MACRO X","Procurando Camaro...", 5)
+            notificacao("MACRO X", "Procurando Camaro...", 5)
+        end
+        getCamaro()
     end
-  getCamaro()
-end   
     function Tp2(vector)
         local vehicle, spec = getCamaro()
         if game.Players.LocalPlayer.Character.Humanoid.Sit == false and use_car and
@@ -465,7 +465,7 @@ end
 
         tpporcima(vector)
     end
-    
+
     repeat wait() until Tp1 ~= nil and Tp2 ~= nil
 
     -- FUNÇÕES:
@@ -516,10 +516,10 @@ end
         Tp1(Vector3.new(96.95466613769531, 19.517820358276367,
                         -1528.409912109375))
 
-     no_clip(true)
+        no_clip(true)
         Tp1(Vector3.new(93.41072845458984, 18.95391082763672,
                         -1512.1981201171875))
-                        no_clip(false)
+        no_clip(false)
     end
 
     function deletar_plataforma()
@@ -886,20 +886,14 @@ end
         end)
     end
 
-    function farmcarro()
-        spawn(function()
-            notificacao('MACRO X', 'Spawnando Carro, Aguarde...', 3.1)
-            wait(3)
-            carro()
-        end)
-    end
+    function farmcarro() carro() end
 
     function venderjoa()
+        carro()
         notificacao('MACRO X', 'Não saia do carro!', 5)
         Tp2(Vector3.new(-246.013916015625, 17.881628036499023,
                         1616.1649169921875))
         wait(1)
-        carro()
     end
 
     function quest()
@@ -1119,6 +1113,25 @@ end
         end
     end
 
+    function plataforma()
+        if is_opened("jewelry store") == "aberto" or is_opened("jewelry store") ==
+            "roubando" or is_opened("Casino") == "aberto" or is_opened("Casino") ==
+            "roubando" then
+        else
+            wait(1)
+
+            local Part = Instance.new("Part", workspace)
+            Part.Anchored = true
+            Part.CanCollide = true
+            Part.Size = Vector3.new(40, 0.5, 40)
+            Part.Position = Vector3.new(-165.25157165527344, 386.55218505859375,
+                                        -4895.79931640625)
+            wait(1)
+            Tp2(Vector3.new(-165.25157165527344, 386.55218505859375,
+                            -4895.79931640625))
+        end
+    end
+
     function sairpower()
         Tp1(Vector3.new(101.30716705322266, -9.45310115814209, 2116.82177734375))
         wait(0.1)
@@ -1270,14 +1283,10 @@ end
     Farm:CriarLabel('AUTO FARM:', true)
 
     local AutoFarm = false
-    Farm:CriarToggle(
-        'Auto Farm',
-        function(bool)
-            AutoFarm = bool
-        end
-    )
-
- 
+    Farm:CriarToggle('Auto Farm', function(bool)
+        AutoFarm = bool
+        plataforma()
+    end)
 
     local function whatRob()
         local whatRobb
@@ -1293,19 +1302,6 @@ end
         return whatRobb
     end
     spawn(function()
-        if is_opened("jewelry store") == "aberto" or is_opened("jewelry store") == "roubando" or is_opened("Casino") == "aberto" or is_opened("Casino") == "roubando" then
-        else
-        wait(1)
-        spawn(function()
-            local Part = Instance.new("Part", workspace)
-                Part.Anchored = true
-                Part.CanCollide = true 
-                Part.Size = Vector3.new(40, 0.5, 40)
-                Part.Position = Vector3.new(-165.25157165527344, 386.55218505859375, -4895.79931640625)
-                wait(1)
-                Tp2(Vector3.new(-165.25157165527344, 386.55218505859375, -4895.79931640625))
-        end)
-        end
         while true do
             if AutoFarm then
                 if tostring(whatRob()) == 'nil' then plataforma() end
@@ -1328,6 +1324,7 @@ end
                         autojoa()
                         wait(1)
                         venderjoa()
+                        plataforma()
                     end
                     wait(1)
                     if whatRob() == 'donut store' and pode then
@@ -1343,6 +1340,32 @@ end
             end
             task.wait()
         end
+    end)
+
+    local function pegarbank()
+        for i,v in pairs(game:GetService("Workspace").Banks:GetChildren()[1].Layout:GetChildren()[1]) do
+            if v.Name == "01TheBlueRoom" then 
+                return v 
+            elseif v.Name == "02Basement" then
+                return v
+            elseif v.Name == "03Corridor" then 
+                return v 
+            elseif v.Name == "04Remastered" then 
+                return v 
+            elseif v.Name == "05Underwater" then 
+                return v 
+            elseif v.Name == "06TheBlueRoom" then 
+                return v 
+            elseif v.Name == "07TheMint" then 
+                return v 
+            end
+        end
+    end
+
+    Farm:CriarBotao('Auto Bank', function()
+    pegarbank()
+    notificacao("MACRO X", "Script Stop", 6)
+    print("V.name")
     end)
 
     Farm:CriarBotao('Auto Museu', function()
@@ -1611,11 +1634,13 @@ end
         wait()
         no_clip(true)
         saircarro()
-        wait(1)
+
+        wait()
         Tp1(Vector3.new(-62, 178, -4725))
         wait()
         Tp1(Vector3.new(-61, 159, -4723))
         wait()
+
         Tp1(Vector3.new(-16.19143295288086, 155.32080078125, -4746.25537109375))
         wait()
         local pos = Vector3.new(-14.686151504516602, 155.30926513671875,
@@ -1628,11 +1653,9 @@ end
 
         Tp1(Vector3.new(-17.028305053710938, 74.50428771972656,
                         -4752.47021484375))
-                        wait()
 
         Tp1(Vector3.new(-13.800651550292969, 71.47806549072266,
                         -4739.62353515625))
-                        wait()
 
         Tp1(
             Vector3.new(-8.465522766113281, 71.58183288574219, -4720.38525390625))
@@ -1678,29 +1701,29 @@ end
         wait()
         spawn(function()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
-            wait(5)
+            wait()
             quest()
         end)
         Tp1(Vector3.new(-13.640522956848145, 86.44746398925781,
@@ -1713,7 +1736,8 @@ end
             Vector3.new(-2.0819365978240967, 71.49842071533203, -4735.5205078125))
         Tp1(
             Vector3.new(-14.850430488586426, 71.47844696044922, -4743.4404296875))
-        wait()
+        notificacao('MACRO X', 'Aguarde 15 Segundos...', 15)
+        wait(20)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                                                          -16.072145462036133,
                                                                          71.52082061767578,
@@ -1723,16 +1747,14 @@ end
             fireclickdetector(workspace.Casino.Elevator.Floors['3'].Call
                                   .ClickDetector)
         end)
-        wait(0.5)
+        wait(1)
         local pos = Vector3.new(-17.89362907409668, 71.49137878417969,
                                 -4750.1083984375) -- posicao
         Tp1(pos)
         wait(1.6)
-        spawn(function()
+
         local Call = game:GetService('Workspace').Casino.Elevator.Car.InnerModel
                          .Calls['1']
-                         repeat until wait()
-end)
 
         esperar(Vector3.new(andares[5].Position.X, -77, andares[5].Position.Z),
                 5, function()
@@ -1742,6 +1764,7 @@ end)
                     andares[5].CFrame + Vector3.new(0, 3, 0)
             end)
         end)
+        wait()
         Tp1(
             Vector3.new(-7.5441484451293945, -77.02445983886719, -4715.873046875))
         wait()
@@ -1756,6 +1779,7 @@ end)
                 end)
             end
         end
+        wait(0.5)
         local Led = game:GetService('Workspace').Casino.HackableVaults
                         .VaultDoorMain.InnerModel.Model.UnlockedLED
         for i = 1, 50 do
@@ -1831,43 +1855,65 @@ end)
         wait(1.1)
         Tp1(Vector3.new(246.68569946289062, -72.08382415771484,
                         -4486.98974609375))
+        wait(0.2)
         Tp1(
             Vector3.new(225.69534301757812, -72.5227279663086, -4500.30908203125))
+        wait(0.2)
         Tp1(
             Vector3.new(219.18287658691406, -72.7594985961914, -4513.04931640625))
+        wait(0.2)
         Tp1(Vector3.new(206.97079467773438, -73.04559326171875,
                         -4521.59423828125))
+        wait(0.2)
         Tp1(Vector3.new(191.861083984375, -73.31571960449219, -4524.02099609375))
+        wait(0.2)
         Tp1(Vector3.new(181.4308319091797, -73.5186996459961, -4527.3046875))
+        wait(0.2)
         Tp1(
             Vector3.new(166.8794708251953, -73.76962280273438, -4528.74755859375))
+        wait(0.2)
         Tp1(Vector3.new(145.12677001953125, -74.07138061523438, -4523.783203125))
+        wait(0.2)
         Tp1(
             Vector3.new(133.14071655273438, -74.29678344726562, -4526.7900390625))
+        wait(0.2)
         Tp1(
             Vector3.new(120.99102020263672, -74.48636627197266, -4526.0615234375))
+        wait(0.2)
         Tp1(
             Vector3.new(109.86833190917969, -74.69288635253906, -4528.5947265625))
+        wait(0.2)
         Tp1(Vector3.new(98.50103759765625, -74.90229797363281, -4531.0224609375))
+        wait(0.2)
         Tp1(Vector3.new(89.5340347290039, -75.10472869873047, -4536.5546875))
+        wait(0.2)
         Tp1(Vector3.new(80.0338134765625, -75.32087707519531, -4542.58251953125))
         Tp1(
             Vector3.new(68.39435577392578, -75.58573150634766, -4549.96923828125))
+        wait(0.2)
         Tp1(Vector3.new(54.92230224609375, -74.94100189208984, -4560.271484375))
+        wait(0.2)
         Tp1(Vector3.new(43.65658187866211, -75.29472351074219, -4576.87890625))
+        wait(0.2)
         Tp1(Vector3.new(36.29990768432617, -75.50173950195312, -4585.396484375))
+        wait(0.2)
         Tp1(
             Vector3.new(27.72158432006836, -75.77055358886719, -4597.99169921875))
+        wait(0.2)
         Tp1(Vector3.new(24.157438278198242, -75.97286224365234,
                         -4612.02685546875))
+        wait(0.2)
         Tp1(
             Vector3.new(22.54392433166504, -75.97261810302734, -4617.81591796875))
+        wait(0.2)
         Tp1(
             Vector3.new(14.417302131652832, -75.96724700927734, -4648.1513671875))
         Tp1(
             Vector3.new(16.19205093383789, -76.36404418945312, -4658.92236328125))
+        wait(0.2)
         Tp1(
             Vector3.new(16.19205093383789, -76.36404418945312, -4658.92236328125))
+        wait(0.2)
         wait(0.6)
         for i = 1, 50 do
             game:GetService('Players').LocalPlayer.Character:PivotTo(CFrame.new(
@@ -1878,14 +1924,20 @@ end)
         end
         Tp1(
             Vector3.new(38.62568283081055, -77.20427703857422, -4665.71533203125))
+        wait(0.2)
         Tp1(Vector3.new(45.80826187133789, -77.14208221435547, -4671.9287109375))
+        wait(0.2)
         Tp1(
             Vector3.new(47.048152923583984, -77.04853820800781, -4683.4755859375))
+        wait(0.2)
         Tp1(Vector3.new(36.40468978881836, -76.72335052490234, -4719.0439453125))
+        wait(0.2)
         Tp1(Vector3.new(29.626070022583008, -76.68933868408203,
                         -4721.03662109375))
+        wait(0.2)
         Tp1(
             Vector3.new(28.39911460876465, -76.68779754638672, -4725.46044921875))
+        wait(0.2)
 
         for i, v in next,
                     require(game:GetService('ReplicatedStorage').Module.UI).CircleAction
@@ -1924,8 +1976,10 @@ end)
                         -4726.22314453125))
         Tp1(
             Vector3.new(-3.2409136295318604, -76.22847747802734, -4728.818359375))
+        wait(0.2)
         Tp1(Vector3.new(-6.4069437980651855, -76.04350280761719,
                         -4740.2861328125))
+        wait(0.2)
         Tp1(Vector3.new(-13.425470352172852, -76.01509857177734, -4739.02734375))
 
         esperar(andares[5], 25, function()
@@ -2256,15 +2310,15 @@ end)
         sairpower()
     end)
 
-    Farm:CriarBotao('Auto Casino', function() 
+    Farm:CriarBotao('Auto Casino', function()
         if is_opened("Casino") == "aberto" or is_opened("Casino") == "roubando" then
-        auto_casino()
-    end
-    if is_opened("Casino") == "aberto" or is_opened("Casino") == "roubando" then
-    else
-        notificacao("MACRO X", "Casinho Fechado!", 5)
-    end
-     end)
+            auto_casino()
+        end
+        if is_opened("Casino") == "aberto" or is_opened("Casino") == "roubando" then
+        else
+            notificacao("MACRO X", "Casinho Fechado!", 5)
+        end
+    end)
 
     Farm:CriarBotao('Auto Joalheria', function()
         if is_opened("jewelry store") == "aberto" or is_opened("jewelry store") ==
@@ -2519,9 +2573,9 @@ end)
         end
         if is_opened("jewelry store") == "aberto" or is_opened("jewelry store") ==
             "roubando" then
-            else
-notificacao("MACRO X", "Joalheria Fechada!", "5")
-            end
+        else
+            notificacao("MACRO X", "Joalheria Fechada!", "5")
+        end
     end)
 
     Farm:CriarBotao('Auto TOMB', function()
@@ -2729,20 +2783,18 @@ notificacao("MACRO X", "Joalheria Fechada!", "5")
     end)
 
     Farm:CriarBotao('Auto Rosquinha', function()
-        --if : se
-        --then : então
-            if is_opened("Donut Store") == "aberto" or is_opened("Donut Store") == "roubando" then
-       robrosca()
-            end
- if is_opened("Donut Store") == "aberto" or is_opened("Donut Store") == "roubando" then    
-else
-notificacao("MACRO X", "Loja De Rosquinha Fechada!", 3)       
-end
-end)
-
-    Farm:CriarBotao('Auto Posto de Gasolina', function()
-        autogasolina()
+        -- if : se
+        -- then : então
+        if is_opened("Donut Store") == "aberto" or is_opened("Donut Store") ==
+            "roubando" then robrosca() end
+        if is_opened("Donut Store") == "aberto" or is_opened("Donut Store") ==
+            "roubando" then
+        else
+            notificacao("MACRO X", "Loja De Rosquinha Fechada!", 3)
+        end
     end)
+
+    Farm:CriarBotao('Auto Posto de Gasolina', function() autogasolina() end)
 
     Farm:CriarBotao('Auto Airdrop', function()
         notificacao('MACRO X', 'Risco de KICK!', 5)
@@ -2780,9 +2832,7 @@ end)
 
     Farm:CriarLabel('AUTO VENDER:', true)
 
-    Farm:CriarBotao('Auto Vender (Vulcao)', function()
-autovendervulcao()
-    end)
+    Farm:CriarBotao('Auto Vender (Vulcao)', function() autovendervulcao() end)
 
     Farm:CriarBotao('Auto Vender (Base Cidade)', function()
         notificacao('MACRO X', 'Não saia do carro!', 5)
@@ -2912,7 +2962,7 @@ autovendervulcao()
     end)
 
     Teleportes:CriarBotao('TP Power Plant', function()
-  
+
         Tp2(Vector3.new(46.77196502685547, 20.40790367126465, 2358.94482421875))
     end)
 
@@ -2944,13 +2994,13 @@ autovendervulcao()
     end)
 
     Teleportes:CriarBotao('TP Area 51', function()
-    
+
         Tp2(
             Vector3.new(612.4613647460938, 19.61579132080078, -3616.880126953125))
     end)
 
     Teleportes:CriarBotao('TP Trade', function()
- 
+
         Tp2(Vector3.new(2675.636962890625, 24.351089477539062,
                         -3805.135986328125))
     end)
@@ -2962,7 +3012,7 @@ autovendervulcao()
     end)
 
     Teleportes:CriarBotao('TP Loja de 1M', function()
-        
+
         Tp2(Vector3.new(479.4014587402344, 19.485206604003906, -1593.4052734375))
     end)
 
@@ -2973,7 +3023,7 @@ autovendervulcao()
     end)
 
     Teleportes:CriarBotao('TP Base Cidade', function()
- 
+
         Tp2(Vector3.new(-246.013916015625, 17.881628036499023,
                         1616.1649169921875))
     end)
@@ -3209,10 +3259,21 @@ autovendervulcao()
     end)
 
     Outros:CriarBotao('Auto Kill', function()
-    Tp2(Vector3.new(2203.126220703125, 175.19915771484375, -2564.80126953125))
-    saircarro()
-    notificacao("MACRO X", "Se Fudeu", 3)
-end)
+        Tp2(
+            Vector3.new(2203.126220703125, 175.19915771484375, -2564.80126953125))
+        saircarro()
+        notificacao("MACRO X", "Se Fudeu", 3)
+    end)
+
+    Outros:CriarBotao('Inf Ammo', function()
+        InfAmmo.Position = UDim2.new(0, StuffFrame.AbsoluteSize.X - 110, 0, 170)
+        InfAmmo.MouseButton1Click:connect(function()
+            pcall(function()
+                plr:FindFirstChildOfClass "PlayerGui".MainGui.Ammo.MagSize
+                    .RobloxLocked = true
+            end)
+        end)
+    end)
 
     Outros:CriarToggle('No Clip (Liga desliga)',
                        function(bool) no_clip(bool) end)
