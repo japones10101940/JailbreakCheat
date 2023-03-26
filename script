@@ -1,5 +1,4 @@
-if --[[Guerreiros de Combate
-]] game.PlaceId == 4282985734 then
+
 --Add Pessoa Cachorro
 _G.killAuraEnabled = true
 _G.infiniteStamina = true
