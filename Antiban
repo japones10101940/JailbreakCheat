@@ -1,0 +1,585 @@
+for i,v in pairs(game.CoreGui:GetChildren()) do 
+    if v.Name == "ScreenGui" then 
+        v:Destroy()
+    end 
+end
+
+local lib = {}
+local Menu = script.Parent;
+ 
+function lib:Criar()
+    local ScreenGui = Instance.new("ScreenGui")
+    local Segundary = Instance.new("ImageLabel")
+    local MACROX = Instance.new("TextLabel")
+    local gamee = Instance.new("TextLabel")
+    local Perfil = Instance.new("ImageLabel")
+    local ImageLabel = Instance.new("ImageLabel")
+    local UICorner = Instance.new("UICorner")
+    local Display = Instance.new("TextLabel")
+    local Tabelas = Instance.new("ImageLabel")
+    local UIListLayout = Instance.new("UIListLayout")
+    local DropDown = Instance.new("Frame")
+    local UICorner_2 = Instance.new("UICorner")
+    local Titulo = Instance.new("TextLabel")
+    local ScrollingFrame = Instance.new("ScrollingFrame")
+    local BotaoTestdeixarVisivel = Instance.new("TextButton")
+    local UICorner_3 = Instance.new("UICorner")
+    local UIListLayout_2 = Instance.new("UIListLayout")
+
+
+    ScreenGui.Parent = game:GetService("CoreGui")
+    
+    Segundary.Name = "Segundary"
+    Segundary.Parent = ScreenGui
+    Segundary.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+    Segundary.BackgroundTransparency = 1.000
+    Segundary.Position = UDim2.new(0.132768422, 0, 0.298645645, 0)
+    Segundary.Size = UDim2.new(0, 474, 0, 287)
+    Segundary.Image = "rbxassetid://3570695787"
+    Segundary.ImageColor3 = Color3.fromRGB(36, 36, 36)
+    Segundary.ScaleType = Enum.ScaleType.Slice
+    Segundary.SliceCenter = Rect.new(100, 100, 100, 100)
+    Segundary.SliceScale = 0.167
+
+    MACROX.Name = "MACRO X"
+    MACROX.Parent = Segundary
+    MACROX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MACROX.BackgroundTransparency = 1.000
+    MACROX.BorderSizePixel = 0
+    MACROX.Position = UDim2.new(0.864782155, 0, 0, 0)
+    MACROX.Size = UDim2.new(0, 49, 0, 17)
+    MACROX.ZIndex = 3
+    MACROX.Font = Enum.Font.FredokaOne
+    MACROX.Text = "MACRO X"
+    MACROX.TextColor3 = Color3.fromRGB(255, 255, 255)
+    MACROX.TextScaled = true
+    MACROX.TextSize = 14.000
+    MACROX.TextWrapped = true
+
+    gamee.Name = "game"
+    gamee.Parent = Segundary
+    gamee.BackgroundColor3 = Color3.fromRGB(255, 170, 0)
+    gamee.BackgroundTransparency = 1.000
+    gamee.Position = UDim2.new(0.26915437, 0, -0.00528892688, 0)
+    gamee.Size = UDim2.new(0, 55, 0, 19)
+    gamee.Font = Enum.Font.FredokaOne
+    gamee.Text = "Jailbreak"
+    gamee.TextColor3 = Color3.fromRGB(255, 170, 0)
+    gamee.TextSize = 12.000
+
+    Perfil.Name = "Perfil"
+    Perfil.Parent = Segundary
+    Perfil.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Perfil.BackgroundTransparency = 1.000
+    Perfil.Size = UDim2.new(0, 100, 0, 35)
+    Perfil.Image = "rbxassetid://3570695787"
+    Perfil.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    Perfil.ImageTransparency = 0.720
+    Perfil.ScaleType = Enum.ScaleType.Slice
+    Perfil.SliceCenter = Rect.new(100, 100, 100, 100)
+    Perfil.SliceScale = 0.167
+
+    ImageLabel.Parent = Perfil
+    ImageLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    ImageLabel.Position = UDim2.new(0.0803773552, 0, 0.120749161, 0)
+    ImageLabel.Size = UDim2.new(0, 26, 0, 26)
+    ImageLabel.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+
+    UICorner.CornerRadius = UDim.new(1, 0)
+    UICorner.Parent = ImageLabel
+
+    Display.Name = "Display"
+    Display.Parent = Perfil
+    Display.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Display.BackgroundTransparency = 1.000
+    Display.Position = UDim2.new(0.41707316, 0, 0.124603182, 0)
+    Display.Size = UDim2.new(0, 15, 0, 26)
+    Display.Font = Enum.Font.FredokaOne
+    Display.Text = "?"
+    Display.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Display.TextSize = 14.000
+    Display.TextXAlignment = Enum.TextXAlignment.Left
+
+    Tabelas.Name = "Tabelas"
+    Tabelas.Parent = Segundary
+    Tabelas.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    Tabelas.BackgroundTransparency = 1.000
+    Tabelas.Position = UDim2.new(-0.00029255671, 0, 0.163574859, 0)
+    Tabelas.Size = UDim2.new(0, 123, 0, 240)
+    Tabelas.Image = "rbxassetid://3570695787"
+    Tabelas.ImageColor3 = Color3.fromRGB(30, 30, 30)
+    Tabelas.ScaleType = Enum.ScaleType.Slice
+    Tabelas.SliceCenter = Rect.new(100, 100, 100, 100)
+    Tabelas.SliceScale = 0.167
+
+    UIListLayout.Parent = Tabelas
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Padding = UDim.new(0, 1)
+
+    DropDown.Name = "DropDown"
+    DropDown.Parent = Segundary
+    DropDown.Active = true
+    DropDown.AnchorPoint = Vector2.new(0.5, 0.5)
+    DropDown.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+    DropDown.BorderSizePixel = 0
+    DropDown.ClipsDescendants = true
+    DropDown.Position = UDim2.new(0.628692031, 0, 0.536585331, 0)
+    DropDown.Size = UDim2.new(0, 320, 0, 239)
+    DropDown.Visible = false
+    DropDown.ZIndex = 7
+
+    UICorner_2.Parent = DropDown
+
+    Titulo.Name = "Titulo"
+    Titulo.Parent = DropDown
+    Titulo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Titulo.BackgroundTransparency = 1.000
+    Titulo.Position = UDim2.new(0.03125, 0, 0, 0)
+    Titulo.Size = UDim2.new(0, 310, 0, 22)
+    Titulo.ZIndex = 8
+    Titulo.Font = Enum.Font.FredokaOne
+    Titulo.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Titulo.TextScaled = true
+    Titulo.TextSize = 14.000
+    Titulo.TextWrapped = true
+    Titulo.TextXAlignment = Enum.TextXAlignment.Left
+
+    ScrollingFrame.Parent = DropDown
+    ScrollingFrame.Active = true
+    ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ScrollingFrame.BackgroundTransparency = 1.000
+    ScrollingFrame.BorderSizePixel = 0
+    ScrollingFrame.Position = UDim2.new(0.03125, 0, 0.150627613, 0)
+    ScrollingFrame.Size = UDim2.new(0, 300, 0, 195)
+    ScrollingFrame.ZIndex = 8
+    ScrollingFrame.ScrollBarThickness = 5
+
+    BotaoTestdeixarVisivel.Name = "BotaoTest(deixarVisivel)"
+    BotaoTestdeixarVisivel.Parent = ScrollingFrame
+    BotaoTestdeixarVisivel.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+    BotaoTestdeixarVisivel.Size = UDim2.new(0, 289, 0, 19)
+    BotaoTestdeixarVisivel.Visible = false
+    BotaoTestdeixarVisivel.ZIndex = 8
+    BotaoTestdeixarVisivel.Font = Enum.Font.FredokaOne
+    BotaoTestdeixarVisivel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    BotaoTestdeixarVisivel.TextSize = 14.000
+
+    UICorner_3.Parent = BotaoTestdeixarVisivel
+
+    UIListLayout_2.Parent = ScrollingFrame
+    UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout_2.Padding = UDim.new(0, 3)
+
+    -- Scripts:
+
+    local function NZOEFD_fake_script() -- MACROX.LocalScript 
+        local script = Instance.new('LocalScript', MACROX)
+
+        
+    end
+    coroutine.wrap(NZOEFD_fake_script)()
+    local function TPDVOVN_fake_script() -- ImageLabel.LocalScript 
+        local script = Instance.new('LocalScript', ImageLabel)
+
+        local Players = game:getService("Players")
+        local plr = Players.LocalPlayer
+        local userId = plr.UserId
+        local thumbType = Enum.ThumbnailType.HeadShot
+        local thumbSize = Enum.ThumbnailSize.Size420x420
+        local content, isReady = Players:GetUserThumbnailAsync(userId,thumbType,thumbSize)
+        
+        local imageLabel = script.Parent
+        imageLabel.Image = content
+        script.Parent.Parent.Display.Text = plr.DisplayName
+    end
+    coroutine.wrap(TPDVOVN_fake_script)()
+
+    getgenv().newtab = function(nome)
+        local TextButton = Instance.new("TextButton")
+        local TextButton_Roundify_2px = Instance.new("ImageLabel")
+
+        TextButton.Parent = Tabelas
+        TextButton.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+        TextButton.BackgroundTransparency = 1.000
+        TextButton.BorderSizePixel = 0
+        TextButton.Position = UDim2.new(0.333333343, 0, 0.0416666679, 0)
+        TextButton.Size = UDim2.new(0, 123, 0, 18)
+        TextButton.ZIndex = 13
+        TextButton.Font = Enum.Font.FredokaOne
+        TextButton.Text = nome
+        TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextButton.TextSize = 14.000
+
+        TextButton_Roundify_2px.Name = "TextButton_Roundify_2px"
+        TextButton_Roundify_2px.Parent = TextButton
+        TextButton_Roundify_2px.Active = true
+        TextButton_Roundify_2px.AnchorPoint = Vector2.new(0.5, 0.5)
+        TextButton_Roundify_2px.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TextButton_Roundify_2px.BackgroundTransparency = 1.000
+        TextButton_Roundify_2px.Position = UDim2.new(0.5, 0, 0.5, 0)
+        TextButton_Roundify_2px.Selectable = true
+        TextButton_Roundify_2px.Size = UDim2.new(1, 0, 1, 0)
+        TextButton_Roundify_2px.Image = "rbxassetid://3570695787"
+        TextButton_Roundify_2px.ImageColor3 = Color3.fromRGB(24, 24, 24)
+        TextButton_Roundify_2px.ScaleType = Enum.ScaleType.Slice
+        TextButton_Roundify_2px.SliceCenter = Rect.new(100, 100, 100, 100)
+        TextButton_Roundify_2px.SliceScale = 0.167
+
+        local Tabs = Instance.new("Frame")
+        local ScrollingFrame = Instance.new("ScrollingFrame")
+        local UIListLayout = Instance.new("UIListLayout")
+
+        --Properties:
+
+        Tabs.Name = "Tabs"
+        Tabs.Parent = Segundary
+        Tabs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Tabs.BackgroundTransparency = 1.000
+        Tabs.Position = UDim2.new(0.291139245, 0, 0.160278752, 0)
+        Tabs.Size = UDim2.new(0, 336, 0, 240)
+        Tabs.Visible = false
+
+        ScrollingFrame.Parent = Tabs
+        ScrollingFrame.Active = true
+        ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        ScrollingFrame.BackgroundTransparency = 1.000
+        ScrollingFrame.BorderSizePixel = 0
+        ScrollingFrame.Size = UDim2.new(0, 336, 0, 240)
+        ScrollingFrame.ScrollBarThickness = 6
+        ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+        UIListLayout.Parent = ScrollingFrame
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.Padding = UDim.new(0, 5)
+
+        TextButton.MouseButton1Click:Connect(function()
+            for i,v in pairs(Segundary:GetChildren()) do 
+                if v.Name == "Tabs" then 
+                    v.Visible = false 
+                end 
+            end
+            Tabs.Visible = true 
+        end)
+        local botoes = {}
+
+        function botoes:CriarBotao(text,callback)
+            local TextButton = Instance.new("TextButton")
+            local UICorner = Instance.new("UICorner")
+            local touch_app = Instance.new("ImageButton")
+            local touch_app2 = Instance.new("ImageButton")
+            local TextButton_Roundify_8px = Instance.new("ImageLabel")
+
+
+            TextButton.Parent = ScrollingFrame
+            TextButton.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+            TextButton.BackgroundTransparency = 1.000
+            TextButton.BorderSizePixel = 0
+            TextButton.Size = UDim2.new(0, 320, 0, 25)
+            TextButton.ZIndex = 2
+            TextButton.Font = Enum.Font.FredokaOne
+            TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextButton.TextSize = 14.000
+            TextButton.Text = text
+            TextButton.MouseButton1Click:Connect(function()
+                pcall(callback, TextButton)
+            end)
+
+            UICorner.Parent = TextButton
+
+            touch_app.Name = "touch_app"
+            touch_app.Parent = TextButton
+            touch_app.BackgroundTransparency = 1.000
+            touch_app.Position = UDim2.new(0.903125048, 0, -0.00216064602, 0)
+            touch_app.Size = UDim2.new(0, 22, 0, 23)
+            touch_app.ZIndex = 2
+            touch_app.Image = "rbxassetid://3926305904"
+            touch_app.ImageRectOffset = Vector2.new(84, 204)
+            touch_app.ImageRectSize = Vector2.new(36, 36)
+
+            touch_app2.Name = "touch_app2"
+            touch_app2.Parent = touch_app
+            touch_app2.AnchorPoint = Vector2.new(0.5, 0.5)
+            touch_app2.BackgroundTransparency = 1.000
+            touch_app2.Position = UDim2.new(0.5, 0, 0.5, 0)
+            touch_app2.ZIndex = 2
+            touch_app2.Image = "rbxassetid://3926305904"
+            touch_app2.ImageColor3 = Color3.fromRGB(255, 0, 0)
+            touch_app2.ImageRectOffset = Vector2.new(84, 204)
+            touch_app2.ImageRectSize = Vector2.new(36, 36)
+
+            TextButton_Roundify_8px.Name = "TextButton_Roundify_8px"
+            TextButton_Roundify_8px.Parent = TextButton
+            TextButton_Roundify_8px.Active = true
+            TextButton_Roundify_8px.AnchorPoint = Vector2.new(0.5, 0.5)
+            TextButton_Roundify_8px.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TextButton_Roundify_8px.BackgroundTransparency = 1.000
+            TextButton_Roundify_8px.Position = UDim2.new(0.5, 0, 0.5, 0)
+            TextButton_Roundify_8px.Selectable = true
+            TextButton_Roundify_8px.Size = UDim2.new(1, 0, 1, 0)
+            TextButton_Roundify_8px.Image = "rbxassetid://3570695787"
+            TextButton_Roundify_8px.ImageColor3 = Color3.fromRGB(24, 24, 24)
+            TextButton_Roundify_8px.ScaleType = Enum.ScaleType.Slice
+            TextButton_Roundify_8px.SliceCenter = Rect.new(100, 100, 100, 100)
+            TextButton_Roundify_8px.SliceScale = 0.080
+
+
+            local function AKTXW_fake_script() 
+                local script = Instance.new('LocalScript', TextButton)
+
+                script.Parent.MouseButton1Click:Connect(function()
+                    spawn(function()
+                        local clone = script.Parent.touch_app.touch_app2:Clone()
+                
+                        clone.Parent = script.Parent.touch_app
+                
+                        game:GetService("TweenService"):Create(clone, TweenInfo.new(0.3), {Size = UDim2.new(1, 0, 1, 0)}):Play()
+                        wait(0.15)
+                        game:GetService("TweenService"):Create(clone, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
+                        wait(0.3)
+                        clone:Destroy()
+                    end)
+                end)
+            end
+            coroutine.wrap(AKTXW_fake_script)()
+
+        end
+        function botoes:CriarLabel(text, underline)
+            underline = underline or false 
+
+            local TextButton = Instance.new("TextLabel")
+            local UICorner = Instance.new("UICorner")
+            local Frame = Instance.new("Frame")
+            local Frame_2 = Instance.new("Frame")
+
+            TextButton.Name = "TextButton"
+            TextButton.Parent = ScrollingFrame
+            TextButton.Active = true
+            TextButton.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+            TextButton.Selectable = true
+            TextButton.Size = UDim2.new(0, 320, 0, 25)
+            TextButton.Font = Enum.Font.FredokaOne
+            TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextButton.TextSize = 14.000
+            TextButton.Text = text 
+
+            UICorner.Parent = TextButton
+
+            Frame.Parent = TextButton
+            Frame.AnchorPoint = Vector2.new(0, 0.5)
+            Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Frame.BorderSizePixel = 0
+            Frame.Position = UDim2.new(0, 0, 0.5, 0)
+            Frame.Size = UDim2.new(0, 100, 0, 2)
+            Frame.Visible = ((underline and true) or (underline == false and false))
+            Frame_2.Parent = TextButton
+            Frame_2.AnchorPoint = Vector2.new(0, 0.5)
+            Frame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Frame_2.BorderSizePixel = 0
+            Frame_2.Position = UDim2.new(0.6875, 0, 0.5, 0)
+            Frame_2.Size = UDim2.new(0, 100, 0, 2)
+            Frame_2.Visible = ((underline and true) or (underline == false and false))
+
+            local a = {}
+            function a:Refresh(text)
+                TextButton.Text = text
+            end
+            return a 
+        end
+        function botoes:CriarToggle(text, callback)
+            local TextButton = Instance.new("TextButton")
+            local UICorner = Instance.new("UICorner")
+            local Cor = Instance.new("Frame")
+            local UICorner_2 = Instance.new("UICorner")
+            local DropShadow = Instance.new("Frame")
+            local UICorner_3 = Instance.new("UICorner")
+            local DropShadow_2 = Instance.new("Frame")
+            local UICorner_4 = Instance.new("UICorner")
+            local DropShadow_3 = Instance.new("Frame")
+            local UICorner_5 = Instance.new("UICorner")
+            local DropShadow_4 = Instance.new("Frame")
+            local UICorner_6 = Instance.new("UICorner")
+            local TextButton_Roundify_8px = Instance.new("ImageLabel")
+
+            --Properties:
+            local toggled = false
+            TextButton.Parent = ScrollingFrame
+            TextButton.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+            TextButton.BackgroundTransparency = 1.000
+            TextButton.BorderSizePixel = 0
+            TextButton.Size = UDim2.new(0, 320, 0, 25)
+            TextButton.ZIndex = 2
+            TextButton.Font = Enum.Font.FredokaOne
+            TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextButton.TextSize = 14.000
+            TextButton.Text = text 
+            TextButton.MouseButton1Click:Connect(function()
+                toggled = not toggled 
+                game:GetService("TweenService"):Create(Cor, TweenInfo.new(0.5), {BackgroundColor3 = ( (toggled and Color3.fromRGB (0, 255, 0) ) or ( toggled == false and Color3.fromRGB (255, 0, 0) ) )}):Play()
+                pcall(callback, toggled)
+            end)
+
+            UICorner.Parent = TextButton
+
+            Cor.Name = "Cor"
+            Cor.Parent = TextButton
+            Cor.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            Cor.BorderSizePixel = 0
+            Cor.Position = UDim2.new(0.900000036, 0, 0.199999988, 0)
+            Cor.Size = UDim2.new(0, 15, 0, 15)
+            Cor.ZIndex = 5
+
+            UICorner_2.Parent = Cor
+
+            DropShadow.Name = "DropShadow"
+            DropShadow.Parent = Cor
+            DropShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DropShadow.BorderSizePixel = 0
+            DropShadow.Position = UDim2.new(0, 1, 0, 1)
+            DropShadow.Size = UDim2.new(1, 0, 1, 0)
+            DropShadow.ZIndex = 2
+
+            UICorner_3.Parent = DropShadow
+
+            DropShadow_2.Name = "DropShadow"
+            DropShadow_2.Parent = Cor
+            DropShadow_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DropShadow_2.BorderSizePixel = 0
+            DropShadow_2.Position = UDim2.new(0, -1, 0, -1)
+            DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
+            DropShadow_2.ZIndex = 2
+
+            UICorner_4.Parent = DropShadow_2
+
+            DropShadow_3.Name = "DropShadow"
+            DropShadow_3.Parent = Cor
+            DropShadow_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DropShadow_3.BorderSizePixel = 0
+            DropShadow_3.Position = UDim2.new(0, 1, 0, -1)
+            DropShadow_3.Size = UDim2.new(1, 0, 1, 0)
+            DropShadow_3.ZIndex = 2
+
+            UICorner_5.Parent = DropShadow_3
+
+            DropShadow_4.Name = "DropShadow"
+            DropShadow_4.Parent = Cor
+            DropShadow_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DropShadow_4.BorderSizePixel = 0
+            DropShadow_4.Position = UDim2.new(0, -1, 0, 1)
+            DropShadow_4.Size = UDim2.new(1, 0, 1, 0)
+            DropShadow_4.ZIndex = 2
+
+            UICorner_6.Parent = DropShadow_4
+
+            TextButton_Roundify_8px.Name = "TextButton_Roundify_8px"
+            TextButton_Roundify_8px.Parent = TextButton
+            TextButton_Roundify_8px.Active = true
+            TextButton_Roundify_8px.AnchorPoint = Vector2.new(0.5, 0.5)
+            TextButton_Roundify_8px.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TextButton_Roundify_8px.BackgroundTransparency = 1.000
+            TextButton_Roundify_8px.Position = UDim2.new(0.5, 0, 0.5, 0)
+            TextButton_Roundify_8px.Selectable = true
+            TextButton_Roundify_8px.Size = UDim2.new(1, 0, 1, 0)
+            TextButton_Roundify_8px.Image = "rbxassetid://3570695787"
+            TextButton_Roundify_8px.ImageColor3 = Color3.fromRGB(24, 24, 24)
+            TextButton_Roundify_8px.ScaleType = Enum.ScaleType.Slice
+            TextButton_Roundify_8px.SliceCenter = Rect.new(100, 100, 100, 100)
+            TextButton_Roundify_8px.SliceScale = 0.080
+        end
+        function botoes:CriarSlider(text, minvalue, maxvalue, callback)
+            local TextButton = Instance.new("TextLabel")
+            local UICorner = Instance.new("UICorner")
+            local Valor = Instance.new("TextLabel")
+            local BotaoPressionar = Instance.new("TextButton")
+            local UICorner_2 = Instance.new("UICorner")
+            local Vermelho = Instance.new("Frame")
+            local UICorner_3 = Instance.new("UICorner")
+
+            TextButton.Name = "TextButton"
+            TextButton.Parent = ScrollingFrame
+            TextButton.Active = true
+            TextButton.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+            TextButton.Position = UDim2.new(0, 0, 0.375, 0)
+            TextButton.Selectable = true
+            TextButton.Size = UDim2.new(0, 320, 0, 37)
+            TextButton.Font = Enum.Font.FredokaOne
+            TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextButton.TextSize = 14.000
+            TextButton.TextYAlignment = Enum.TextYAlignment.Top
+            TextButton.Text = text
+
+            UICorner.Parent = TextButton
+
+            Valor.Name = "Valor"
+            Valor.Parent = TextButton
+            Valor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Valor.BackgroundTransparency = 1.000
+            Valor.Position = UDim2.new(0.903124988, 0, 0, 0)
+            Valor.Size = UDim2.new(0, 30, 0, 37)
+            Valor.Font = Enum.Font.FredokaOne
+            Valor.Text = "0"
+            Valor.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Valor.TextSize = 17.000
+            Valor.TextWrapped = true 
+
+            BotaoPressionar.Name = "BotaoPressionar"
+            BotaoPressionar.Parent = TextButton
+            BotaoPressionar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            BotaoPressionar.Position = UDim2.new(0.0370000005, 0, 0.649999976, 0)
+            BotaoPressionar.Size = UDim2.new(0, 260, 0, 3)
+            BotaoPressionar.Font = Enum.Font.SourceSans
+            BotaoPressionar.Text = ""
+            BotaoPressionar.TextColor3 = Color3.fromRGB(0, 0, 0)
+            BotaoPressionar.TextSize = 14.000
+
+            UICorner_2.Parent = BotaoPressionar
+
+            Vermelho.Name = "Vermelho"
+            Vermelho.Parent = BotaoPressionar
+            Vermelho.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            Vermelho.Size = UDim2.new(0, 0, 0, 3)
+
+            UICorner_3.Parent = Vermelho
+
+            local button = BotaoPressionar--your button
+
+            local frame = Vermelho--your frame
+
+            local TextLabel_2 = Valor--Your locationtovalue
+            local uis = game:GetService("UserInputService")
+            local minvalue = 0
+            local maxvalue = 0
+            local mouse = game.Players.LocalPlayer:GetMouse()
+
+            button.MouseButton1Down:Connect(function()
+                Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 260) * frame.AbsoluteSize.X) + tonumber(minvalue)) or 0
+                pcall(function()
+                    callback(Value)
+                end)
+                frame.Size = UDim2.new(0, math.clamp(mouse.X - frame.AbsolutePosition.X, 0, 260), 0, 3)
+                moveconnection = mouse.Move:Connect(function()
+                    TextLabel_2.Text = Value
+                    Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 260) * frame.AbsoluteSize.X) + tonumber(minvalue))
+                    pcall(function()
+                        callback(Value)
+                    end)
+                    frame.Size = UDim2.new(0, math.clamp(mouse.X - frame.AbsolutePosition.X, 0, 260), 0, 3)
+                end)
+                releaseconnection = uis.InputEnded:Connect(function(Mouse)
+                    if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+                        Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 260) * frame.AbsoluteSize.X) + tonumber(minvalue))
+                        pcall(function()
+                            callback(Value)
+                        end)
+                        frame.Size = UDim2.new(0, math.clamp(mouse.X - frame.AbsolutePosition.X, 0, 260), 0, 3)
+                        moveconnection:Disconnect()
+                        releaseconnection:Disconnect()
+                    end
+                end)
+            end)
+        end
+        
+        return botoes 
+    end
+end
+
+lib:Criar()
